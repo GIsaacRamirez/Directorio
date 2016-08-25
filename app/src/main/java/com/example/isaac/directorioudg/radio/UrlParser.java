@@ -1,13 +1,10 @@
 package com.example.isaac.directorioudg.radio;
 
 import android.annotation.SuppressLint;
-
 import com.example.isaac.directorioudg.radio.parser.M3UParser;
-
 import java.util.LinkedList;
 
 public class UrlParser {
-	
 	@SuppressLint("DefaultLocale") // Does not matter, no text but URL
 	public static String getUrl(String url)
 	{
