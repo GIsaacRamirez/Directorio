@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.isaac.directorioudg.entities.Prepa;
@@ -32,12 +33,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private CameraUpdate mCamera;
 
+    String[] datos;
+
     private void setToolbar() {
         // Añadir la Toolbar
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);// Habilitar up button
-        }
+    }
+    private void setUpSpinner(){
+        datos= new String[]{"Todo","Centros Universitarios (CU)","CU Tematicos", "CU Regionales",
+        "Preparatorias (Pre)", "Pre Metropolitanas", "Pre Regionales"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getSupportActionBar().getThemedContext(),
+                android.R.layout.simple_spinner_item,
+                datos);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CmbToolbar.setAdapter(adapter);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +55,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         setContentView(R.layout.activity_map);
         ButterKnife.bind(this);
-
         setToolbar();
+        setUpSpinner();
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map2);

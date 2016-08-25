@@ -64,7 +64,6 @@
 
         <activity android:name=".pdfView" />
         <activity android:name=".MapActivity"
-            android:label="@string/title_activity_maps"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

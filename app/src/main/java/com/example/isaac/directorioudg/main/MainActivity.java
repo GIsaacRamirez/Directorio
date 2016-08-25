@@ -45,15 +45,8 @@ public class MainActivity extends AppCompatActivity
     NavigationView navView;
     PrepaList fragmentPrepaList = new PrepaList();
 
-    public void setupSpinner(int tipo){
-        String[] datos;
-        if(tipo==1){
-             datos= new String[]{"Todo", "Metropolitanas", "Regionales"};
-        }
-        else {
-            datos= new String[]{"Todo", "Tematicos", "Regionales"};
-        }
-
+    public void setupSpinner(){
+        String[] datos= new String[]{"Todo", "Metropolitanas", "Regionales"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getSupportActionBar().getThemedContext(),
                 android.R.layout.simple_spinner_item,
@@ -70,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.content_main, fragmentPrepaList);
         fragmentTransaction.commit();
         setTitle("Prepas");
-        setupSpinner(1);
+        setupSpinner();
         CmbToolbar.setVisibility(View.VISIBLE);
     }
 
