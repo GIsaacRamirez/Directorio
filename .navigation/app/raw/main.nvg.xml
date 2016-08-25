@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigationModel
+  ns = "http://schemas.android.com?import=com.android.tools.idea.editors.navigation.model.*">
+  <locations  
+    class = "java.util.ArrayList">
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.isaac.directorioudg.ItemListActivity"/>
+      <point      
+        x = "1152"      
+        y = "192"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.isaac.directorioudg.main.MainActivity"/>
+      <point      
+        x = "848"      
+        y = "244"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.isaac.directorioudg.ItemDetailActivity"/>
+      <point      
+        x = "2052"      
+        y = "212"/>
+    </statePointEntry>
+  </locations>
+</navigationModel>

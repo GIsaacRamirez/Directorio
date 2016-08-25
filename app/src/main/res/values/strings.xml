@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">DirectorioUDG</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+
+    <string name="textoejemplo">Texto de ejemplo</string>
+
+    <string name="list_title_placeholder">Title</string>
+    <string name="list_description_placeholder">Description</string>
+    <string name="hidden_view_text">Click Me</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps2">Map</string>
+    <string name="title_activity_detalle_prepa">DetallePrepaActivity</string>
+
+    <string name="preparatoria">Preparatoria </string>
+    <string name="direccion">Dirección: </string>
+    <string name="codigo_postal">Codigo Postal:</string>
+    <string name="telefonos">Telefonos: </string>
+    <string name="administrativos">Administrativos: </string>
+    <string name="director">Director: </string>
+
+
+    <string name=".listaprepasrecycle.direccionDatosPrepas">http://appdirectorioudg.com/preparatoriasMetropolitanas.php</string>
+    <string name=".listaprepasrecycle.error.conexion">"Es necesario conectarse a Internet \n para descargar los datos "</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="notification_playing">Playing radio</string>
+    <string name="notification_stop">Click to stop playing</string>
+    <string name="radio_playing_other">Se esta reproduciendo otra estación . Puede pulsar el icono de reproduccion pausar la otra estación .</string>
+    <string name="ad_id" />
+    <string name="volume_low">Turn your volume up!</string>
+    <string name="isnotConnected">\"Esta accion requiere conexion a Internet\"</string>
+    <string name="Website">Web:</string>
+
+</resources>
