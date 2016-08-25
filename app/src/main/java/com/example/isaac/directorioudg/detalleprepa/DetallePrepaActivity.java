@@ -68,6 +68,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         repository = new PrepaListRepositoryImpl(this);
         imageLoader = new GlideImageLoader(this.getApplicationContext());
 
-        Bundle bundle = this.getIntent().getExtras();;
+        Bundle bundle = this.getIntent().getExtras();
         prepa=bundle.getParcelable("prepa");
         mapView.onCreate(null);
         mapView.getMapAsync(this);
