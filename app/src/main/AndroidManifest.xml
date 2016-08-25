@@ -39,15 +39,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"
-            android:parentActivityName=".main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.MainActivity" />
-        </activity>
-        <activity
             android:name=".detalleprepa.DetallePrepaActivity"
             android:label="@string/title_activity_detalle_prepa"
             android:parentActivityName=".main.MainActivity"
@@ -72,7 +63,14 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".pdfView" />
-        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".MapActivity"
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -18,9 +18,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.isaac.directorioudg.MapsActivity;
+import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaList;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
@@ -179,7 +178,7 @@ public class MainActivity extends AppCompatActivity
             loadRadioList();
         } else if (id == R.id.nav_slideshow) {
 
-            Intent intent = new Intent(this, MapsActivity.class);
+            Intent intent = new Intent(this, MapActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
