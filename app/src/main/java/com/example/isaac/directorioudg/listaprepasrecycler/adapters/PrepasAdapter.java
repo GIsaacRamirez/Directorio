@@ -87,9 +87,9 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.imagePrepa)
+        @Bind(R.id.imagen)
         CircleImageView imagePrepa;
-        @Bind(R.id.txtPrepa)
+        @Bind(R.id.txtItem)
         TextView txtPrepa;
         @Bind(R.id.lbldireccion)
         TextView lbldireccion;

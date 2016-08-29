@@ -8,7 +8,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="90dp"
         android:layout_height="94dp"
-        android:id="@+id/imagePrepa"
+        android:id="@+id/imagen"
         android:scaleType="centerCrop" />
 
     <LinearLayout
@@ -18,7 +18,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:weightSum="1">
         <TextView
-            android:id="@+id/txtPrepa"
+            android:id="@+id/txtItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
