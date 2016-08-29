@@ -24,6 +24,7 @@ import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaList;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
+import com.example.isaac.directorioudg.listcentros.CentroList;
 import com.example.isaac.directorioudg.pdfView;
 import com.example.isaac.directorioudg.radio.RadioList.RadioList;
 import com.example.isaac.directorioudg.util.Helper;
@@ -43,7 +44,9 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     @Bind(R.id.nav_view)
     NavigationView navView;
+    Boolean isPrepa;
     PrepaList fragmentPrepaList = new PrepaList();
+    CentroList fragmentCentroList = new CentroList();
 
     public void setupSpinner(){
         String[] datos= new String[]{"Todo", "Metropolitanas", "Regionales"};
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity
 
     public void loadPrepaList( ){
 
+        isPrepa=true;
         FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
 
@@ -103,7 +107,11 @@ public class MainActivity extends AppCompatActivity
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(AdapterView<?> parent,
                                                android.view.View v, int position, long id) {
-                        fragmentPrepaList.setPrepaList(position);
+                        if (isPrepa){
+                            fragmentPrepaList.setPrepaList(position);
+                        }else {
+                            fragmentCentroList.setCentrosList(position);
+                        }
                     }
                     public void onNothingSelected(AdapterView<?> parent) {
                     }
@@ -184,6 +192,16 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
+            isPrepa=false;
+
+            FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+
+            fragmentTransaction.replace(R.id.content_main, fragmentCentroList);
+            fragmentTransaction.commit();
+            setTitle("Centros");
+            setupSpinner();
+            CmbToolbar.setVisibility(View.VISIBLE);
 
         } else if (id == R.id.nav_send) {
 
