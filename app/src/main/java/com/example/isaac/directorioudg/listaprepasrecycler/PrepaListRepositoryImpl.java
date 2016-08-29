@@ -12,7 +12,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.entities.Prepa_Table;
-import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
@@ -32,13 +31,6 @@ import java.util.List;
 public class PrepaListRepositoryImpl implements PrepaListRepository{
 
     Context context;
-    PrepasAdapter adapter;
-
-    public PrepaListRepositoryImpl(Context context, PrepasAdapter adapter) {
-        this.context = context;
-        this.adapter = adapter;
-    }
-
     public PrepaListRepositoryImpl(Context context) {
         this.context = context;
     }
@@ -87,7 +79,7 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
                 prepa.setMetropolitana(Integer.parseInt(jsonObject.get("Metropolitana").toString()));
                 prepa.setDireccion(jsonObject.get("Direccion").toString());
                 prepa.setMunicipio(jsonObject.get("Municipio").toString());
-                prepa.setCP(jsonObject.get("CP").toString());
+                prepa.setCP(Integer.parseInt(jsonObject.get("CP").toString()));
                 prepa.setTelefono1(jsonObject.get("Telefono1").toString());
                 prepa.setTelefono2(jsonObject.get("Telefono2").toString());
                 prepa.setWEB(jsonObject.get("Web").toString());

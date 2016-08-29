@@ -25,7 +25,7 @@ public class Prepa extends BaseModel implements Parcelable{
     @Column private int Metropolitana;
     @Column private String Direccion;
     @Column private String Municipio;
-    @Column private String CP;
+    @Column private int CP;
     @Column private String Telefono1;
     @Column private String Telefono2;
     @Column private Double Latitud;
@@ -81,11 +81,11 @@ public class Prepa extends BaseModel implements Parcelable{
         Municipio = municipio;
     }
 
-    public String getCP() {
+    public int getCP() {
         return CP;
     }
 
-    public void setCP(String CP) {
+    public void setCP(int CP) {
         this.CP = CP;
     }
 
@@ -194,7 +194,7 @@ public class Prepa extends BaseModel implements Parcelable{
         parcel.writeInt(this.Metropolitana);
         parcel.writeString(this.Direccion);
         parcel.writeString(this.Municipio);
-        parcel.writeString(this.CP);
+        parcel.writeInt(this.CP);
         parcel.writeString(this.Telefono1);
         parcel.writeString(this.Telefono2);
         parcel.writeDouble(this.Latitud);
@@ -214,7 +214,7 @@ public class Prepa extends BaseModel implements Parcelable{
         this.Metropolitana=in.readInt();
         this.Direccion=in.readString();
         this.Municipio=in.readString();
-        this.CP=in.readString();
+        this.CP=in.readInt();
         this.Telefono1=in.readString();
         this.Telefono2=in.readString();
         this.Latitud=in.readDouble();
