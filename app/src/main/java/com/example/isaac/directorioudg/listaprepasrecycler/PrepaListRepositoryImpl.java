@@ -60,7 +60,7 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
 
     @Override
     public void descargarDatosPrepaCompletos() {
-        String ruta = "http://appdirectorioudg.com/preparatoriasMetropolitanas.php";
+        String ruta = "http://appdirectorioudg.com/preparatorias.php";
         descargarDatosPrepa(ruta);
     }
 
