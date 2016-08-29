@@ -64,6 +64,7 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHold
         Centro centro = centroList.get(position);
         holder.setOnItemClickListener(centro, onItemClickListener);
 
+
         String url = centro.getImagenURL().toString();
         if (url.equalsIgnoreCase("No Disponible")) {
             url = "http://appdirectorioudg.com/photo.jpg";
