@@ -24,6 +24,7 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
 
     public List<Prepa> prepaList;
 
+
     private ImageLoader imageLoader;
     OnItemClickListener onItemClickListener;
 
@@ -33,7 +34,8 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
         this.onItemClickListener = onItemClickListener;
         this.imageLoader = imageLoader;
     }
-    public PrepasAdapter( ImageLoader imageLoader, OnItemClickListener onItemClickListener) {
+
+    public PrepasAdapter(ImageLoader imageLoader, OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
         this.imageLoader = imageLoader;
     }
@@ -72,8 +74,10 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
         }
         imageLoader.load(holder.imagePrepa, url, true);
 
+        holder.txtPrepa.setVisibility(View.VISIBLE);
         holder.txtPrepa.setText(prepa.getPreparatoria());
-        holder.lbldireccion.setText(prepa.getDireccion()+", "+prepa.getMunicipio());
+        holder.nombreCentro.setVisibility(View.GONE);
+        holder.lbldireccion.setText(prepa.getDireccion() + ", " + prepa.getMunicipio());
 
     }
 
@@ -93,6 +97,8 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
         TextView txtPrepa;
         @Bind(R.id.lbldireccion)
         TextView lbldireccion;
+        @Bind(R.id.nombreCentro)
+        TextView nombreCentro;
 
         private View view;
 

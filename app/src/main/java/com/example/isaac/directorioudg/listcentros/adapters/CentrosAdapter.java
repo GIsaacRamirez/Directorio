@@ -19,8 +19,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by isaac on 29/08/16.
  */
-public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHolder>{
+public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHolder> {
     public List<Centro> centroList;
+
 
     private ImageLoader imageLoader;
     OnItemClickListener onItemClickListener;
@@ -31,7 +32,7 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHold
         this.imageLoader = imageLoader;
     }
 
-    public CentrosAdapter( ImageLoader imageLoader, OnItemClickListener onItemClickListener) {
+    public CentrosAdapter(ImageLoader imageLoader, OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
         this.imageLoader = imageLoader;
     }
@@ -71,8 +72,11 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHold
         }
         imageLoader.load(holder.imageCentro, url, true);
 
+        holder.nombreCentro.setVisibility(View.VISIBLE);
         holder.txtCentro.setText(centro.getSigla());
-        holder.lbldireccion.setText(centro.getDireccion()+", "+centro.getMunicipio());
+        //holder.txtCentro.setVisibility(View.GONE);
+        holder.nombreCentro.setText(centro.getNombreCentro());
+        holder.lbldireccion.setText(centro.getDireccion() + ", " + centro.getMunicipio());
 
     }
 
@@ -92,6 +96,8 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHold
         TextView txtCentro;
         @Bind(R.id.lbldireccion)
         TextView lbldireccion;
+        @Bind(R.id.nombreCentro)
+        TextView nombreCentro;
 
         private View view;
 
@@ -102,7 +108,7 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHold
         }
 
         public void setOnItemClickListener(final Centro centro,
-                                           final com.example.isaac.directorioudg.listcentros.adapters.OnItemClickListener listener) {
+                                           final OnItemClickListener listener) {
             view.setOnClickListener(new View.OnClickListener() {
 
                 @Override
