@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +24,8 @@ import com.example.isaac.directorioudg.listaprepasrecycler.PrepaList;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.listcentros.CentroList;
+import com.example.isaac.directorioudg.listcentros.CentroListRepository;
+import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.pdfView;
 import com.example.isaac.directorioudg.radio.RadioList.RadioList;
 import com.example.isaac.directorioudg.util.Helper;
@@ -35,7 +36,8 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    PrepaListRepository repository;
+    PrepaListRepository repositoryPrepa;
+    CentroListRepository repositoryCentro;
     Helper helper = new Helper(this);
     SharedPreferences prefs;
     @Bind(R.id.CmbToolbar)
@@ -93,8 +95,10 @@ public class MainActivity extends AppCompatActivity
         if (firstStart) {
             SharedPreferences.Editor editor = prefs.edit();
             if (helper.isConect()) {
-                repository = new PrepaListRepositoryImpl(getApplicationContext());
-                repository.descargarDatosPrepaCompletos();
+                repositoryPrepa = new PrepaListRepositoryImpl(getApplicationContext());
+                repositoryPrepa.descargarDatosPrepaCompletos();
+                repositoryCentro = new CentroListRepositoryImpl(getApplicationContext());
+                repositoryCentro.descargarDatosCentroCompletos();
             }
             editor.putBoolean("firstStart", false);
             // commits your edits

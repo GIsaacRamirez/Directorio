@@ -29,8 +29,6 @@ import butterknife.ButterKnife;
 
 public class RadioList extends Fragment implements OnItemClickListener,RadioListView {
 
-
-    OnItemClickListener onItemClickListener;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -115,8 +113,6 @@ public class RadioList extends Fragment implements OnItemClickListener,RadioList
     private void setupRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-
         recyclerView.setAdapter(adapter);
     }
 

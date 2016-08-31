@@ -16,10 +16,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Toast;
-
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.util.Helper;
-
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
