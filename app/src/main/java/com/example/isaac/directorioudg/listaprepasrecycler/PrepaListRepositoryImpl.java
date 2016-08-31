@@ -88,6 +88,7 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
                 prepa.setImagenURL(jsonObject.get("imagenURL").toString());
 
                 prepa.setDirector(jsonObject.get("Director").toString());
+                prepa.setFotoDirectorURL(jsonObject.get("FotoDirectorURL").toString());
                 prepa.setCorreoDirector(jsonObject.get("CorreoDirector").toString());
                 prepa.setSecretario(jsonObject.get("Secretario").toString());
                 prepa.setCorreoSecretario(jsonObject.get("CorreoSecretario").toString());

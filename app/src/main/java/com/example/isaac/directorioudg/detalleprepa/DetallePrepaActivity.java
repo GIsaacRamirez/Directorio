@@ -33,6 +33,8 @@ import butterknife.OnClick;
 public class DetallePrepaActivity extends AppCompatActivity implements OnMapReadyCallback {
 
 
+    @Bind(R.id.imageDirector)
+    ImageView imageDirector;
     private GoogleMap mMap;
     private CameraUpdate mCamera;
     private Double Latitud, Longitud;
@@ -41,21 +43,35 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     Prepa prepa = new Prepa();
 
     ImageLoader imageLoader;
-    @Bind(R.id.collapser) CollapsingToolbarLayout collapser;
-    @Bind(R.id.web) TextView txtweb;
-    @Bind(R.id.image_paralax) ImageView imageParalax;
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.nombrePrep) TextView nombrePrep;
-    @Bind(R.id.direccionPrep) TextView direccionPrep;
-    @Bind(R.id.codigoPostalPrep) TextView codigoPostalPrep;
-    @Bind(R.id.telefonosPrep) TextView telefonosPrep;
-    @Bind(R.id.lblDirector) TextView lblDirector;
-    @Bind(R.id.lblCorreoDirector) TextView lblCorreoDirector;
-    @Bind(R.id.lblSecretario) TextView lblSecretario;
-    @Bind(R.id.lblCorreoSecretario) TextView lblCorreoSecretario;
-    @Bind(R.id.map) MapView mapView;
+    @Bind(R.id.collapser)
+    CollapsingToolbarLayout collapser;
+    @Bind(R.id.web)
+    TextView txtweb;
+    @Bind(R.id.image_paralax)
+    ImageView imageParalax;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.nombrePrep)
+    TextView nombrePrep;
+    @Bind(R.id.direccionPrep)
+    TextView direccionPrep;
+    @Bind(R.id.codigoPostalPrep)
+    TextView codigoPostalPrep;
+    @Bind(R.id.telefonosPrep)
+    TextView telefonosPrep;
+    @Bind(R.id.lblDirector)
+    TextView lblDirector;
+    @Bind(R.id.lblCorreoDirector)
+    TextView lblCorreoDirector;
+    @Bind(R.id.lblSecretario)
+    TextView lblSecretario;
+    @Bind(R.id.lblCorreoSecretario)
+    TextView lblCorreoSecretario;
+    @Bind(R.id.map)
+    MapView mapView;
 
-    @Bind(R.id.fab) FloatingActionButton fab;
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
 
     PrepaListRepositoryImpl repository;
 
@@ -78,7 +94,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         imageLoader = new GlideImageLoader(this.getApplicationContext());
 
         Bundle bundle = this.getIntent().getExtras();
-        prepa=bundle.getParcelable("prepa");
+        prepa = bundle.getParcelable("prepa");
         mapView.onCreate(null);
         mapView.getMapAsync(this);
 
@@ -112,7 +128,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         }
 
 
-        txtweb.setText( prepa.getWEB());
+        txtweb.setText(prepa.getWEB());
         String url = prepa.getImagenURL().toString();
         if (url.equalsIgnoreCase("No Disponible")) {
             url = "http://appdirectorioudg.com/photo.jpg";
@@ -121,7 +137,9 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
 
         Latitud = prepa.getLatitud();
         Longitud = prepa.getLongitud();
+
         lblDirector.setText(prepa.getDirector().trim());
+        imageLoader.load(imageDirector,prepa.getFotoDirectorURL(),false);
         lblCorreoDirector.setText(prepa.getCorreoDirector().trim());
         lblSecretario.setText(prepa.getSecretario().trim());
         lblCorreoSecretario.setText(prepa.getCorreoSecretario().trim());

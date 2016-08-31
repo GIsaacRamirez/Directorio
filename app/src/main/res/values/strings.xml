@@ -21,7 +21,7 @@
     <string name="codigo_postal">Codigo Postal:</string>
     <string name="telefonos">Tel. </string>
     <string name="administrativos">Administrativos: </string>
-    <string name="director">Director: </string>
+    <string name="director">Director. </string>
 
 
     <string name=".listaprepasrecycle.direccionDatosPrepas">http://appdirectorioudg.com/preparatoriasMetropolitanas.php</string>

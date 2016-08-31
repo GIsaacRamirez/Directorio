@@ -65,26 +65,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="www.web.com"
                     android:id="@+id/web" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/layoutweb">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/world"
-                        android:background="@color/white_transparent"
-                        android:id="@+id/imageButton" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/wallet_holo_blue_light"
-                        android:text="Visitar"/>
-                </LinearLayout>
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/layoutweb">
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/world"
+                            android:background="@color/white_transparent"
+                            android:id="@+id/imageButton" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:textColor="@color/wallet_holo_blue_light"
+                            android:textSize="20sp"
+                            android:text="Visitar"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -103,9 +114,6 @@
                 style="@style/Widget.CardContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <!-- Etiqueta Director -->
-
                 <TextView
                     android:id="@+id/tituloCardDirector"
 
@@ -113,40 +121,56 @@
                     android:layout_height="wrap_content"
                     android:text="@string/administrativos"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
+                <!-- Etiqueta Director -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/director"
                     android:id="@+id/textView3" />
-
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:id="@+id/lblDirector" />
-
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
+                        android:id="@+id/imageDirector"
+                        android:src="@drawable/logo_udg"/>
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/activity_vertical_margin"
+                        android:orientation="vertical">
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/activity_vertical_margin"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:id="@+id/lblDirector" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/lblCorreoDirector" />
-                    </LinearLayout>
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:id="@+id/lblCorreoDirector" />
+                            </LinearLayout>
+
 
                 </LinearLayout>
 
+
+
+
+                </LinearLayout>
+
+                <!--Secretario-->
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"

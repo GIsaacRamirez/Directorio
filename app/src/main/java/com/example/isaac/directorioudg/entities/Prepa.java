@@ -34,6 +34,7 @@ public class Prepa extends BaseModel implements Parcelable{
     @Column private String WEB;
 
     @Column private String Director;
+    @Column private String FotoDirectorURL;
     @Column private String CorreoDirector;
     @Column private String Secretario;
     @Column private String CorreoSecretario;
@@ -145,6 +146,14 @@ public class Prepa extends BaseModel implements Parcelable{
         Director = director;
     }
 
+    public String getFotoDirectorURL() {
+        return FotoDirectorURL;
+    }
+
+    public void setFotoDirectorURL(String fotoDirectorURL) {
+        FotoDirectorURL = fotoDirectorURL;
+    }
+
     public String getCorreoDirector() {
         return CorreoDirector;
     }
@@ -203,6 +212,7 @@ public class Prepa extends BaseModel implements Parcelable{
         parcel.writeString(this.WEB);
 
         parcel.writeString(this.Director);
+        parcel.writeString(this.FotoDirectorURL);
         parcel.writeString(this.CorreoDirector);
         parcel.writeString(this.Secretario);
         parcel.writeString(this.CorreoSecretario);
@@ -223,6 +233,7 @@ public class Prepa extends BaseModel implements Parcelable{
         this.WEB=in.readString();
 
         this.Director=in.readString();
+        this.FotoDirectorURL=in.readString();
         this.CorreoDirector=in.readString();
         this.Secretario=in.readString();
         this.CorreoSecretario=in.readString();
