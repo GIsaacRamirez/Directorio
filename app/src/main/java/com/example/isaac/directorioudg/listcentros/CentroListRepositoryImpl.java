@@ -1,7 +1,6 @@
 package com.example.isaac.directorioudg.listcentros;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,11 +12,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.entities.Centro_Table;
-import com.example.isaac.directorioudg.entities.Prepa;
-import com.example.isaac.directorioudg.entities.Prepa_Table;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
-import com.raizlabs.android.dbflow.sql.language.property.DoubleProperty;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
@@ -40,7 +36,7 @@ public class CentroListRepositoryImpl implements CentroListRepository {
 
     @Override
     public void descargarDatosCentroCompletos() {
-        String ruta = "http://appdirectorioudg.com/CentrosUniversitarios.php";
+        String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/CentrosUniversitarios.php";
         descargarDatosCentro(ruta);
     }
     @Override
@@ -97,12 +93,12 @@ public class CentroListRepositoryImpl implements CentroListRepository {
                 centro.setFotoRectorURL(jsonObject.get("FotoRectorURL").toString());
 
                 centro.setSecretarioAcademico(jsonObject.get("SecretarioAcademico").toString());
-                centro.setSecretarioAcademico(jsonObject.get("TelefonoSecAcademico").toString());
+                centro.setTelefonoSecAcademico(jsonObject.get("TelefonoSecAcademico").toString());
                 centro.setCorreoSecAcademico(jsonObject.get("CorreoSecAcademico").toString());
                 centro.setFotoSecAcademicoURL(jsonObject.get("FotoSecAcademicoURL").toString());
 
                 centro.setSecretarioAdministrativo(jsonObject.get("SecretarioAdministrativo").toString());
-                centro.setSecretarioAdministrativo(jsonObject.get("TelefonoSecAdministrativo").toString());
+                centro.setTelefonoSecAdministrativo(jsonObject.get("TelefonoSecAdministrativo").toString());
                 centro.setCorreoSecAdministrativo(jsonObject.get("CorreoSecAdministrativo").toString());
                 centro.setFotoSecAdministrativoURL(jsonObject.get("FotoSecAdministrativoURL").toString());
 
@@ -154,8 +150,8 @@ public class CentroListRepositoryImpl implements CentroListRepository {
     }
 
     @Override
-    public Prepa getCentro(int id) {
-        Prepa prepa = new Select().from(Prepa.class).where(Prepa_Table.idPrepa.is(id)).querySingle();
-        return prepa;
+    public Centro getCentro(int id) {
+        Centro centro = new Select().from(Centro.class).where(Centro_Table.IdCentro.is(id)).querySingle();
+        return centro;
     }
 }

@@ -19,7 +19,7 @@
     <string name="preparatoria">Preparatoria </string>
     <string name="direccion">Dirección: </string>
     <string name="codigo_postal">Codigo Postal:</string>
-    <string name="telefonos">Telefonos: </string>
+    <string name="telefonos">Tel. </string>
     <string name="administrativos">Administrativos: </string>
     <string name="director">Director: </string>
 
@@ -36,5 +36,9 @@
     <string name="volume_low">Turn your volume up!</string>
     <string name="isnotConnected">\"Esta accion requiere conexion a Internet\"</string>
     <string name="Website">Web:</string>
+    <string name="centro">Centro</string>
+    <string name="rector">Rector</string>
+    <string name="SecretarioAcademico">SecretarioAcademico</string>
+    <string name="SecretarioAdministrativo">Secretario Administrativo</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.example.isaac.directorioudg.listcentros;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.isaac.directorioudg.R;
+import com.example.isaac.directorioudg.detallecentro.DetalleCentroActivity;
 import com.example.isaac.directorioudg.entities.Centro;
-import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listcentros.adapters.CentrosAdapter;
-
 import com.example.isaac.directorioudg.listcentros.adapters.OnItemClickListener;
 import com.example.isaac.directorioudg.util.Helper;
 
@@ -29,7 +29,6 @@ import butterknife.ButterKnife;
 
 
 public class CentroList extends Fragment implements OnItemClickListener {
-
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -93,7 +92,12 @@ public class CentroList extends Fragment implements OnItemClickListener {
     }
 
     @Override
-    public void onItemClick(Centro cento) {
-
+    public void onItemClick(Centro centro) {
+        Intent intent = new Intent(getActivity(), DetalleCentroActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("centro",centro);
+        intent.putExtras(bundle);//ponerlos en el intent
+        startActivity(intent);//iniciar la actividad
     }
 }

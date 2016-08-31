@@ -48,6 +48,14 @@
                 android:value=".main.MainActivity" />
         </activity>
         <activity
+            android:name=".detallecentro.DetalleCentroActivity"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.MainActivity" />
+        </activity>
+        <activity
             android:name=".radio.RadioActivity"
             android:parentActivityName=".main.MainActivity">
             <meta-data

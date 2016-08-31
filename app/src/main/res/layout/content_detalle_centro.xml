@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".detallecentro.DetalleCentroActivity"
+    tools:showIn="@layout/activity_detalle_centro">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="24dp">
+
+
+    <!-- Card Centro -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardCentro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_margin">
+
+            <LinearLayout
+                style="@style/Widget.CardContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--Etiqueta Perfil -->
+                <TextView
+                    android:id="@+id/nombreCentro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/centro"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                <!--Texto de ejemplo-->
+                <TextView
+                    android:id="@+id/direccionCentro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/direccion" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/codigo_postal"
+                    android:id="@+id/codigoPostalCentro" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="www.web.com"
+                    android:id="@+id/DirWeb" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/layoutweb">
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/world"
+                            android:background="@color/white_transparent"
+                            android:id="@+id/imageButton" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:textColor="@color/wallet_holo_blue_light"
+                            android:textSize="20sp"
+                            android:text="Visitar"/>
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Card Rector -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardRector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_margin"
+            android:layout_marginLeft="@dimen/card_margin"
+            android:layout_marginRight="@dimen/card_margin">
+
+            <!--Contiene Tod0 incluso el correo-->
+            <LinearLayout
+                style="@style/Widget.CardContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <!--Layout de (imgen, nombre y telefono)-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/logo_udg"
+                        android:background="@color/white_transparent"
+                        android:id="@+id/imageRector" />
+                    <!--otro layout del nombre y telefono-->
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <!--Contenerdor de nombreRector y telefono-->
+
+                        <!-- Etiqueta Rector -->
+                        <TextView
+                            android:id="@+id/tituloCardDirector"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:text="@string/rector"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                        <!--NombreRector-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="NombreRector"
+                            android:textSize="20sp"
+                            android:id="@+id/lblNombreRector" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+                            <!--TelefonoRector-->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@string/telefonos"
+                                android:id="@+id/lblTelefonoRector" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text=" Numero"
+                                android:id="@+id/txtTelefonoRector" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!--CorreoRector-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:text="guillermoisaac@gmail.com"
+                        android:id="@+id/txtCorreoRector" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Card SecretarioAcademico -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardSecAcademico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_margin"
+            android:layout_marginLeft="@dimen/card_margin"
+            android:layout_marginRight="@dimen/card_margin">
+
+
+            <!--Contiene Tod0 incluso el correo-->
+            <LinearLayout
+                style="@style/Widget.CardContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--Layout de (imgen, nombre y telefono)-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/logo_udg"
+                        android:background="@color/white_transparent"
+                        android:id="@+id/imageSecacademico" />
+                    <!--otro layout del nombre y telefono-->
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <!--Contenerdor de nombreRector y telefono-->
+
+                        <!-- Etiqueta SecAcademico -->
+                        <TextView
+                            android:id="@+id/tituloCardSecAcademico"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:text="@string/SecretarioAcademico"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        <!--NombreRector-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/activity_vertical_margin"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="NombreSecAcademico"
+                            android:textSize="20sp"
+                            android:id="@+id/lblNombreSecAcademico" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:orientation="horizontal">
+                            <!--TelefonoSecAcademico-->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@string/telefonos"
+                                android:id="@+id/lblTelefonoSecAcademico" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text=" Numero"
+                                android:id="@+id/txtTelefonoSecAcademico" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!--CorreoSecAcademico-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:text="guillermoisaac@gmail.com"
+                        android:id="@+id/txtCorreoSecAcademico" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Card SecretarioAdministrativo -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardSecAdministrativo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_margin"
+            android:layout_marginLeft="@dimen/card_margin"
+            android:layout_marginRight="@dimen/card_margin">
+
+
+            <!--Contiene Tod0 incluso el correo-->
+            <LinearLayout
+                style="@style/Widget.CardContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--Layout de (imgen, nombre y telefono)-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/logo_udg"
+                        android:background="@color/white_transparent"
+                        android:id="@+id/imageSecAdministrativo" />
+                    <!--otro layout del nombre y telefono-->
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <!--Contenerdor de nombreSecAdministrativo y telefono-->
+
+                        <!-- Etiqueta SecAdministrativo -->
+                        <TextView
+                            android:id="@+id/tituloCardSecAdministrativo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:text="@string/SecretarioAdministrativo"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        <!--NombreSecAdministrativo-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/activity_vertical_margin"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="NombreSecAdministrativo"
+                            android:textSize="20sp"
+                            android:id="@+id/lblNombreSecAdministrativo" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:orientation="horizontal">
+                            <!--TelefonoSecAdministrativo-->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@string/telefonos"
+                                android:id="@+id/lblTelefonoSecAdministrativo" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text=" Numero"
+                                android:id="@+id/txtTelefonoSecAdministrativo" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!--CorreoSecAdministrativo-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:text="guillermoisaac@gmail.com"
+                        android:id="@+id/txtCorreoSecAdministrativo" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Card Map -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardMap"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_margin"
+            android:layout_marginLeft="@dimen/card_margin"
+            android:layout_marginRight="@dimen/card_margin"
+            android:paddingTop="12dp"
+            android:paddingBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/cardMapa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mapa"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:layout_marginLeft="24dp"/>
+
+                <com.google.android.gms.maps.MapView
+                    xmlns:map="http://schemas.android.com/apk/res-auto"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:id="@+id/map"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/cardMapa"
+                    map:liteMode="true"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

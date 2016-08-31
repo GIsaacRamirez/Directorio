@@ -18,5 +18,5 @@ public interface CentroListRepository {
 
     List<Centro> getListCentro(int filter);
 
-    Prepa getCentro(int id);
+    Centro getCentro(int id);
 }
