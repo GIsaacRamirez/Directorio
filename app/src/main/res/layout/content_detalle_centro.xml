@@ -177,6 +177,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:textColor="@color/wallet_holo_blue_light"
                         android:text="guillermoisaac@gmail.com"
                         android:id="@+id/txtCorreoRector" />
                 </LinearLayout>
@@ -270,6 +271,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:textColor="@color/wallet_holo_blue_light"
                         android:text="guillermoisaac@gmail.com"
                         android:id="@+id/txtCorreoSecAcademico" />
                 </LinearLayout>
@@ -363,6 +365,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:textColor="@color/wallet_holo_blue_light"
                         android:text="guillermoisaac@gmail.com"
                         android:id="@+id/txtCorreoSecAdministrativo" />
                 </LinearLayout>

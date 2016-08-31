@@ -154,12 +154,12 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         txtTelefonoRector.setText(centro.getTelefonoRector());
         txtCorreoRector.setText(centro.getCorreoRector());
         //Card secretario academico
-        imageLoader.load(imageSecacademico,centro.getFotoSecAcademicoURL(),false);
+        imageLoader.load(imageSecacademico, centro.getFotoSecAcademicoURL(), false);
         lblNombreSecAcademico.setText(centro.getSecretarioAcademico());
         txtTelefonoSecAcademico.setText(centro.getTelefonoSecAcademico());
         txtCorreoSecAcademico.setText(centro.getCorreoSecAcademico());
         //Card secretario administrativo
-        imageLoader.load(imageSecAdministrativo,centro.getFotoSecAdministrativoURL(),false);
+        imageLoader.load(imageSecAdministrativo, centro.getFotoSecAdministrativoURL(), false);
         lblNombreSecAdministrativo.setText(centro.getSecretarioAdministrativo());
         txtTelefonoSecAdministrativo.setText(centro.getTelefonoSecAdministrativo());
         txtCorreoSecAdministrativo.setText(centro.getCorreoSecAdministrativo());
@@ -189,13 +189,12 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     }
 
 
-    @OnClick(R.id.layoutweb)
-    public void onClick() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(centro.getWeb()));
-        startActivity(intent);
+    public void sendEmail(String emailTo) {
+        Intent email = new Intent(Intent.ACTION_SENDTO);
+        email.setData(Uri.parse("mailto:"));
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
+        startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -205,6 +204,26 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @OnClick({R.id.layoutweb, R.id.txtCorreoRector, R.id.txtCorreoSecAcademico, R.id.txtCorreoSecAdministrativo})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.layoutweb:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(centro.getWeb()));
+                startActivity(intent);
+                break;
+            case R.id.txtCorreoRector:
+                sendEmail(txtCorreoRector.getText().toString());
+                break;
+            case R.id.txtCorreoSecAcademico:
+                sendEmail(txtCorreoSecAcademico.getText().toString());
+                break;
+            case R.id.txtCorreoSecAdministrativo:
+                sendEmail(txtCorreoSecAdministrativo.getText().toString());
+                break;
         }
     }
 }

@@ -139,7 +139,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         Longitud = prepa.getLongitud();
 
         lblDirector.setText(prepa.getDirector().trim());
-        imageLoader.load(imageDirector,prepa.getFotoDirectorURL(),false);
+        imageLoader.load(imageDirector, prepa.getFotoDirectorURL(), false);
         lblCorreoDirector.setText(prepa.getCorreoDirector().trim());
         lblSecretario.setText(prepa.getSecretario().trim());
         lblCorreoSecretario.setText(prepa.getCorreoSecretario().trim());
@@ -168,15 +168,6 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         });
     }
 
-
-    @OnClick(R.id.layoutweb)
-    public void onClick() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(prepa.getWEB()));
-        startActivity(intent);
-    }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -186,6 +177,31 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    @OnClick({R.id.layoutweb, R.id.lblCorreoDirector, R.id.lblCorreoSecretario})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.layoutweb:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(prepa.getWEB()));
+                startActivity(intent);
+                break;
+            case R.id.lblCorreoDirector:
+                sendEmail(lblCorreoDirector.getText().toString());
+                break;
+            case R.id.lblCorreoSecretario:
+                sendEmail(lblCorreoSecretario.getText().toString());
+                break;
+        }
+    }
+
+    public void sendEmail(String emailTo){
+        Intent email = new Intent(Intent.ACTION_SENDTO);
+        email.setData(Uri.parse("mailto:"));
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
+        startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
     }
 }
 
