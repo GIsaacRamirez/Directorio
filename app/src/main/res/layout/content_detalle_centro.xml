@@ -123,7 +123,8 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
                         <!--Contenerdor de nombreRector y telefono-->
 
                         <!-- Etiqueta Rector -->
@@ -131,7 +132,7 @@
                             android:id="@+id/tituloCardDirector"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="5dp"
                             android:text="@string/rector"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -139,17 +140,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="NombreRector"
                             android:textSize="20sp"
                             android:id="@+id/lblNombreRector" />
+                        <!--TelefonoRector-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin">
-                            <!--TelefonoRector-->
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:layout_marginLeft="5dp">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -164,23 +168,21 @@
                                 android:id="@+id/txtTelefonoRector" />
                         </LinearLayout>
 
+                        <!--CorreoRector-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/wallet_holo_blue_light"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:text="guillermoisaac@gmail.com"
+                            android:id="@+id/txtCorreoRector" />
                     </LinearLayout>
+
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <!--CorreoRector-->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:textColor="@color/wallet_holo_blue_light"
-                        android:text="guillermoisaac@gmail.com"
-                        android:id="@+id/txtCorreoRector" />
-                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -218,7 +220,8 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
                         <!--Contenerdor de nombreRector y telefono-->
 
                         <!-- Etiqueta SecAcademico -->
@@ -241,6 +244,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"
                             android:orientation="horizontal">
                             <!--TelefonoSecAcademico-->
@@ -258,22 +262,16 @@
                                 android:id="@+id/txtTelefonoSecAcademico" />
                         </LinearLayout>
 
+                        <!--CorreoSecAcademico-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:textColor="@color/wallet_holo_blue_light"
+                            android:text="guillermoisaac@gmail.com"
+                            android:id="@+id/txtCorreoSecAcademico" />
                     </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <!--CorreoSecAcademico-->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:textColor="@color/wallet_holo_blue_light"
-                        android:text="guillermoisaac@gmail.com"
-                        android:id="@+id/txtCorreoSecAcademico" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -312,7 +310,8 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
                         <!--Contenerdor de nombreSecAdministrativo y telefono-->
 
                         <!-- Etiqueta SecAdministrativo -->
@@ -320,14 +319,15 @@
                             android:id="@+id/tituloCardSecAdministrativo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="5dp"
                             android:text="@string/SecretarioAdministrativo"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
                         <!--NombreSecAdministrativo-->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/activity_vertical_margin"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="NombreSecAdministrativo"
                             android:textSize="20sp"
@@ -335,7 +335,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:layout_marginLeft="5dp"
                             android:orientation="horizontal">
                             <!--TelefonoSecAdministrativo-->
                             <TextView
@@ -352,22 +353,16 @@
                                 android:id="@+id/txtTelefonoSecAdministrativo" />
                         </LinearLayout>
 
+                        <!--CorreoSecAdministrativo-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:textColor="@color/wallet_holo_blue_light"
+                            android:text="guillermoisaac@gmail.com"
+                            android:id="@+id/txtCorreoSecAdministrativo" />
                     </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <!--CorreoSecAdministrativo-->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:textColor="@color/wallet_holo_blue_light"
-                        android:text="guillermoisaac@gmail.com"
-                        android:id="@+id/txtCorreoSecAdministrativo" />
                 </LinearLayout>
 
             </LinearLayout>
