@@ -45,7 +45,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setSupportActionBar(toolbar);
     }
     private void setUpSpinner(){
-        datos= new String[]{"Todo","Metropolitanos","Regionales","Centros Universitarios (CU)","CU Tematicos", "CU Regionales",
+        datos= new String[]{"Todo","Metropolitanos","Regionales","Centros Universitarios","CU Tematicos", "CU Regionales",
         "Preparatorias (Pre)", "Pre Metropolitanas", "Pre Regionales"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getSupportActionBar().getThemedContext(),

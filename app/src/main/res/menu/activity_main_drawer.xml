@@ -3,21 +3,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_centros"
+            android:id="@+id/nav_Prepas"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Preparatorias Metropolitanas" />
+            android:title="Preparatorias" />
+        <item
+            android:id="@+id/nav_Centros"
+            android:icon="@drawable/vector_drawable_ic_school_black___px"
+            android:title="Centros Universitarios" />
         <item
             android:id="@+id/nav_Radio"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_radio_black_px"
             android:title="Radio UDG" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Maps" />
+            android:id="@+id/nav_Map"
+            android:icon="@drawable/map_marker_24"
+            android:title="Mapas" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="PDF" />
     </group>
 
     <item android:title="Communicate">

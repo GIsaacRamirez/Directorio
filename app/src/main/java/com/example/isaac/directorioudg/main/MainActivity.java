@@ -177,26 +177,10 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_centros) {
+        if (id == R.id.nav_Prepas) {
             loadPrepaList();
-        } else if (id == R.id.nav_Radio) {
-            loadRadioList();
-        } else if (id == R.id.nav_slideshow) {
-
-            Intent intent = new Intent(this, MapActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } else if (id == R.id.nav_manage) {/*Tools*/
-
-            Intent intent = new Intent(this, pdfView.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_share) {
-
-            isPrepa=false;
+        } else if (id == R.id.nav_Centros) {
+            isPrepa = false;
 
             FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
@@ -206,6 +190,25 @@ public class MainActivity extends AppCompatActivity
             setTitle("Centros");
             setupSpinner();
             CmbToolbar.setVisibility(View.VISIBLE);
+
+        }else if(id == R.id.nav_Radio){
+            loadRadioList();
+        } else if (id == R.id.nav_Map) {
+
+            Intent intent = new Intent(this, MapActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else if (id == R.id.nav_manage) {/*Tools PDF*/
+
+            Intent intent = new Intent(this, pdfView.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_share) {
+
+
 
         } else if (id == R.id.nav_send) {
 
