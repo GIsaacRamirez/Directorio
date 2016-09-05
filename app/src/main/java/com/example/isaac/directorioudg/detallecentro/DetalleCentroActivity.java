@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
@@ -169,11 +170,11 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        String title = "Centro " + centro.getSigla();
+        final String title = "Centro " + centro.getSigla();
 
-        LatLng preparatoria = new LatLng(Latitud, Longitud);
+        final LatLng centro = new LatLng(Latitud, Longitud);
         mMap.addMarker(new MarkerOptions()
-                .position(preparatoria)
+                .position(centro)
                 .title(title));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(guadalajara));
         mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(Latitud, Longitud), 15);
@@ -182,9 +183,19 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("coordenadaVacia",false);
+                bundle.putDouble("Latitud",centro.latitude);
+                bundle.putDouble("Longitud",centro.longitude);
+                bundle.putBoolean("isPrepa",false);
+                bundle.putString("Name",title);
+                intent.putExtras(bundle);//ponerlos en el intent
+                startActivity(intent);
 
             }
-
         });
     }
 

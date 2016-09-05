@@ -198,9 +198,11 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, MapActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("coordenadaVacia",true);
+            intent.putExtras(bundle);//ponerlos en el intent
             startActivity(intent);
         } else if (id == R.id.nav_manage) {/*Tools PDF*/
-
             Intent intent = new Intent(this, pdfView.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_NEW_TASK);

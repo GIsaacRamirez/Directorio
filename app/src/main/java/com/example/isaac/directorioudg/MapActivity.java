@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -37,8 +38,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     Toolbar toolbar;
     private GoogleMap mMap;
     private CameraUpdate mCamera;
-
+    Double Latitud;
+    Double Longitud;
+    Boolean isPrepa;
+    String title;
     String[] datos;
+    Boolean isBundleEmpty;
 
     private void setToolbar() {
         // Añadir la Toolbar
@@ -62,6 +67,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         ButterKnife.bind(this);
         setToolbar();
         setUpSpinner();
+        Bundle bundle = getIntent().getExtras();
+        isBundleEmpty=bundle.getBoolean("coordenadaVacia");
+        if(!isBundleEmpty)
+        {
+            CmbToolbar.setVisibility(View.GONE);
+            isPrepa=bundle.getBoolean("isPrepa");
+            title=bundle.getString("Name");
+            Latitud = bundle.getDouble("Latitud");
+            Longitud = bundle.getDouble("Longitud");
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -74,10 +89,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                android.view.View v, int position, long id) {
                         loadMarkers(position);
                     }
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
+                    public void onNothingSelected(AdapterView<?> parent) {}
                 });
-
 
     }
 
@@ -163,10 +176,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        loadMarkers(0);
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(guadalajara));
+        if(isBundleEmpty){
+            loadMarkers(0);
+            mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(20.675356, -103.358919), 11);
+        } else{
+            LatLng coordenadas = new LatLng(Latitud,Longitud);
 
-        mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(20.675356, -103.358919), 11);
+            if(isPrepa) {
+                mMap.addMarker(new MarkerOptions()
+                    .position(coordenadas)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                        .title(title));
+                mCamera = CameraUpdateFactory.newLatLngZoom(coordenadas, 11);
+            }else{
+                mMap.addMarker(new MarkerOptions()
+                    .position(coordenadas).
+                        icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_centros))
+                        .title(title));
+                mCamera = CameraUpdateFactory.newLatLngZoom(coordenadas, 11);
+            }
+        }
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(guadalajara));
         mMap.animateCamera(mCamera);
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
