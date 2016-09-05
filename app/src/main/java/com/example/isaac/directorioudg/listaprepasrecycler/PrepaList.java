@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +41,7 @@ public class PrepaList extends Fragment implements  OnItemClickListener {
     public PrepaList() { }
 
     public final void setPrepaList(int filter){
-
-
         adapter.setPrepaList(repository.getListPrepas(filter));
-        Log.v("PrepaList", "metropolitana");
     }
 
 
@@ -91,8 +87,7 @@ public class PrepaList extends Fragment implements  OnItemClickListener {
     @Override
     public void onItemClick(Prepa prepa) {
         Intent intent = new Intent(getActivity(), DetallePrepaActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                );
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Bundle bundle = new Bundle();
         bundle.putParcelable("prepa",prepa);
         intent.putExtras(bundle);//ponerlos en el intent
