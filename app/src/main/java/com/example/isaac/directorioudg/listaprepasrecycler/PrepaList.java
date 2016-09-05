@@ -34,7 +34,6 @@ public class PrepaList extends Fragment implements  OnItemClickListener {
 
     public static PrepasAdapter adapter;
     Helper helper;
-    int tipo;
 
     View view = null;
     public  static List<Prepa> prepaList = new ArrayList<>();
@@ -93,8 +92,6 @@ public class PrepaList extends Fragment implements  OnItemClickListener {
         intent.putExtras(bundle);//ponerlos en el intent
         startActivity(intent);//iniciar la actividad
     }
-
-
 
     ImageLoader provideImageLoader(Activity activity) {
         GlideImageLoader imageLoader = new GlideImageLoader();
