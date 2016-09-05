@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
@@ -151,7 +152,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         mMap = googleMap;
         String title = "Preparatoria " + prepa.getPreparatoria();
 
-        LatLng preparatoria = new LatLng(Latitud, Longitud);
+        final LatLng preparatoria = new LatLng(Latitud, Longitud);
         mMap.addMarker(new MarkerOptions()
                 .position(preparatoria)
                 .title(title));
@@ -162,7 +163,17 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("coordenadaVacia",false);
+                bundle.putDouble("Latitud",prepa.getLatitud());
+                bundle.putDouble("Longitud",prepa.getLongitud());
+                bundle.putBoolean("isPrepa",true);
+                bundle.putString("Name","Preparatoria " + prepa.getPreparatoria());
+                intent.putExtras(bundle);//ponerlos en el intent
+                startActivity(intent);
             }
 
         });
