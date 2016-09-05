@@ -131,7 +131,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         collapser.setTitle(centro.getSigla());
 
         //Card centro
-        nombreCentro.setText("Preparatoria: " + centro.getNombreCentro());
+        nombreCentro.setText(centro.getNombreCentro());
         String dir = "Direccion:" + centro.getDireccion();
         dir = dir.replaceAll("\n", "");
         String municipio = centro.getMunicipio();
