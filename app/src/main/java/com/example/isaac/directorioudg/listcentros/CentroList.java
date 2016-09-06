@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,6 @@ public class CentroList extends Fragment implements OnItemClickListener {
 
     public final void setCentrosList(int filter){
         adapter.setCentroList(repository.getListCentro(filter));
-        Log.v("CentroList", "centro");
     }
 
     public void setupAdapter() {
