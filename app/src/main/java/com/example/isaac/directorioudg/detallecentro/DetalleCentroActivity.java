@@ -84,6 +84,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     FloatingActionButton fab;
 
     private GoogleMap mMap;
+
     private CameraUpdate mCamera;
     private Double Latitud, Longitud;
     String Estado = "Jalisco";
@@ -170,6 +171,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         final String title = "Centro " + centro.getSigla();
 
         final LatLng centro = new LatLng(Latitud, Longitud);
@@ -183,6 +185,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                         | Intent.FLAG_ACTIVITY_NEW_TASK);

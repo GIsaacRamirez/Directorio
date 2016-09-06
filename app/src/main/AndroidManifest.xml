@@ -70,7 +70,14 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".pdfView" />
+        <activity android:name=".pdfView"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.MainActivity" />
+        </activity>
+
         <activity android:name=".MapActivity"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
