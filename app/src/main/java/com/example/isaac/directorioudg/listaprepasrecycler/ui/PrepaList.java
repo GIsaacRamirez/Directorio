@@ -114,8 +114,4 @@ public class PrepaList extends Fragment implements PrepaListView, OnItemClickLis
     public final void setPrepaList(int filter,PrepasAdapter adapter){
         adapter.setPrepaList(presenter.getPrepas(filter));
     }
-
-    public PrepaListPresenter getPresenter() {
-        return presenter;
-    }
 }

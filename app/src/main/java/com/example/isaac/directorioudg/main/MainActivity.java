@@ -21,7 +21,11 @@ import android.widget.Spinner;
 
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
+import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
+import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.listaprepasrecycler.ui.PrepaList;
+import com.example.isaac.directorioudg.listcentros.CentroListRepository;
+import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.listcentros.ui.CentroList;
 import com.example.isaac.directorioudg.pdfView;
 import com.example.isaac.directorioudg.radio.RadioList.RadioList;
@@ -43,6 +47,10 @@ public class MainActivity extends AppCompatActivity
     @Bind(R.id.nav_view)
     NavigationView navView;
     int isPrepa;
+
+    PrepaListRepository prepaListRepository = new PrepaListRepositoryImpl();
+    CentroListRepository centroListRepository = new CentroListRepositoryImpl();
+
     PrepaList fragmentPrepaList = new PrepaList();
     CentroList fragmentCentroList = new CentroList();
 
@@ -104,8 +112,8 @@ public class MainActivity extends AppCompatActivity
         if (firstStart) {
             SharedPreferences.Editor editor = prefs.edit();
             if (helper.isConect()) {
-                fragmentPrepaList.getPresenter().descargarPrepas();
-                fragmentCentroList.getPresenter().descargarCentros();
+                prepaListRepository.descargarDatosPrepaCompletos();
+                centroListRepository.descargarDatosCentroCompletos();
             }
             editor.putBoolean("firstStart", false);
             // commits your edits
@@ -171,8 +179,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_actualizar) {
             if (helper.isConect()) {
 
-                fragmentPrepaList.getPresenter().descargarPrepas();
-                fragmentCentroList.getPresenter().descargarCentros();
+                prepaListRepository.descargarDatosPrepaCompletos(fragmentPrepaList.getPrepaListAdapter());
+                centroListRepository.descargarDatosCentroCompletos(fragmentCentroList.getCentroListAdapter());
 
                 if(isPrepa==0){
                     showSnackbar("Se esta actualizando la informacion");
