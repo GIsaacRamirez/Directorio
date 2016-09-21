@@ -91,7 +91,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         setContentView(R.layout.activity_detalle_prepa);
         ButterKnife.bind(this);
         setToolbar();// Añadir action bar
-        repository = new PrepaListRepositoryImpl(this);
+        repository = new PrepaListRepositoryImpl();
         imageLoader = new GlideImageLoader(this.getApplicationContext());
 
         Bundle bundle = this.getIntent().getExtras();

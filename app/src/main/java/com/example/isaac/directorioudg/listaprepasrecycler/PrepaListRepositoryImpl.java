@@ -25,6 +25,8 @@ import org.json.simple.JSONValue;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
+
 
 /**
  * Created by isaac on 14/07/16.
@@ -34,12 +36,12 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
     Context context;
     PrepasAdapter adapter=null;
     Boolean adapterisEmpty=true;
-    public PrepaListRepositoryImpl(Context context) {
-        this.context = context;
+    public PrepaListRepositoryImpl() {
+        this.context = getContext().getApplicationContext();
     }
 
-    public PrepaListRepositoryImpl(Context context, PrepasAdapter adapter) {
-        this.context = context;
+    public PrepaListRepositoryImpl( PrepasAdapter adapter) {
+        this.context = getContext().getApplicationContext();
         this.adapter=adapter;
     }
 

@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
         if (firstStart) {
             SharedPreferences.Editor editor = prefs.edit();
             if (helper.isConect()) {
-                repositoryPrepa = new PrepaListRepositoryImpl(getApplicationContext());
+                repositoryPrepa = new PrepaListRepositoryImpl();
                 repositoryPrepa.descargarDatosPrepaCompletos();
                 repositoryCentro = new CentroListRepositoryImpl(getApplicationContext());
                 repositoryCentro.descargarDatosCentroCompletos();
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_actualizar) {
             if (helper.isConect()) {
-                repositoryPrepa = new PrepaListRepositoryImpl(getApplicationContext());
+                repositoryPrepa = new PrepaListRepositoryImpl();
                 repositoryPrepa.descargarDatosPrepaCompletos(fragmentPrepaList.getPrepaListAdapter());
                 repositoryCentro = new CentroListRepositoryImpl(getApplicationContext());
                 repositoryCentro.descargarDatosCentroCompletos();

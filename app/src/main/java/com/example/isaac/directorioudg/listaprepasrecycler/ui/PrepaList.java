@@ -18,8 +18,6 @@ import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListPresenter;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListPresenterImpl;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.listaprepasrecycler.adapters.OnItemClickListener;
 import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
 import com.example.isaac.directorioudg.util.Helper;
@@ -84,9 +82,7 @@ public class PrepaList extends Fragment implements PrepaListView, OnItemClickLis
                         Toast.LENGTH_SHORT).show();
             }
         }
-
         setupRecyclerView();
-
         return view;
     }
 

@@ -127,7 +127,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         final int metropolitanas = 11;
         int zoom = foraneas;
 
-        PrepaListRepository prepaListRepository = new PrepaListRepositoryImpl(getApplicationContext());
+        PrepaListRepository prepaListRepository = new PrepaListRepositoryImpl();
         CentroListRepository centroListRepository = new CentroListRepositoryImpl(getApplicationContext());
 
         List<Prepa> prepaList = new ArrayList<>();
