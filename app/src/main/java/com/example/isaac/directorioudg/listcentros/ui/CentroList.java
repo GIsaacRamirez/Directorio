@@ -1,6 +1,7 @@
-package com.example.isaac.directorioudg.listcentros;
+package com.example.isaac.directorioudg.listcentros.ui;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,9 @@ import com.example.isaac.directorioudg.detallecentro.DetalleCentroActivity;
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
+import com.example.isaac.directorioudg.listcentros.CentroListPresenter;
+import com.example.isaac.directorioudg.listcentros.CentroListPresenterImpl;
+import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.listcentros.adapters.CentrosAdapter;
 import com.example.isaac.directorioudg.listcentros.adapters.OnItemClickListener;
 import com.example.isaac.directorioudg.util.Helper;
@@ -27,35 +31,30 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class CentroList extends Fragment implements OnItemClickListener {
+public class CentroList extends Fragment implements CentroListView, OnItemClickListener {
 
+    public static final int todos=0;
+    public static final int metropolitanos=1;
+    public static final int regionales=2;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    CentroListRepository repository;
-    ImageLoader imageLoader;
+    private CentroListPresenter presenter;
+    private  CentrosAdapter adapter = null;
+    private Helper helper;
+    private View view = null;
+    private List<Centro> centrosList = new ArrayList<>();
 
-    public static CentrosAdapter adapter;
-    Helper helper;
-
-    View view = null;
-    public  static List<Centro> centrosList = new ArrayList<>();
-
-    public final void setCentrosList(int filter){
-        adapter.setCentroList(repository.getListCentro(filter));
-    }
-
-    public void setupAdapter() {
-        adapter = new CentrosAdapter(repository.getListCentro(0), imageLoader, this);
-    }
 
     private void setupRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(adapter);
     }
-    public CentroList() {
-        // Required empty public constructor
+    public CentroList() { /* Required empty public constructor*/ }
+
+    public CentroListPresenter getPresenter() {
+        return presenter;
     }
 
     @Override
@@ -64,21 +63,23 @@ public class CentroList extends Fragment implements OnItemClickListener {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_centro_list, container, false);
         ButterKnife.bind(this, view);
-        helper= new Helper(this.getContext());
-        imageLoader= new GlideImageLoader(this.getContext());
 
-        repository= new CentroListRepositoryImpl(getContext());
-        centrosList = repository.getListCentro(0);
+        helper= new Helper(this.getContext());
+
+
+        setupCentroListAdapter();
+        presenter = new CentroListPresenterImpl(getCentroListAdapter());
+
+        centrosList = presenter.getCentros(todos);
         if (centrosList.isEmpty()) {
             if (helper.isConect()) {
-                repository.descargarDatosCentroCompletos();
+                presenter.descargarCentros();
             } else {
                 Toast.makeText(getContext(),
                         R.string._listaprepasrecycle_error_conexion,
                         Toast.LENGTH_SHORT).show();
             }
         }
-        setupAdapter();
         setupRecyclerView();
         return view;
     }
@@ -88,7 +89,6 @@ public class CentroList extends Fragment implements OnItemClickListener {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
     @Override
     public void onItemClick(Centro centro) {
         Intent intent = new Intent(getActivity(), DetalleCentroActivity.class);
@@ -97,5 +97,28 @@ public class CentroList extends Fragment implements OnItemClickListener {
         bundle.putParcelable("centro",centro);
         intent.putExtras(bundle);//ponerlos en el intent
         startActivity(intent);//iniciar la actividad
+    }
+
+    ImageLoader provideImageLoader(Activity activity) {
+        GlideImageLoader imageLoader = new GlideImageLoader();
+        if (activity != null) {
+            imageLoader.setLoaderContext(activity);
+        }
+        return imageLoader;
+    }
+
+    @Override
+    public void setCentroList(int filter, CentrosAdapter adapter) {
+        adapter.setCentroList(presenter.getCentros(filter));
+    }
+
+    @Override
+    public CentrosAdapter getCentroListAdapter() {
+        return adapter;
+    }
+
+    @Override
+    public void setupCentroListAdapter() {
+        adapter = new CentrosAdapter(centrosList, provideImageLoader(getActivity()), this);
     }
 }

@@ -21,18 +21,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHolder> {
     public List<Centro> centroList;
-
-
     private ImageLoader imageLoader;
     OnItemClickListener onItemClickListener;
 
     public CentrosAdapter(List<Centro> centroList, ImageLoader imageLoader, OnItemClickListener onItemClickListener) {
         this.centroList = centroList;
-        this.onItemClickListener = onItemClickListener;
-        this.imageLoader = imageLoader;
-    }
-
-    public CentrosAdapter(ImageLoader imageLoader, OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
         this.imageLoader = imageLoader;
     }

@@ -128,7 +128,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         int zoom = foraneas;
 
         PrepaListRepository prepaListRepository = new PrepaListRepositoryImpl();
-        CentroListRepository centroListRepository = new CentroListRepositoryImpl(getApplicationContext());
+        CentroListRepository centroListRepository = new CentroListRepositoryImpl();
 
         List<Prepa> prepaList = new ArrayList<>();
         List<Centro> centroList = new ArrayList<>();
@@ -137,30 +137,30 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         switch (filter) {
             case 0:
                 prepaList = prepaListRepository.getListPrepas(0);
-                centroList = centroListRepository.getListCentro(0);
+                centroList = centroListRepository.getListCentros(0);
                 zoom = foraneas;
 
                 break;
             case 1:
                 prepaList = prepaListRepository.getListPrepas(1);
-                centroList = centroListRepository.getListCentro(1);
+                centroList = centroListRepository.getListCentros(1);
                 zoom = metropolitanas;
                 break;
             case 2:
                 prepaList = prepaListRepository.getListPrepas(2);
-                centroList = centroListRepository.getListCentro(2);
+                centroList = centroListRepository.getListCentros(2);
                 zoom = foraneas;
                 break;
             case 3:
-                centroList = centroListRepository.getListCentro(0);
+                centroList = centroListRepository.getListCentros(0);
                 zoom = foraneas;
                 break;
             case 4:
-                centroList = centroListRepository.getListCentro(1);
+                centroList = centroListRepository.getListCentros(1);
                 zoom = metropolitanas;
                 break;
             case 5:
-                centroList = centroListRepository.getListCentro(2);
+                centroList = centroListRepository.getListCentros(2);
                 zoom = foraneas;
                 break;
             case 6:

@@ -24,7 +24,7 @@ import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.listaprepasrecycler.ui.PrepaList;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
-import com.example.isaac.directorioudg.listcentros.CentroList;
+import com.example.isaac.directorioudg.listcentros.ui.CentroList;
 import com.example.isaac.directorioudg.listcentros.CentroListRepository;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.pdfView;
@@ -98,10 +98,8 @@ public class MainActivity extends AppCompatActivity
         if (firstStart) {
             SharedPreferences.Editor editor = prefs.edit();
             if (helper.isConect()) {
-                repositoryPrepa = new PrepaListRepositoryImpl();
-                repositoryPrepa.descargarDatosPrepaCompletos();
-                repositoryCentro = new CentroListRepositoryImpl(getApplicationContext());
-                repositoryCentro.descargarDatosCentroCompletos();
+                fragmentPrepaList.getPresenter().descargarPrepas();
+                fragmentCentroList.getPresenter().descargarCentros();
             }
             editor.putBoolean("firstStart", false);
             // commits your edits
@@ -117,7 +115,7 @@ public class MainActivity extends AppCompatActivity
                         if (isPrepa==0){
                             fragmentPrepaList.setPrepaList(position,fragmentPrepaList.getPrepaListAdapter());
                         }else if(isPrepa==1){
-                            fragmentCentroList.setCentrosList(position);
+                            fragmentCentroList.setCentroList(position,fragmentCentroList.getCentroListAdapter());
                         }
                     }
                     public void onNothingSelected(AdapterView<?> parent) {
@@ -166,16 +164,13 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_actualizar) {
             if (helper.isConect()) {
-                repositoryPrepa = new PrepaListRepositoryImpl();
-                repositoryPrepa.descargarDatosPrepaCompletos(fragmentPrepaList.getPrepaListAdapter());
-                repositoryCentro = new CentroListRepositoryImpl(getApplicationContext());
-                repositoryCentro.descargarDatosCentroCompletos();
+
+                fragmentPrepaList.getPresenter().descargarPrepas();
+                fragmentCentroList.getPresenter().descargarCentros();
 
                 if(isPrepa==0){
-
                     showSnackbar("Se esta actualizando la informacion");
                 }else if(isPrepa==1){
-                    fragmentCentroList.setCentrosList(0);
                     showSnackbar("Se esta actualizando la informacion");
                 }
             }else{

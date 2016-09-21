@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.entities.Centro_Table;
+import com.example.isaac.directorioudg.listcentros.adapters.CentrosAdapter;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
@@ -24,18 +25,34 @@ import org.json.simple.JSONValue;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
+
 /**
  * Created by isaac on 29/08/16.
  */
 public class CentroListRepositoryImpl implements CentroListRepository {
     Context context;
+    CentrosAdapter adapter=null;
+    Boolean adapterisEmpty=true;
 
-    public CentroListRepositoryImpl(Context context) {
-        this.context = context;
+    public CentroListRepositoryImpl() {
+        this.context = getContext().getApplicationContext();
     }
 
+    public CentroListRepositoryImpl(CentrosAdapter adapter) {
+        this.context = getContext().getApplicationContext();
+        this.adapter=adapter;
+    }
     @Override
     public void descargarDatosCentroCompletos() {
+        adapterisEmpty=true;
+        String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/CentrosUniversitarios.php";
+        descargarDatosCentro(ruta);
+    }
+    @Override
+    public void descargarDatosCentroCompletos(CentrosAdapter adapteraux) {
+        adapterisEmpty=true;
+        adapter=adapteraux;
         String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/CentrosUniversitarios.php";
         descargarDatosCentro(ruta);
     }
@@ -124,7 +141,9 @@ public class CentroListRepositoryImpl implements CentroListRepository {
                     .success(new Transaction.Success() {
                         @Override
                         public void onSuccess(Transaction transaction) {
-
+                            if(!adapterisEmpty){
+                                adapter.setCentroList(getListCentros(0));
+                            }
                         }
                     }).build().execute();
 
@@ -136,7 +155,7 @@ public class CentroListRepositoryImpl implements CentroListRepository {
     }
 
     @Override
-    public List<Centro> getListCentro(int filter) {
+    public List<Centro> getListCentros(int filter) {
         List<Centro> centroList;
         if(filter==0){
             centroList = new Select().from(Centro.class).queryList();

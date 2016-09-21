@@ -108,7 +108,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         setContentView(R.layout.activity_detalle_centro);
         ButterKnife.bind(this);
         setToolbar();// Añadir action bar
-        repository = new CentroListRepositoryImpl(this);
+        repository = new CentroListRepositoryImpl();
         imageLoader = new GlideImageLoader(this.getApplicationContext());
 
         Bundle bundle = this.getIntent().getExtras();
