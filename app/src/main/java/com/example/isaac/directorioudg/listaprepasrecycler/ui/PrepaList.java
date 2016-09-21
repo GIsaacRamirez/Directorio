@@ -34,34 +34,15 @@ public class PrepaList extends Fragment implements PrepaListView, OnItemClickLis
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
-
     private PrepaListPresenter presenter;
-
     private  PrepasAdapter adapter = null;
     private Helper helper;
     private  View view = null;
     private List<Prepa> prepaList = new ArrayList<>();
 
-    public final PrepasAdapter getPrepaListAdapter() {
-        return adapter;
-    }
+    public PrepaList() { }
 
-    public PrepaList() {    }
-
-    public void setupPrepaListAdapter() {
-        adapter = new PrepasAdapter(prepaList,provideImageLoader(getActivity()), this);
-    }
-
-    private void setupRecyclerView() {
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(adapter);
-    }
-
-    public final void setPrepaList(int filter,PrepasAdapter adapter){
-        adapter.setPrepaList(presenter.getPrepas(filter));
-    }
-
+    //Ciclo de vida
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,6 +73,8 @@ public class PrepaList extends Fragment implements PrepaListView, OnItemClickLis
         ButterKnife.unbind(this);
     }
 
+
+
     @Override
     public void onItemClick(Prepa prepa) {
         Intent intent = new Intent(getActivity(), DetallePrepaActivity.class);
@@ -109,4 +92,27 @@ public class PrepaList extends Fragment implements PrepaListView, OnItemClickLis
         }
         return imageLoader;
     }
+
+    private void setupRecyclerView() {
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setAdapter(adapter);
+    }
+
+    //Metodos de la PrepaListView
+    @Override
+    public  PrepasAdapter getPrepaListAdapter() {
+        return adapter;
+    }
+
+    @Override
+    public void setupPrepaListAdapter() {
+        adapter = new PrepasAdapter(prepaList,provideImageLoader(getActivity()), this);
+    }
+
+    @Override
+    public final void setPrepaList(int filter,PrepasAdapter adapter){
+        adapter.setPrepaList(presenter.getPrepas(filter));
+    }
+
 }
