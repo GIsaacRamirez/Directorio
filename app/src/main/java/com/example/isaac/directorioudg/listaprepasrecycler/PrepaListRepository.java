@@ -1,6 +1,8 @@
 package com.example.isaac.directorioudg.listaprepasrecycler;
 
 import com.example.isaac.directorioudg.entities.Prepa;
+import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,7 @@ import java.util.List;
  */
 public interface PrepaListRepository {
     void descargarDatosPrepa(String url);
+    void descargarDatosPrepaCompletos(PrepasAdapter adapter);
     void descargarDatosPrepaCompletos();
 
     List<Prepa> getListPrepas(int filter);
