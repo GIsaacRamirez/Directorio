@@ -21,13 +21,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder> {
 
-
     public List<Prepa> prepaList;
-
-
     private ImageLoader imageLoader;
     OnItemClickListener onItemClickListener;
-
 
     public PrepasAdapter(List<Prepa> prepaList, ImageLoader imageLoader, OnItemClickListener onItemClickListener) {
         this.prepaList = prepaList;
