@@ -200,6 +200,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(20.675356, -103.358919), zoom);
         mMap.animateCamera(mCamera);
     }
+    //https://maps.googleapis.com/maps/api/directions/json?origin=20.6538880,-103.3257880&destination=20.6798740,-103.3506070&key=AIzaSyDR_ZCIiXBAP00ff2m9-Nc9VQxvbR8OeWs
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -227,6 +228,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(guadalajara));
         mMap.animateCamera(mCamera);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION},PERMISSIONS_REQUEST_LOCATION);
+            }
+            return;
+        }
+            mMap.setMyLocationEnabled(true);
+
+
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -253,22 +267,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     //METODOS DE LA CONEXION y peticion de permisos de localizacion
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                        PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION},PERMISSIONS_REQUEST_LOCATION);
-            }
-            return;
-        }
-        //Revisar si la ubicacion esta disponible
-        if(LocationServices.FusedLocationApi.getLocationAvailability(apiClient).isLocationAvailable()){
-            lastKnowLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
-        }else {
-            showSnackbar("Localizacion no disponible");
-        }
+
     }
 
     @Override
@@ -277,11 +276,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             case PERMISSIONS_REQUEST_LOCATION:{
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    if(LocationServices.FusedLocationApi.getLocationAvailability(apiClient).isLocationAvailable()){
-                        lastKnowLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
-                    }else {
-                        showSnackbar( "Localizacion no disponible 2");
-                    }
+                    mMap.setMyLocationEnabled(true);
                 }
             }
         }
