@@ -114,6 +114,8 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         Bundle bundle = this.getIntent().getExtras();
         centro = bundle.getParcelable("centro");
         map.onCreate(null);
+        map.setDrawingCacheEnabled(true);
+        map.getDrawingCache();
         map.getMapAsync(this);
 
         setDataInView();
