@@ -22,11 +22,7 @@ import android.widget.Spinner;
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.listaprepasrecycler.ui.PrepaList;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.listcentros.ui.CentroList;
-import com.example.isaac.directorioudg.listcentros.CentroListRepository;
-import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.pdfView;
 import com.example.isaac.directorioudg.radio.RadioList.RadioList;
 import com.example.isaac.directorioudg.util.Helper;
@@ -38,8 +34,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    PrepaListRepository repositoryPrepa;
-    CentroListRepository repositoryCentro;
     Helper helper = new Helper(this);
     SharedPreferences prefs;
     @Bind(R.id.CmbToolbar)
@@ -71,6 +65,18 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.content_main, fragmentPrepaList);
         fragmentTransaction.commit();
         setTitle("Prepas");
+        setupSpinner();
+        CmbToolbar.setVisibility(View.VISIBLE);
+    }
+
+    public void loadCentroList(){
+        isPrepa = 1;
+        FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.content_main, fragmentCentroList);
+        fragmentTransaction.commit();
+        setTitle("Centros");
         setupSpinner();
         CmbToolbar.setVisibility(View.VISIBLE);
     }
@@ -196,17 +202,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_Prepas) {
             loadPrepaList();
         } else if (id == R.id.nav_Centros) {
-            isPrepa = 1;
-
-            FragmentTransaction fragmentTransaction =
-                    getSupportFragmentManager().beginTransaction();
-
-            fragmentTransaction.replace(R.id.content_main, fragmentCentroList);
-            fragmentTransaction.commit();
-            setTitle("Centros");
-            setupSpinner();
-            CmbToolbar.setVisibility(View.VISIBLE);
-
+            loadCentroList();
         }else if(id == R.id.nav_Radio){
             loadRadioList();
         } else if (id == R.id.nav_Map) {

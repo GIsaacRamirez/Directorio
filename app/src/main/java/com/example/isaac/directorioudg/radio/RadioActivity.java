@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import com.example.isaac.directorioudg.R;
+import com.example.isaac.directorioudg.radio.parser.UrlParser;
 import com.example.isaac.directorioudg.util.Helper;
 
 import butterknife.Bind;
@@ -103,12 +104,10 @@ public class RadioActivity extends AppCompatActivity implements MediaPlayer.OnPr
         super.onDestroy();
         ButterKnife.unbind(this);
         //Si hay una estacion reproduciendo al salir se lanza la notificacion
-
     }
 
     @OnClick(R.id.play)
     public void onClick() {
-
 
             if (null != MusicService.getPlayer() && !MusicService.getPlayer().isPlaying()) {
                 if(helper.isConect()){
@@ -160,10 +159,7 @@ public class RadioActivity extends AppCompatActivity implements MediaPlayer.OnPr
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         //MusicService.getPlayer().prepareAsync();
-
-
     }
 
     private void stopPlaying() {

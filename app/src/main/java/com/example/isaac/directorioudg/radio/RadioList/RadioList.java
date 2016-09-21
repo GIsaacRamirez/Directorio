@@ -18,7 +18,7 @@ import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.radio.RadioList.adapters.OnItemClickListener;
 import com.example.isaac.directorioudg.radio.RadioList.adapters.RadioAdapter;
-import com.example.isaac.directorioudg.radio.UrlParser;
+import com.example.isaac.directorioudg.radio.parser.UrlParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +27,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class RadioList extends Fragment implements OnItemClickListener,RadioListView {
+public class RadioList extends Fragment implements OnItemClickListener {
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
-
 
     private RadioAdapter adapter;
 
