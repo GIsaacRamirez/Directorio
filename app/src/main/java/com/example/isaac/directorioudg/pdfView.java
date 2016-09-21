@@ -2,6 +2,8 @@ package com.example.isaac.directorioudg;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +16,10 @@ import android.view.MenuItem;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.ScrollBar;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,10 +29,15 @@ public class pdfView extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_READ_EXTERNAL = 1;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    int numPage;
+
+
+
     private void setToolbar() {
         // Añadir la Toolbar
         setSupportActionBar(toolbar);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +45,11 @@ public class pdfView extends AppCompatActivity {
         ButterKnife.bind(this);
         setToolbar();
 
-        if(ActivityCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)!=
-        PackageManager.PERMISSION_GRANTED&&
-                ActivityCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)!=
-        PackageManager.PERMISSION_GRANTED) {
+        //Pedir permiso de lectura
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                        PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_EXTERNAL);
@@ -46,14 +57,17 @@ public class pdfView extends AppCompatActivity {
             return;
         }
         loadGaceta();
-}
+
+        /**Bitmap bmp = BitmapFactory.decodeFile(miFoto);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 70, bos);*/
+    }
 
     private void loadGaceta() {
         String directory = "/sdcard/";
+        File file = new File(directory, "889.pdf");
+        PDFView pdfView= (PDFView) findViewById(R.id.pdfView);
 
-        File file = new File(directory, "sample.pdf");
-
-        PDFView pdfView = (PDFView) findViewById(R.id.pdfView);
         ScrollBar scrollBar = (ScrollBar) findViewById(R.id.scrollBar);
         scrollBar.setHorizontal(true);
         pdfView.setScrollBar(scrollBar);
@@ -69,7 +83,9 @@ public class pdfView extends AppCompatActivity {
                 .load();
 
         setTitle("Gaceta");
+
     }
+
 
     //Respuesta de los permisos
     @Override
@@ -98,7 +114,10 @@ public class pdfView extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     private void showSnackbar(String msg) {
         Snackbar.make(getWindow().findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show();
     }
+
+
 }
