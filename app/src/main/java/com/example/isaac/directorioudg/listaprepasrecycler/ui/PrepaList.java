@@ -1,4 +1,4 @@
-package com.example.isaac.directorioudg.listaprepasrecycler;
+package com.example.isaac.directorioudg.listaprepasrecycler.ui;
 
 
 import android.app.Activity;
@@ -16,6 +16,10 @@ import com.example.isaac.directorioudg.detalleprepa.DetallePrepaActivity;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
+import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListPresenter;
+import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListPresenterImpl;
+import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
+import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.listaprepasrecycler.adapters.OnItemClickListener;
 import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
 import com.example.isaac.directorioudg.util.Helper;
@@ -25,56 +29,65 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PrepaList extends Fragment implements  OnItemClickListener {
+public class PrepaList extends Fragment implements PrepaListView, OnItemClickListener {
+    public static final int todas=0;
+    public static final int metropolitanas=1;
+    public static final int regionales=2;
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    PrepaListRepository repository;
+    private PrepaListPresenter presenter;
 
-    public static PrepasAdapter adapter;
-    Helper helper;
+    private  PrepasAdapter adapter = null;
+    private Helper helper;
+    private  View view = null;
+    private List<Prepa> prepaList = new ArrayList<>();
 
-    View view = null;
-    public  static List<Prepa> prepaList = new ArrayList<>();
-    public PrepaList() { }
-
-    public final void setPrepaList(int filter){
-        adapter.setPrepaList(repository.getListPrepas(filter));
+    public final PrepasAdapter getPrepaListAdapter() {
+        return adapter;
     }
 
+    public PrepaList() {    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        helper= new Helper(this.getContext());
-        view = inflater.inflate(R.layout.fragment_prepalist, container, false);
-        ButterKnife.bind(this, view);
-        repository= new PrepaListRepositoryImpl(getContext());
-        prepaList = repository.getListPrepas(0);
-        if (prepaList.isEmpty()) {
-            if (helper.isConect()) {
-                repository.descargarDatosPrepaCompletos();
-            } else {
-                Toast.makeText(getContext(),
-                        R.string._listaprepasrecycle_error_conexion,
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-        setupAdapter();
-        setupRecyclerView();
-
-        return view;
-    }
-
-    public void setupAdapter() {
-        adapter = new PrepasAdapter( repository.getListPrepas(0), provideImageLoader(getActivity()), this);
+    public void setupPrepaListAdapter() {
+        adapter = new PrepasAdapter(prepaList,provideImageLoader(getActivity()), this);
     }
 
     private void setupRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(adapter);
+    }
+
+    public final void setPrepaList(int filter,PrepasAdapter adapter){
+        adapter.setPrepaList(presenter.getPrepas(filter));
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_prepalist, container, false);
+        ButterKnife.bind(this, view);
+
+        helper= new Helper(this.getContext());
+        setupPrepaListAdapter();
+        presenter = new PrepaListPresenterImpl(getPrepaListAdapter());
+
+        prepaList = presenter.getPrepas(todas);
+        if (prepaList.isEmpty()) {
+            if (helper.isConect()) {
+                presenter.descargarPrepas();
+            } else {
+                Toast.makeText(getContext(),
+                        R.string._listaprepasrecycle_error_conexion,
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        setupRecyclerView();
+
+        return view;
     }
 
     @Override

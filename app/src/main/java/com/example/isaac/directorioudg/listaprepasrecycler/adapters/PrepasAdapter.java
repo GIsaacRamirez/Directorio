@@ -21,7 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder> {
 
-    public List<Prepa> prepaList;
+    public List<Prepa> prepaList=null;
     private ImageLoader imageLoader;
     OnItemClickListener onItemClickListener;
 
@@ -31,10 +31,6 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
         this.imageLoader = imageLoader;
     }
 
-    public PrepasAdapter(ImageLoader imageLoader, OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-        this.imageLoader = imageLoader;
-    }
 
     public void setPrepaList(List<Prepa> prepaList) {
         this.prepaList = prepaList;
@@ -83,6 +79,9 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
      */
     @Override
     public int getItemCount() {
+        if(prepaList.isEmpty()){
+            return 0;
+        }
         return prepaList.size();
     }
 

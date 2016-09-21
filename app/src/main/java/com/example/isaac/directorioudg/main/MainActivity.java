@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,7 +21,7 @@ import android.widget.Spinner;
 
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaList;
+import com.example.isaac.directorioudg.listaprepasrecycler.ui.PrepaList;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.listcentros.CentroList;
@@ -32,6 +33,7 @@ import com.example.isaac.directorioudg.util.Helper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     @Bind(R.id.nav_view)
     NavigationView navView;
-    Boolean isPrepa;
+    int isPrepa;
     PrepaList fragmentPrepaList = new PrepaList();
     CentroList fragmentCentroList = new CentroList();
 
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity
 
     public void loadPrepaList( ){
 
-        isPrepa=true;
+        isPrepa=0;
         FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
 
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void loadRadioList(){
+
         RadioList fragmentRadioList = new RadioList();
         FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
@@ -111,9 +114,9 @@ public class MainActivity extends AppCompatActivity
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(AdapterView<?> parent,
                                                android.view.View v, int position, long id) {
-                        if (isPrepa){
-                            fragmentPrepaList.setPrepaList(position);
-                        }else {
+                        if (isPrepa==0){
+                            fragmentPrepaList.setPrepaList(position,fragmentPrepaList.getPrepaListAdapter());
+                        }else if(isPrepa==1){
                             fragmentCentroList.setCentrosList(position);
                         }
                     }
@@ -161,12 +164,30 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_actualizar) {
+            if (helper.isConect()) {
+                repositoryPrepa = new PrepaListRepositoryImpl(getApplicationContext());
+                repositoryPrepa.descargarDatosPrepaCompletos(fragmentPrepaList.getPrepaListAdapter());
+                repositoryCentro = new CentroListRepositoryImpl(getApplicationContext());
+                repositoryCentro.descargarDatosCentroCompletos();
+
+                if(isPrepa==0){
+
+                    showSnackbar("Se esta actualizando la informacion");
+                }else if(isPrepa==1){
+                    fragmentCentroList.setCentrosList(0);
+                    showSnackbar("Se esta actualizando la informacion");
+                }
+            }else{
+                showSnackbar("Necesita conexion a internet");
+            }
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void showSnackbar(String msg) {
+        Snackbar.make(getWindow().findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show();
+    }
     /**
      * Presionar las opciones del navigation drawer
      **/
@@ -180,7 +201,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_Prepas) {
             loadPrepaList();
         } else if (id == R.id.nav_Centros) {
-            isPrepa = false;
+            isPrepa = 1;
 
             FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();

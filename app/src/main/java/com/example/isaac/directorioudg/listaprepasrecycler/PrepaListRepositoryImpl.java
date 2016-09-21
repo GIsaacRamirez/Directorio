@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.entities.Prepa_Table;
+import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
@@ -31,14 +32,22 @@ import java.util.List;
 public class PrepaListRepositoryImpl implements PrepaListRepository{
 
     Context context;
+    PrepasAdapter adapter=null;
+    Boolean adapterisEmpty=true;
     public PrepaListRepositoryImpl(Context context) {
         this.context = context;
+    }
+
+    public PrepaListRepositoryImpl(Context context, PrepasAdapter adapter) {
+        this.context = context;
+        this.adapter=adapter;
     }
 
 
     @Override
     public void descargarDatosPrepa(String url) {
         try {
+                adapterisEmpty=true;
 
             StringRequest request = new StringRequest(url, new Response.Listener<String>() {
                 @Override
@@ -58,6 +67,13 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
         }
     }
 
+    @Override
+    public void descargarDatosPrepaCompletos(PrepasAdapter adapteraux) {
+        adapterisEmpty=false;
+        adapter=adapteraux;
+        String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/preparatorias.php";
+        descargarDatosPrepa(ruta);
+    }
     @Override
     public void descargarDatosPrepaCompletos() {
         String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/preparatorias.php";
@@ -102,7 +118,11 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
                                 @Override
                                 public void processModel(Prepa prepa) {
                                     // do work here -- i.e. user.delete() or user.update()
-                                    prepa.save();
+                                    if(prepa.exists()){
+                                        prepa.update();
+                                    }else {
+                                        prepa.save();
+                                    }
                                 }
                             }).addAll(listPrepas).build())  // add elements (can also handle multiple)
                     .error(new Transaction.Error() {
@@ -114,11 +134,11 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
                     .success(new Transaction.Success() {
                         @Override
                         public void onSuccess(Transaction transaction) {
-
+                            if(!adapterisEmpty){
+                                adapter.setPrepaList(getListPrepas(0));
+                            }
                         }
                     }).build().execute();
-
-
 
         } catch (SQLiteException e) {
             Log.e("llenarBaseDatosPrepa: ", e.getMessage());
