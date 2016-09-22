@@ -62,9 +62,10 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
 
         String url = prepa.getImagenURL().toString();
         if (url.equalsIgnoreCase("No Disponible")) {
-            url = "http://appdirectorioudg.com/photo.jpg";
+            imageLoader.load(holder.imagePrepa, R.drawable.fotolugarvacio);
+        }else {
+            imageLoader.load(holder.imagePrepa, url, true);
         }
-        imageLoader.load(holder.imagePrepa, url, true);
 
         holder.txtPrepa.setVisibility(View.VISIBLE);
         holder.txtPrepa.setText(prepa.getPreparatoria());
