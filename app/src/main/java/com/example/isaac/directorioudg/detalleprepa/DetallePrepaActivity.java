@@ -19,6 +19,7 @@ import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
+import com.example.isaac.directorioudg.util.Helper;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -74,6 +75,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     @Bind(R.id.fab)
     FloatingActionButton fab;
 
+    Helper helper = new Helper(this);
     PrepaListRepositoryImpl repository;
 
     private void setToolbar() {
@@ -138,11 +140,17 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         }
         imageLoader.load(imageParalax, url, true);
 
+        if (helper.isConect()) {
+            imageLoader.load(imageDirector, prepa.getFotoDirectorURL(), false);
+        }else{
+            imageLoader.load(imageDirector, R.drawable.fotonodisponible);
+        }
+
         Latitud = prepa.getLatitud();
         Longitud = prepa.getLongitud();
 
         lblDirector.setText(prepa.getDirector().trim());
-        imageLoader.load(imageDirector, prepa.getFotoDirectorURL(), false);
+
         lblCorreoDirector.setText(prepa.getCorreoDirector().trim());
         lblSecretario.setText(prepa.getSecretario().trim());
         lblCorreoSecretario.setText(prepa.getCorreoSecretario().trim());

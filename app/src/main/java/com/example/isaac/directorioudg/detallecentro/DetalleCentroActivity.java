@@ -19,6 +19,7 @@ import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
+import com.example.isaac.directorioudg.util.Helper;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -83,6 +84,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     @Bind(R.id.fab)
     FloatingActionButton fab;
 
+    Helper helper = new Helper(this);
     private GoogleMap mMap;
 
     private CameraUpdate mCamera;
@@ -145,25 +147,34 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         DirWeb.setText(centro.getWeb());
         String url = centro.getImagenURL().toString();
         if (url.equalsIgnoreCase("No Disponible")) {
-            url = "http://s512984961.onlinehome.mx/DirectorioUDG/photo.jpg";
+            imageLoader.load(imageParalax,R.drawable.fotolugarvacio);
+        }else {
+            imageLoader.load(imageParalax, url, true);
         }
-        imageLoader.load(imageParalax, url, true);
 
         Latitud = centro.getLatitud();
         Longitud = centro.getLongitud();
 
         //CardRector
-        imageLoader.load(imageRector, centro.getFotoRectorURL(), false);
+        if (helper.isConect()) {
+            imageLoader.load(imageRector, centro.getFotoRectorURL(), false);
+            imageLoader.load(imageSecacademico, centro.getFotoSecAcademicoURL(), false);
+            imageLoader.load(imageSecAdministrativo, centro.getFotoSecAdministrativoURL(), false);
+        }else {
+            imageLoader.load(imageRector, R.drawable.fotonodisponible);
+            imageLoader.load(imageSecacademico, R.drawable.fotonodisponible);
+            imageLoader.load(imageSecAdministrativo, R.drawable.fotonodisponible);
+        }
         lblNombreRector.setText(centro.getRector());
         txtTelefonoRector.setText(centro.getTelefonoRector());
         txtCorreoRector.setText(centro.getCorreoRector());
         //Card secretario academico
-        imageLoader.load(imageSecacademico, centro.getFotoSecAcademicoURL(), false);
+
         lblNombreSecAcademico.setText(centro.getSecretarioAcademico());
         txtTelefonoSecAcademico.setText(centro.getTelefonoSecAcademico());
         txtCorreoSecAcademico.setText(centro.getCorreoSecAcademico());
         //Card secretario administrativo
-        imageLoader.load(imageSecAdministrativo, centro.getFotoSecAdministrativoURL(), false);
+
         lblNombreSecAdministrativo.setText(centro.getSecretarioAdministrativo());
         txtTelefonoSecAdministrativo.setText(centro.getTelefonoSecAdministrativo());
         txtCorreoSecAdministrativo.setText(centro.getCorreoSecAdministrativo());

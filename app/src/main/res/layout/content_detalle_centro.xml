@@ -116,7 +116,7 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/logo_udg"
+                        android:src="@drawable/fotonodisponible"
                         android:background="@color/white_transparent"
                         android:id="@+id/imageRector" />
                     <!--otro layout del nombre y telefono-->
@@ -213,7 +213,7 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/logo_udg"
+                        android:src="@drawable/fotonodisponible"
                         android:background="@color/white_transparent"
                         android:id="@+id/imageSecacademico" />
                     <!--otro layout del nombre y telefono-->
@@ -303,7 +303,7 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/logo_udg"
+                        android:src="@drawable/fotonodisponible"
                         android:background="@color/white_transparent"
                         android:id="@+id/imageSecAdministrativo" />
                     <!--otro layout del nombre y telefono-->
