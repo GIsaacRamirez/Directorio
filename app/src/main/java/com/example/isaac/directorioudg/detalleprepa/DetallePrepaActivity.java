@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -108,8 +107,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                sharePrepa();
             }
         });
 
@@ -136,13 +134,14 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         txtweb.setText(prepa.getWEB());
         String url = prepa.getImagenURL().toString();
         if (url.equalsIgnoreCase("No Disponible")) {
-            url = "http://appdirectorioudg.com/photo.jpg";
+            imageLoader.load(imageParalax,R.drawable.fotolugarvacio);
+        }else {
+            imageLoader.load(imageParalax, url, true);
         }
-        imageLoader.load(imageParalax, url, true);
 
         if (helper.isConect()) {
             imageLoader.load(imageDirector, prepa.getFotoDirectorURL(), false);
-        }else{
+        } else {
             imageLoader.load(imageDirector, R.drawable.fotonodisponible);
         }
 
@@ -177,11 +176,11 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                         | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("coordenadaVacia",false);
-                bundle.putDouble("Latitud",prepa.getLatitud());
-                bundle.putDouble("Longitud",prepa.getLongitud());
-                bundle.putBoolean("isPrepa",true);
-                bundle.putString("Name","Preparatoria " + prepa.getPreparatoria());
+                bundle.putBoolean("coordenadaVacia", false);
+                bundle.putDouble("Latitud", prepa.getLatitud());
+                bundle.putDouble("Longitud", prepa.getLongitud());
+                bundle.putBoolean("isPrepa", true);
+                bundle.putString("Name", "Preparatoria " + prepa.getPreparatoria());
                 intent.putExtras(bundle);//ponerlos en el intent
                 startActivity(intent);
             }
@@ -218,11 +217,26 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    public void sendEmail(String emailTo){
+    public void sendEmail(String emailTo) {
         Intent email = new Intent(Intent.ACTION_SENDTO);
         email.setData(Uri.parse("mailto:"));
         email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
         startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
     }
+
+    public void sharePrepa() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String aux = "Preparatoria: " + prepa.getPreparatoria() + " \nDir. " + prepa.getDireccion() + ", " + prepa.getMunicipio() + "Jalisco";
+        aux += "\nCP:" + prepa.getCP();
+        aux += "\n" + telefonosPrep.getText() + " \n" + prepa.getWEB();
+        aux += "\nDirector: " + prepa.getDirector() + " email: " + prepa.getCorreoDirector();
+        aux += "\nSecretario: " + prepa.getSecretario() + " email: " + prepa.getCorreoSecretario();
+
+        intent.putExtra(Intent.EXTRA_TEXT, aux);
+
+        startActivity(Intent.createChooser(intent, "Compartir"));
+    }
+
 }
 
