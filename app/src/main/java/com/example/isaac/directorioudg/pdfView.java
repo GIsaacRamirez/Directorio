@@ -2,8 +2,6 @@ package com.example.isaac.directorioudg;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,11 +13,9 @@ import android.view.MenuItem;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.ScrollBar;
+import com.github.barteksc.pdfviewer.exception.FileNotFoundException;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.InputStream;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,10 +25,6 @@ public class pdfView extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_READ_EXTERNAL = 1;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    int numPage;
-
-
-
     private void setToolbar() {
         // Añadir la Toolbar
         setSupportActionBar(toolbar);
@@ -57,33 +49,32 @@ public class pdfView extends AppCompatActivity {
             return;
         }
         loadGaceta();
-
-        /**Bitmap bmp = BitmapFactory.decodeFile(miFoto);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 70, bos);*/
     }
 
     private void loadGaceta() {
-        String directory = "/sdcard/";
-        File file = new File(directory, "889.pdf");
         PDFView pdfView= (PDFView) findViewById(R.id.pdfView);
+        String directory = "/sdcard/";
 
-        ScrollBar scrollBar = (ScrollBar) findViewById(R.id.scrollBar);
-        scrollBar.setHorizontal(true);
-        pdfView.setScrollBar(scrollBar);
+        try{
+            File file = new File(directory, "889.pdf");
 
+            ScrollBar scrollBar = (ScrollBar) findViewById(R.id.scrollBar);
+            scrollBar.setHorizontal(true);
+            pdfView.setScrollBar(scrollBar);
 
-        pdfView.fromFile(file)
-                .enableSwipe(true)
-                .enableDoubletap(true)
-                .swipeVertical(false)
-                .defaultPage(1)
-                .showPageWithAnimation(true)
-                .showMinimap(true)
-                .load();
+            pdfView.fromFile(file)
+                    .enableSwipe(true)
+                    .enableDoubletap(true)
+                    .swipeVertical(false)
+                    .defaultPage(1)
+                    .showPageWithAnimation(true)
+                    .showMinimap(true)
+                    .load();
+        }catch (FileNotFoundException e){
+            showSnackbar("No se encontro el archivo");
+        }
 
         setTitle("Gaceta");
-
     }
 
 
