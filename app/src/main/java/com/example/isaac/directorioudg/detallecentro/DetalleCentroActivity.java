@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -125,8 +124,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                shareCentro();
             }
         });
 
@@ -222,6 +220,22 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
         startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
     }
+    public void shareCentro() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String aux = "Centro: " + centro.getNombreCentro();
+        aux+=" \nDir. " + centro.getDireccion() + ", " + centro.getMunicipio() + "Jalisco";
+        aux += "\nCP:" + centro.getCP();
+        aux += "\n" + centro.getWeb();
+        aux += "\nRector: " + centro.getRector() +"\n Tel."+centro.getTelefonoRector() +"\n email: " + centro.getCorreoRector();
+        aux += "\nSec. Academico: " + centro.getSecretarioAcademico() +"\n Tel."+centro.getTelefonoSecAcademico() +"\n email: " + centro.getCorreoSecAcademico();
+        aux += "\nSec. Administrativo: " + centro.getSecretarioAdministrativo() +"\n Tel."+centro.getTelefonoSecAdministrativo() +"\n email: " + centro.getCorreoSecAdministrativo();
+
+        intent.putExtra(Intent.EXTRA_TEXT, aux);
+
+        startActivity(Intent.createChooser(intent, "Compartir"));
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
