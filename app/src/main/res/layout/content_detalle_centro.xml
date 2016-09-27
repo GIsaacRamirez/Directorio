@@ -145,6 +145,7 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="NombreRector"
                             android:textSize="20sp"
+                            android:longClickable="true"
                             android:id="@+id/lblNombreRector" />
                         <!--TelefonoRector-->
                         <LinearLayout
@@ -165,6 +166,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text=" Numero"
+                                android:longClickable="true"
                                 android:id="@+id/txtTelefonoRector" />
                         </LinearLayout>
 
@@ -176,13 +178,12 @@
                             android:textColor="@color/wallet_holo_blue_light"
                             android:layout_marginTop="@dimen/activity_vertical_margin"
                             android:text="guillermoisaac@gmail.com"
+                            android:longClickable="true"
                             android:id="@+id/txtCorreoRector" />
                     </LinearLayout>
 
 
                 </LinearLayout>
-
-
 
             </LinearLayout>
 
@@ -240,6 +241,7 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="NombreSecAcademico"
                             android:textSize="20sp"
+                            android:longClickable="true"
                             android:id="@+id/lblNombreSecAcademico" />
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -259,6 +261,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text=" Numero"
+                                android:longClickable="true"
                                 android:id="@+id/txtTelefonoSecAcademico" />
                         </LinearLayout>
 
@@ -270,6 +273,7 @@
                             android:layout_marginTop="@dimen/activity_vertical_margin"
                             android:textColor="@color/wallet_holo_blue_light"
                             android:text="guillermoisaac@gmail.com"
+                            android:longClickable="true"
                             android:id="@+id/txtCorreoSecAcademico" />
                     </LinearLayout>
                 </LinearLayout>
@@ -331,6 +335,7 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="NombreSecAdministrativo"
                             android:textSize="20sp"
+                            android:longClickable="true"
                             android:id="@+id/lblNombreSecAdministrativo" />
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -350,6 +355,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text=" Numero"
+                                android:longClickable="true"
                                 android:id="@+id/txtTelefonoSecAdministrativo" />
                         </LinearLayout>
 
@@ -361,6 +367,7 @@
                             android:layout_marginTop="@dimen/activity_vertical_margin"
                             android:textColor="@color/wallet_holo_blue_light"
                             android:text="guillermoisaac@gmail.com"
+                            android:longClickable="true"
                             android:id="@+id/txtCorreoSecAdministrativo" />
                     </LinearLayout>
                 </LinearLayout>
