@@ -11,14 +11,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.View;
 import com.example.isaac.directorioudg.R;
 
 import java.io.IOException;
@@ -195,7 +193,7 @@ public class MusicService extends Service  {
 
 
     //No se usa
-    static class Player extends AsyncTask<String, Void, Boolean> {
+    /*static class Player extends AsyncTask<String, Void, Boolean> {
         @Override
         protected Boolean doInBackground(String... params) {
             Boolean prepared;
@@ -252,6 +250,6 @@ public class MusicService extends Service  {
                 mediaActivity.progressBar3.setVisibility(View.VISIBLE);
             }
         }
-    }
+    }*/
 
 }
