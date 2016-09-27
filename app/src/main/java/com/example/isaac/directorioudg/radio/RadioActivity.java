@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Toast;
+
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.radio.parser.UrlParser;
 import com.example.isaac.directorioudg.util.Helper;
@@ -26,21 +27,22 @@ import butterknife.OnClick;
 
 public class RadioActivity extends AppCompatActivity implements MediaPlayer.OnPreparedListener {
 
-    @Bind(R.id.play)
-    public ImageButton btnplay;
-    @Bind(R.id.progressBar2)
-    public ProgressBar progressBar2;
-    @Bind(R.id.seekBar)
-    public SeekBar seekBar;
-    @Bind(R.id.textView1)
-    ImageView imagenRadio;
     String name;
     int image;
-
     Helper helper = new Helper(this);
     View view;
-
     public String URL;
+
+    @Bind(R.id.imageVolume)
+    ImageView imageVolume;
+    @Bind(R.id.seekVolumen)
+    SeekBar seekVolumen;
+    @Bind(R.id.imageView3)
+    ImageView imageViewLugar;
+    @Bind(R.id.imageButton2)
+    ImageButton btnPlay;
+    @Bind(R.id.progressBar3)
+    ProgressBar progressBar3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,24 +50,24 @@ public class RadioActivity extends AppCompatActivity implements MediaPlayer.OnPr
         setContentView(R.layout.activity_radio);
         ButterKnife.bind(this);
         MusicService.removeNotification(getApplicationContext());
-        view=getWindow().findViewById(android.R.id.content);
+        view = getWindow().findViewById(android.R.id.content);
 
         Bundle bundle = this.getIntent().getExtras();
-        if(bundle!=null){
+        if (bundle != null) {
             //Es para averiguar si hay una estacion reproduciendose
             //Cargar la adecuada si se viene desde la notificacion
-            name=bundle.getString("name");
-            image=bundle.getInt("image");
+            name = bundle.getString("name");
+            image = bundle.getInt("image");
             URL = bundle.getString("url");
-        }else {
+        } else {
             //Si no viene de la notificacion se cargan los datos pero no se guardan para usar en la notificacion
             //hasta que se reproduce
-            image=MusicService.getSourceImagen();
-            imagenRadio.setImageResource(image);
-            name=MusicService.getStationName();
-            URL=MusicService.getDataSource();
+            image = MusicService.getSourceImagen();
+            imageViewLugar.setImageResource(image);
+            name = MusicService.getStationName();
+            URL = MusicService.getDataSource();
         }
-        imagenRadio.setImageResource(image);
+        imageViewLugar.setImageResource(image);
         setTitle(name);
 
         if (null == MusicService.getPlayer()) {
@@ -74,28 +76,32 @@ public class RadioActivity extends AppCompatActivity implements MediaPlayer.OnPr
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        btnplay.setBackgroundResource(R.drawable.ic_play_circle_outline_black_24px);
+        btnPlay.setBackgroundResource(R.drawable.ic_play_circle_outline_black_24px);
 
         if (null != MusicService.getPlayer() && MusicService.getPlayer().isPlaying()) {
             if (!MusicService.getDataSource().equals(URL)) {
                 Snackbar.make(view, getResources().getString(R.string.radio_playing_other), Snackbar.LENGTH_LONG).show();
             } else {
-                btnplay.setBackgroundResource(R.drawable.ic_pause_circle_outline_black_24px);
+                btnPlay.setBackgroundResource(R.drawable.ic_pause_circle_outline_black_24px);
             }
         }
 
 
-        seekBar.setProgress(100);//Manejar la barra de volumen
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekVolumen.setProgress(100);//Manejar la barra de volumen
+        seekVolumen.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float volumen = (float) (seekBar.getProgress()) / 100;
                 MusicService.getPlayer().setVolume(volumen, volumen);
             }
+
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
     }
 
@@ -104,41 +110,45 @@ public class RadioActivity extends AppCompatActivity implements MediaPlayer.OnPr
         super.onDestroy();
         ButterKnife.unbind(this);
         //Si hay una estacion reproduciendo al salir se lanza la notificacion
+        if (MusicService.getPlayer().isPlaying()) {
+            MusicService.startNotification(getApplicationContext());
+        }
     }
 
-    @OnClick(R.id.play)
+    @OnClick(R.id.imageButton2)
     public void onClick() {
 
-            if (null != MusicService.getPlayer() && !MusicService.getPlayer().isPlaying()) {
-                if(helper.isConect()){
-                    btnplay.setBackgroundResource(R.drawable.ic_pause_circle_outline_black_24px);
-                    progressBar2.setVisibility(View.VISIBLE);
-                    MusicService.setStationName(name);
-                    MusicService.setSourceImagen(image);
-                    MusicService.setMediaActivity(this);
-                    MusicService.getPlayer().setOnPreparedListener(this);
-                    MusicService.getPlayer().setOnErrorListener(new MediaPlayer.OnErrorListener() {
-                        @Override
-                        public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-                        Snackbar.make(view,"Error",Snackbar.LENGTH_SHORT).show();
-                            return false;
-                        }
-                    });
-
-                    //Verificar volumen
-                    AudioManager am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-                    int volume_level = am.getStreamVolume(AudioManager.STREAM_MUSIC);
-                    if (volume_level < 3) {
-                        Toast.makeText(this, getResources().getString(R.string.volume_low), Toast.LENGTH_SHORT).show();
+        if (null != MusicService.getPlayer() && !MusicService.getPlayer().isPlaying()) {
+            if (helper.isConect()) {
+                btnPlay.setBackgroundResource(R.drawable.ic_pause_circle_outline_black_24px);
+                btnPlay.setVisibility(View.GONE);
+                progressBar3.setVisibility(View.VISIBLE);
+                MusicService.setStationName(name);
+                MusicService.setSourceImagen(image);
+                MusicService.setMediaActivity(this);
+                MusicService.getPlayer().setOnPreparedListener(this);
+                MusicService.getPlayer().setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                    @Override
+                    public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+                        Snackbar.make(view, "Error", Snackbar.LENGTH_SHORT).show();
+                        return false;
                     }
-                    startPlaying();
-                } else {
-                    Snackbar.make(view, getResources().getString(R.string.isnotConnected), Snackbar.LENGTH_LONG).show();
+                });
+
+                //Verificar volumen
+                AudioManager am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+                int volume_level = am.getStreamVolume(AudioManager.STREAM_MUSIC);
+                if (volume_level < 3) {
+                    Toast.makeText(this, getResources().getString(R.string.volume_low), Toast.LENGTH_SHORT).show();
                 }
+                startPlaying();
             } else {
-                btnplay.setBackgroundResource(R.drawable.ic_play_circle_outline_black_24px);
-                stopPlaying();
+                Snackbar.make(view, getResources().getString(R.string.isnotConnected), Snackbar.LENGTH_LONG).show();
             }
+        } else {
+            btnPlay.setBackgroundResource(R.drawable.ic_play_circle_outline_black_24px);
+            stopPlaying();
+        }
 
 
     }
@@ -168,23 +178,14 @@ public class RadioActivity extends AppCompatActivity implements MediaPlayer.OnPr
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
-        progressBar2.setVisibility(View.GONE);
+        progressBar3.setVisibility(View.GONE);
+        btnPlay.setVisibility(View.VISIBLE);
         MusicService.startPlaying(this);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(MusicService.getPlayer().isPlaying())
-        {
-            MusicService.startNotification(getApplicationContext());
-        }
-    }
-
-
     /**
-     *Para que al momento de presionar la flecha de back en la toolbar
-     *  me regrese exactamente a la activity anterior
+     * Para que al momento de presionar la flecha de back en la toolbar
+     * me regrese exactamente a la activity anterior
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

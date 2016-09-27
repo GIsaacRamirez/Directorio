@@ -121,7 +121,7 @@ public class MusicService extends Service  {
 
     public static void startPlaying(Context context){
         player.start();
-        mediaActivity.btnplay.setBackgroundResource(R.drawable.ic_pause_circle_outline_black_24px);
+        mediaActivity.btnPlay.setBackgroundResource(R.drawable.ic_pause_circle_outline_black_24px);
     }
 
     public static void startNotification(Context context){
@@ -236,20 +236,20 @@ public class MusicService extends Service  {
             player.start();
            // isinitial = false;
             if(mediaActivity!=null){
-                mediaActivity.progressBar2.setVisibility(View.GONE);
+                mediaActivity.progressBar3.setVisibility(View.GONE);
             }
             else {
-                mediaActivity.progressBar2.setVisibility(View.GONE);
+                mediaActivity.progressBar3.setVisibility(View.GONE);
             }
         }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             if(mediaActivity!=null){
-                mediaActivity.progressBar2.setVisibility(View.VISIBLE);
+                mediaActivity.progressBar3.setVisibility(View.VISIBLE);
             }
             else {
-                mediaActivity.progressBar2.setVisibility(View.VISIBLE);
+                mediaActivity.progressBar3.setVisibility(View.VISIBLE);
             }
         }
     }

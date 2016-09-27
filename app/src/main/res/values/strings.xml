@@ -23,15 +23,12 @@
     <string name="administrativos">Administrativos: </string>
     <string name="director">Director. </string>
 
-
     <string name=".listaprepasrecycle.direccionDatosPrepas">http://appdirectorioudg.com/preparatoriasMetropolitanas.php</string>
     <string name=".listaprepasrecycle.error.conexion">"Es necesario conectarse a Internet \n para descargar los datos "</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
     <string name="notification_playing">Playing radio</string>
     <string name="notification_stop">Click to stop playing</string>
-    <string name="radio_playing_other">Se esta reproduciendo otra estación . Puede pulsar el icono de reproduccion pausar la otra estación .</string>
+    <string name="radio_playing_other">Se esta reproduciendo otra estación. Pulsar el icono de reproduccion detiene la otra estación .</string>
     <string name="ad_id" />
     <string name="volume_low">Turn your volume up!</string>
     <string name="isnotConnected">\"Esta accion requiere conexion a Internet\"</string>
@@ -40,5 +37,8 @@
     <string name="rector">Rector</string>
     <string name="SecretarioAcademico">SecretarioAcademico</string>
     <string name="SecretarioAdministrativo">Secretario Administrativo</string>
+    <string name="botonreproducir">botonReproducir</string>
+    <string name="imagen_de_volumen">imagen de volumen</string>
+    <string name="imagen_a_mostrarRadio">imagen a mostrar</string>
 
 </resources>

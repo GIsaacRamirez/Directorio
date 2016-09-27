@@ -63,32 +63,32 @@ public class RadioList extends Fragment implements OnItemClickListener {
         Radio radioAutlan = new Radio();
         radioAutlan.setStationName("Radio Autlán");
         radioAutlan.setUrlRadio("http://148.202.114.39:8000/;stream/1");
-        radioAutlan.setSourceImagen(R.drawable.ameca);//**
+        radioAutlan.setSourceImagen(R.drawable.autlan);//**
 
         Radio radioGuzman = new Radio();
         radioGuzman.setStationName("Radio Guzman");
         radioGuzman.setUrlRadio("http://148.202.119.233:8080/;stream/1");
-        radioGuzman.setSourceImagen(R.drawable.ameca);//**
+        radioGuzman.setSourceImagen(R.drawable.ciudadguzman);//**
 
         Radio radioColotlan = new Radio();
         radioColotlan.setStationName("Radio Colotlan");
         radioColotlan.setUrlRadio("http://148.202.79.112:8000/;stream/1");
-        radioColotlan.setSourceImagen(R.drawable.ameca);//**
+        radioColotlan.setSourceImagen(R.drawable.colotlan);//**
 
         Radio radioLagosMoreno = new Radio();
         radioLagosMoreno.setStationName("Lagos de Moreno");
         radioLagosMoreno.setUrlRadio("http://148.202.62.3:8000/;stream/1");
-        radioLagosMoreno.setSourceImagen(R.drawable.ameca);//**
+        radioLagosMoreno.setSourceImagen(R.drawable.lagosdemoreno);//**
 
         Radio radioOcotlan = new Radio();
         radioOcotlan.setStationName("Radio Ocotlan");
         radioOcotlan.setUrlRadio("http://148.202.62.3:8000/;stream/1");
-        radioOcotlan.setSourceImagen(R.drawable.ameca);//**
+        radioOcotlan.setSourceImagen(R.drawable.ocotlan);//**
 
         Radio radioVallarta = new Radio();
         radioVallarta.setStationName("Radio Vallarta");
         radioVallarta.setUrlRadio("http://148.202.110.152:8000/;stream/1");
-        radioVallarta.setSourceImagen(R.drawable.ameca);//**
+        radioVallarta.setSourceImagen(R.drawable.vallarta);//**
 
 
         radioList.add(radioUdg);
