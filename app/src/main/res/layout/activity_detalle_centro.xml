@@ -40,7 +40,6 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 />
-            <!-- app:navigationIcon="?attr/homeAsUpIndicator" habilita el icono de retroceso-->
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -52,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_send"
+        android:src="@drawable/ic_send_white_24px"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
 

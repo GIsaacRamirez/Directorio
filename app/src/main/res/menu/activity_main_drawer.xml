@@ -16,7 +16,7 @@
             android:title="Radio UDG" />
         <item
             android:id="@+id/nav_Map"
-            android:icon="@drawable/map_marker_24"
+            android:icon="@android:drawable/ic_dialog_map"
             android:title="Mapas" />
         <item
             android:id="@+id/nav_manage"
