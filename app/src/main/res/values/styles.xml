@@ -13,11 +13,25 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
+    <style name="Widget.CardList" parent="android:Widget">
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_marginRight">4dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+    <style name="Widget.CardDetalle" parent="android:Widget">
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
     <style name="Widget.CardContent" parent="android:Widget">
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>
         <item name="android:paddingTop">12dp</item>
-        <item name="android:paddingBottom">24dp</item>
+        <item name="android:paddingBottom">12dp</item>
         <item name="android:orientation">vertical</item>
     </style>
 
@@ -34,5 +48,7 @@
         <item name="android:padding">8dp</item>
         <item name="android:textColor">#77000000</item>
     </style>
+
+
 
 </resources>

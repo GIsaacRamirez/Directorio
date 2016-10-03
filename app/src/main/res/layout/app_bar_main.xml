@@ -22,7 +22,8 @@
             <Spinner android:id="@+id/CmbToolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                android:popupBackground="@color/colorPrimaryDark" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

@@ -26,7 +26,8 @@
 
             <Spinner android:id="@+id/CmbToolbar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:popupBackground="@color/colorPrimaryDark" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -36,8 +37,7 @@
             android:id="@+id/map2"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbarMap" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 

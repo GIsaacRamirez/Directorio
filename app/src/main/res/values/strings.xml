@@ -40,5 +40,16 @@
     <string name="botonreproducir">botonReproducir</string>
     <string name="imagen_de_volumen">imagen de volumen</string>
     <string name="imagen_a_mostrarRadio">imagen a mostrar</string>
+    <string name="secretario">Secretario</string>
+    <string name="visitar">Visitar</string>
+    <string name="www_web_com">www.web.com</string>
+    <string name="imagen_del_mundo">imagen del mundo</string>
+    <string name="imagen_no_disponible">imagen no disponible</string>
+    <string name="imagen">imagen</string>
+    <string name="numero">Numero</string>
+    <string name="nombresecacademico">NombreSecAcademico</string>
+    <string name="nombresecadministrativo">NombreSecAdministrativo</string>
+    <string name="guillermoisaac_gmail_com">guillermoisaac@gmail.com</string>
+    <string name="nombrerector">NombreRector</string>
 
 </resources>
