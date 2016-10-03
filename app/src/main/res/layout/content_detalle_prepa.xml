@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             card_view:cardCornerRadius="@dimen/card.radius"
-            card_view:elevation="@dimen/card.elevation">
+            card_view:elevation="@dimen/card.detalle.1person.elevation">
 
             <LinearLayout
                 style="@style/Widget.CardContent"
@@ -217,7 +217,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             card_view:cardCornerRadius="@dimen/card.radius"
-            card_view:elevation="@dimen/card.detalle.lugar.elevation">
+            card_view:elevation="@dimen/card.detalle.map.elevation">
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     style="@style/Widget.CardList"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:elevation="@dimen/card.elevation"
+    card_view:elevation="@dimen/card.item.elevation"
     card_view:cardCornerRadius="@dimen/card.radius">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
