@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
@@ -12,7 +11,6 @@ import com.example.isaac.directorioudg.lib.ImageLoader;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 
 public class zoom extends AppCompatActivity {

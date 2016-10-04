@@ -19,6 +19,7 @@ import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.util.Helper;
+import com.example.isaac.directorioudg.zoom;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -200,7 +201,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     }
 
 
-    @OnClick({R.id.layoutweb, R.id.lblCorreoDirector, R.id.lblCorreoSecretario})
+    @OnClick({R.id.layoutweb, R.id.lblCorreoDirector, R.id.lblCorreoSecretario,R.id.image_paralax})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layoutweb:
@@ -213,6 +214,15 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
                 break;
             case R.id.lblCorreoSecretario:
                 sendEmail(lblCorreoSecretario.getText().toString());
+                break;
+
+            case  R.id.image_paralax:
+                Intent intentzoom = new Intent(getApplicationContext(), zoom.class);
+                intentzoom.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Bundle bundle = new Bundle();
+                bundle.putString("url",prepa.getImagenURL());
+                intentzoom.putExtras(bundle);//ponerlos en el intent
+                startActivity(intentzoom);//iniciar la actividad
                 break;
         }
     }
