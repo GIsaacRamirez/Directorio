@@ -31,6 +31,7 @@
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
+                android:transitionName="@string/nombre_transicion_imagen"
                 android:src="@drawable/fotolugarvacio" />
 
             <android.support.v7.widget.Toolbar

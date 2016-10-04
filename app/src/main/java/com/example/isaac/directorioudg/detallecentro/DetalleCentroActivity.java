@@ -19,6 +19,7 @@ import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.util.Helper;
+import com.example.isaac.directorioudg.zoom;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -248,7 +249,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         }
     }
 
-    @OnClick({R.id.layoutweb, R.id.txtCorreoRector, R.id.txtCorreoSecAcademico, R.id.txtCorreoSecAdministrativo})
+    @OnClick({R.id.layoutweb, R.id.txtCorreoRector, R.id.txtCorreoSecAcademico, R.id.txtCorreoSecAdministrativo, R.id.image_paralax})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layoutweb:
@@ -264,6 +265,14 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 break;
             case R.id.txtCorreoSecAdministrativo:
                 sendEmail(txtCorreoSecAdministrativo.getText().toString());
+                break;
+            case  R.id.image_paralax:
+                Intent intentzoom = new Intent(getApplicationContext(), zoom.class);
+                intentzoom.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Bundle bundle = new Bundle();
+                bundle.putString("url",centro.getImagenURL());
+                intentzoom.putExtras(bundle);//ponerlos en el intent
+                startActivity(intentzoom);//iniciar la actividad
                 break;
         }
     }

@@ -13,15 +13,13 @@
     <dimen name="map_card_vertical_margin">8dp</dimen>
     <dimen name="map_card_horizontal_margin">12dp</dimen>
 
-    <dimen name="card.item.elevation">10dp</dimen>
+    <dimen name="card.item.elevation">8dp</dimen>
     <dimen name="card.radius">15dp</dimen>
 
-    <dimen name="card.detalle.lugar.elevation">20dp</dimen>
-    <dimen name="card.detalle.1person.elevation">15dp</dimen>
-    <dimen name="card.detalle.2person.elevation">10dp</dimen>
-    <dimen name="card.detalle.map.elevation">8dp</dimen>
-
-
+    <dimen name="card.detalle.lugar.elevation">12dp</dimen>
+    <dimen name="card.detalle.1person.elevation">10dp</dimen>
+    <dimen name="card.detalle.2person.elevation">8dp</dimen>
+    <dimen name="card.detalle.map.elevation">6dp</dimen>
 
 
     <dimen name="card_margin">12dp</dimen>
