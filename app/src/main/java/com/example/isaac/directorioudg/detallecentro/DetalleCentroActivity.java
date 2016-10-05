@@ -245,6 +245,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 zoomImage(imageParalax);
                 break;
         }
+
     }
 
 

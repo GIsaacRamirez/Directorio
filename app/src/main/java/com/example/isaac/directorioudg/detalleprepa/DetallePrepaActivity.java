@@ -218,6 +218,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
             case  R.id.image_paralax:
                 zoomImage(imageParalax);
                 break;
+
         }
     }
 

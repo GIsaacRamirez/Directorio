@@ -8,5 +8,6 @@ public interface ImageLoader {
     void setLoaderContext(Context context);
     void load(ImageView imageView, String URL,Boolean cache);
     void load(ImageView imageView, int resource);
+    void loadzoom(ImageView imageView, String URL, Boolean cache, Boolean center);
     void setOnFinishedImageLoadingListener(Object object);
 }

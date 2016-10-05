@@ -38,6 +38,7 @@ public class zoom extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         dirfile= bundle.getString("urlfile");
         imageLoader.loadzoom(imagenExtendida,dirfile,false,false);
+
     }
 
     @Override

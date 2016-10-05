@@ -1,6 +1,7 @@
 package com.example.isaac.directorioudg.lib;
 
 import android.content.Context;
+import android.icu.text.DateFormat;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -8,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestListener;
+import com.example.isaac.directorioudg.R;
 
 
 public class GlideImageLoader implements ImageLoader {
@@ -24,6 +26,40 @@ public class GlideImageLoader implements ImageLoader {
 
     public void setLoaderContext(Context context) {
         this.glideRequestManager = Glide.with(context);
+    }
+
+    @Override
+    public void loadzoom(ImageView imageView, String URL, Boolean cache, Boolean center) {
+        if(cache){
+            if(center){
+                glideRequestManager
+                        .load(URL)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .centerCrop()
+                        .error(R.drawable.fotolugarvacio)
+                        .into(imageView);
+            }else {
+                glideRequestManager
+                        .load(URL)
+                        .error(R.drawable.fotolugarvacio)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(imageView);
+            }
+        }else {
+            if(center){
+                glideRequestManager
+                        .load(URL)
+                        .error(R.drawable.fotolugarvacio)
+                        .centerCrop()
+                        .into(imageView);
+            }else {
+                glideRequestManager
+                        .load(URL)
+                        .error(R.drawable.fotolugarvacio)
+                        .into(imageView);
+            }
+        }
+
     }
 
     @Override
@@ -49,7 +85,6 @@ public class GlideImageLoader implements ImageLoader {
                     .centerCrop()
                     .into(imageView);
         }
-
     }
 
     @Override

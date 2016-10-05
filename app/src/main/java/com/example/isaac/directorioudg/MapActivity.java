@@ -239,15 +239,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             return;
         }
             mMap.setMyLocationEnabled(true);
-
-
-
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-
-            }
-        });
     }
 
 
