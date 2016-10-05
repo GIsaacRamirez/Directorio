@@ -1,12 +1,9 @@
 package com.example.isaac.directorioudg.util;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.isaac.directorioudg.R;
@@ -26,7 +23,7 @@ public class zoom extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     ImageLoader imageLoader;
-    String dirfile=null;
+    String dirfile = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +33,8 @@ public class zoom extends AppCompatActivity {
         setToolbar();
         imageLoader = new GlideImageLoader(this.getApplicationContext());
         Bundle bundle = this.getIntent().getExtras();
-        dirfile= bundle.getString("urlfile");
-        imageLoader.loadzoom(imagenExtendida,dirfile,false,false);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_zoom, menu);
-        return true;
+        dirfile = bundle.getString("urlfile");
+        imageLoader.loadzoom(imagenExtendida, dirfile, false, false);
     }
 
     @Override
@@ -54,34 +43,55 @@ public class zoom extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.action_compartir:
-                shareImage(dirfile);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    /*@Nullable
+    private String imageFileChache(ImageView imageview){
+        //pasamos el ImageView al metodo imageFileCache para que se pueda compartir la imagen
+        imageview.buildDrawingCache(true);
+        Bitmap bitmap= imageview.getDrawingCache(true);
+        File file;
+        try {
+            file = new File(imageview.getContext().getCacheDir(), bitmap + ".jpg");
+            FileOutputStream fOut = null;
+            fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            file.setReadable(true, false);
+            return file.getAbsolutePath();
+        } catch (Exception e) {
+            e.printStackTrace();
 
-    private void shareImage(String urlfile){
-        final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+            return null;
+        }
+    }*/
+
+    /**private void shareImage(String urlfile) {
+        String urlCache =imageFileChache(imageInvisible);
+        final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(urlfile));
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(urlCache));
         intent.setType("image/jpg");
         startActivity(Intent.createChooser(intent, "Compartir"));
-    }
+    }**/
+
     private void setToolbar() {
         // Añadir la Toolbar
         setSupportActionBar(toolbar);
     }
 
-    private void  deleteCache(String pArchivo) throws Exception {
+    private void deleteCache(String pArchivo) throws Exception {
         try {
             File fichero = new File(pArchivo);
             if (!fichero.delete()) {
-                Log.v("cache","Archivo no eliminado");
+                Log.v("cache", "Archivo no eliminado");
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -91,7 +101,7 @@ public class zoom extends AppCompatActivity {
             deleteCache(dirfile);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.v("cache","Archivo no eliminado");
+            Log.v("cache", "Archivo no eliminado");
         }
     }
 }

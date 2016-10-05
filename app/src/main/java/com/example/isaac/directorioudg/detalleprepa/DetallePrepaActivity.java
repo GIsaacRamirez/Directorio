@@ -1,10 +1,8 @@
 package com.example.isaac.directorioudg.detalleprepa;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,9 +28,6 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.File;
-import java.io.FileOutputStream;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -223,35 +218,13 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void zoomImage(ImageView imageView){
-        //pasamos el ImageView al metodo imageFileCache para que se pueda compartir la imagen
-        String dirfile=imageFileChache(imageView);
 
         Intent intentzoom = new Intent(this, zoom.class);
         intentzoom.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Bundle bundle = new Bundle();
-        bundle.putString("urlfile",dirfile);
+        bundle.putString("urlfile",prepa.getImagenURL());
         intentzoom.putExtras(bundle);//ponerlos en el intent
         startActivity(intentzoom);//iniciar la actividad
-    }
-    @Nullable
-    private String imageFileChache(ImageView imageview){
-        imageview.buildDrawingCache(true);
-        Bitmap bitmap= imageview.getDrawingCache(true);
-        File file;
-        try {
-            file = new File(imageview.getContext().getCacheDir(), bitmap + ".jpg");
-            FileOutputStream fOut = null;
-            fOut = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-            fOut.flush();
-            fOut.close();
-            file.setReadable(true, false);
-            return file.getAbsolutePath();
-        } catch (Exception e) {
-            e.printStackTrace();
-            showSnackbar("Ha ocurrido un error");
-            return null;
-        }
     }
 
     private void sendEmail(String emailTo) {
@@ -264,11 +237,14 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     private void sharePrepa() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        String aux = "Preparatoria: " + prepa.getPreparatoria() + " \nDir. " + prepa.getDireccion() + ", " + prepa.getMunicipio() + "Jalisco";
+        String aux = "Preparatoria: " + prepa.getPreparatoria();
+        aux+=" \n Imagen: "+prepa.getImagenURL()+"\n";
+        aux +=" \nDir. " + prepa.getDireccion() + ", " + prepa.getMunicipio() + "Jalisco";
         aux += "\nCP:" + prepa.getCP();
         aux += "\n" + telefonosPrep.getText() + " \n" + prepa.getWEB();
         aux += "\nDirector: " + prepa.getDirector() + " email: " + prepa.getCorreoDirector();
         aux += "\nSecretario: " + prepa.getSecretario() + " email: " + prepa.getCorreoSecretario();
+        //aux += "\nImagen: " +prepa.getImagenURL();
 
         intent.putExtra(Intent.EXTRA_TEXT, aux);
 
