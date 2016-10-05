@@ -87,7 +87,7 @@
                 android:value=".main.MainActivity" />
         </activity>
 
-        <activity android:name=".zoom"
+        <activity android:name=".util.zoom"
             android:theme="@style/AppTheme.NoActionBarBlack">
         </activity>
     </application>

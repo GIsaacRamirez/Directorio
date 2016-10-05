@@ -1,10 +1,13 @@
 package com.example.isaac.directorioudg.detallecentro;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -19,7 +22,7 @@ import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.util.Helper;
-import com.example.isaac.directorioudg.zoom;
+import com.example.isaac.directorioudg.util.zoom;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +30,9 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -98,9 +104,6 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     private void setToolbar() {
         // Añadir la Toolbar
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);// Habilitar up button
-        }
     }
 
 
@@ -121,16 +124,13 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         map.getMapAsync(this);
 
         setDataInView();
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 shareCentro();
             }
         });
-
     }
-
 
     private void setDataInView() {
         collapser.setTitle(centro.getSigla());
@@ -179,7 +179,6 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         txtCorreoSecAdministrativo.setText(centro.getCorreoSecAdministrativo());
 
     }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -214,30 +213,6 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         });
     }
 
-
-    public void sendEmail(String emailTo) {
-        Intent email = new Intent(Intent.ACTION_SENDTO);
-        email.setData(Uri.parse("mailto:"));
-        email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
-        startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
-    }
-    public void shareCentro() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        String aux = "Centro: " + centro.getNombreCentro();
-        aux+=" \nDir. " + centro.getDireccion() + ", " + centro.getMunicipio() + "Jalisco";
-        aux += "\nCP:" + centro.getCP();
-        aux += "\n" + centro.getWeb();
-        aux += "\nRector: " + centro.getRector() +"\n Tel."+centro.getTelefonoRector() +"\n email: " + centro.getCorreoRector();
-        aux += "\nSec. Academico: " + centro.getSecretarioAcademico() +"\n Tel."+centro.getTelefonoSecAcademico() +"\n email: " + centro.getCorreoSecAcademico();
-        aux += "\nSec. Administrativo: " + centro.getSecretarioAdministrativo() +"\n Tel."+centro.getTelefonoSecAdministrativo() +"\n email: " + centro.getCorreoSecAdministrativo();
-
-        intent.putExtra(Intent.EXTRA_TEXT, aux);
-
-        startActivity(Intent.createChooser(intent, "Compartir"));
-    }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -267,14 +242,70 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 sendEmail(txtCorreoSecAdministrativo.getText().toString());
                 break;
             case  R.id.image_paralax:
-                Intent intentzoom = new Intent(getApplicationContext(), zoom.class);
-                intentzoom.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                Bundle bundle = new Bundle();
-                bundle.putString("url",centro.getImagenURL());
-                intentzoom.putExtras(bundle);//ponerlos en el intent
-                startActivity(intentzoom);//iniciar la actividad
+                zoomImage(imageParalax);
                 break;
         }
     }
+
+
+    private void sendEmail(String emailTo) {
+        Intent email = new Intent(Intent.ACTION_SENDTO);
+        email.setData(Uri.parse("mailto:"));
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
+        startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
+    }
+    private void shareCentro() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String aux = "Centro: " + centro.getNombreCentro();
+        aux+=" \nDir. " + centro.getDireccion() + ", " + centro.getMunicipio() + "Jalisco";
+        aux += "\nCP:" + centro.getCP();
+        aux += "\n" + centro.getWeb();
+        aux += "\nRector: " + centro.getRector() +"\n Tel."+centro.getTelefonoRector() +"\n email: " + centro.getCorreoRector();
+        aux += "\nSec. Academico: " + centro.getSecretarioAcademico() +"\n Tel."+centro.getTelefonoSecAcademico() +"\n email: " + centro.getCorreoSecAcademico();
+        aux += "\nSec. Administrativo: " + centro.getSecretarioAdministrativo() +"\n Tel."+centro.getTelefonoSecAdministrativo() +"\n email: " + centro.getCorreoSecAdministrativo();
+
+        intent.putExtra(Intent.EXTRA_TEXT, aux);
+
+        startActivity(Intent.createChooser(intent, "Compartir"));
+    }
+
+
+    private void zoomImage(ImageView imageView){
+        //pasamos el ImageView al metodo imageFileCache para que se pueda compartir la imagen
+        String dirfile=imageFileChache(imageView);
+
+        Intent intentzoom = new Intent(this, zoom.class);
+        intentzoom.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Bundle bundle = new Bundle();
+        bundle.putString("urlfile",dirfile);
+        intentzoom.putExtras(bundle);//ponerlos en el intent
+        startActivity(intentzoom);//iniciar la actividad
+    }
+    @Nullable
+    private String imageFileChache(ImageView imageview){
+        imageview.buildDrawingCache(true);
+        Bitmap bitmap= imageview.getDrawingCache(true);
+        File file;
+        try {
+            file = new File(imageview.getContext().getCacheDir(), bitmap + ".jpg");
+            FileOutputStream fOut = null;
+            fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            file.setReadable(true, false);
+            return file.getAbsolutePath();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showSnackbar("Ha ocurrido un error");
+            return null;
+        }
+    }
+
+    private void showSnackbar(String msg) {
+        Snackbar.make(getWindow().findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show();
+    }
+
 }
 

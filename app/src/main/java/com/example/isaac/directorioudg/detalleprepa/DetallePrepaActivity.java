@@ -1,10 +1,13 @@
 package com.example.isaac.directorioudg.detalleprepa;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -19,7 +22,7 @@ import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.util.Helper;
-import com.example.isaac.directorioudg.zoom;
+import com.example.isaac.directorioudg.util.zoom;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,12 +31,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class DetallePrepaActivity extends AppCompatActivity implements OnMapReadyCallback {
-
 
     @Bind(R.id.imageDirector)
     ImageView imageDirector;
@@ -81,11 +86,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     private void setToolbar() {
         // Añadir la Toolbar
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);// Habilitar up button
-        }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,14 +105,12 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         mapView.getMapAsync(this);
 
         setDataInView();
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sharePrepa();
             }
         });
-
     }
 
 
@@ -217,24 +216,51 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
                 break;
 
             case  R.id.image_paralax:
-                Intent intentzoom = new Intent(getApplicationContext(), zoom.class);
-                intentzoom.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                Bundle bundle = new Bundle();
-                bundle.putString("url",prepa.getImagenURL());
-                intentzoom.putExtras(bundle);//ponerlos en el intent
-                startActivity(intentzoom);//iniciar la actividad
+                zoomImage(imageParalax);
                 break;
         }
     }
 
-    public void sendEmail(String emailTo) {
+    private void zoomImage(ImageView imageView){
+        //pasamos el ImageView al metodo imageFileCache para que se pueda compartir la imagen
+        String dirfile=imageFileChache(imageView);
+
+        Intent intentzoom = new Intent(this, zoom.class);
+        intentzoom.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Bundle bundle = new Bundle();
+        bundle.putString("urlfile",dirfile);
+        intentzoom.putExtras(bundle);//ponerlos en el intent
+        startActivity(intentzoom);//iniciar la actividad
+    }
+    @Nullable
+    private String imageFileChache(ImageView imageview){
+        imageview.buildDrawingCache(true);
+        Bitmap bitmap= imageview.getDrawingCache(true);
+        File file;
+        try {
+            file = new File(imageview.getContext().getCacheDir(), bitmap + ".jpg");
+            FileOutputStream fOut = null;
+            fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            file.setReadable(true, false);
+            return file.getAbsolutePath();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showSnackbar("Ha ocurrido un error");
+            return null;
+        }
+    }
+
+    private void sendEmail(String emailTo) {
         Intent email = new Intent(Intent.ACTION_SENDTO);
         email.setData(Uri.parse("mailto:"));
         email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
         startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
     }
 
-    public void sharePrepa() {
+    private void sharePrepa() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         String aux = "Preparatoria: " + prepa.getPreparatoria() + " \nDir. " + prepa.getDireccion() + ", " + prepa.getMunicipio() + "Jalisco";
@@ -246,6 +272,10 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         intent.putExtra(Intent.EXTRA_TEXT, aux);
 
         startActivity(Intent.createChooser(intent, "Compartir"));
+    }
+
+    private void showSnackbar(String msg) {
+        Snackbar.make(getWindow().findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show();
     }
 
 }
