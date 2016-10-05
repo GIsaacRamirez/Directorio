@@ -285,6 +285,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     }
     @Nullable
     private String imageFileChache(ImageView imageview){
+        imageview.getAdjustViewBounds();
         imageview.buildDrawingCache(true);
         Bitmap bitmap= imageview.getDrawingCache(true);
         File file;
