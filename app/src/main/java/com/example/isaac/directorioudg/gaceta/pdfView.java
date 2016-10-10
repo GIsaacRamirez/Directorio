@@ -1,4 +1,4 @@
-package com.example.isaac.directorioudg;
+package com.example.isaac.directorioudg.gaceta;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.isaac.directorioudg.R;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.ScrollBar;
 import com.github.barteksc.pdfviewer.exception.FileNotFoundException;

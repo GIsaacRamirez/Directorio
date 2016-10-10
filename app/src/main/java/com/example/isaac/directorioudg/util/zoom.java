@@ -34,7 +34,7 @@ public class zoom extends AppCompatActivity {
         imageLoader = new GlideImageLoader(this.getApplicationContext());
         Bundle bundle = this.getIntent().getExtras();
         dirfile = bundle.getString("urlfile");
-        imageLoader.loadzoom(imagenExtendida, dirfile, false, false);
+        imageLoader.loadzoom(imagenExtendida, dirfile, true, false);
     }
 
     @Override
