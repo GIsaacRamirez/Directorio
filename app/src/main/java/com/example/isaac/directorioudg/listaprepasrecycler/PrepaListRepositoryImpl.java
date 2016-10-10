@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.entities.Prepa_Table;
@@ -72,13 +73,13 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
     public void descargarDatosPrepaCompletos(PrepasAdapter adapteraux) {
         adapterisEmpty=false;
         adapter=adapteraux;
-        String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/preparatorias.php";
+        String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"preparatorias.php";
         descargarDatosPrepa(ruta);
     }
     @Override
     public void descargarDatosPrepaCompletos() {
         adapterisEmpty=true;
-        String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/preparatorias.php";
+        String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"preparatorias.php";
         descargarDatosPrepa(ruta);
     }
 

@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.entities.Centro_Table;
@@ -46,14 +47,15 @@ public class CentroListRepositoryImpl implements CentroListRepository {
     @Override
     public void descargarDatosCentroCompletos() {
         adapterisEmpty=true;
-        String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/CentrosUniversitarios.php";
+        String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"CentrosUniversitarios.php";
         descargarDatosCentro(ruta);
     }
     @Override
     public void descargarDatosCentroCompletos(CentrosAdapter adapteraux) {
         adapterisEmpty=true;
         adapter=adapteraux;
-        String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/CentrosUniversitarios.php";
+        String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"CentrosUniversitarios.php";
+       // String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/WebService/CentrosUniversitarios.php";
         descargarDatosCentro(ruta);
     }
     @Override
