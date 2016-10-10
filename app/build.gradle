@@ -25,6 +25,7 @@ android {
     }
 }
 def dbflow_version = "3.1.1"
+def playservice_version = "9.6.1"
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -53,9 +54,10 @@ dependencies {
 
 
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.google.android.gms:play-services:9.4.0'
-    compile 'com.google.android.gms:play-services-auth:9.0.0'
-    compile 'com.google.android.gms:play-services-gcm:9.0.0'
+    compile "com.google.android.gms:play-services:${playservice_version}"
+    compile "com.google.android.gms:play-services-auth:${playservice_version}"
+    compile "com.google.android.gms:play-services-gcm:${playservice_version}"
+
     compile 'com.android.support:multidex:1.0.0'
-    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support:support-v4:24.2.1'
 }
