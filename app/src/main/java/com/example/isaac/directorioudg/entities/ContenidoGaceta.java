@@ -7,13 +7,14 @@ import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.raizlabs.android.dbflow.structure.Model;
 
 /**
  * Created by Usuario on 10/10/2016.
  */
 @Table( database= DirectorioDataBase.class)
-public class ContenidoGaceta implements Parcelable, Model {
+public class ContenidoGaceta extends BaseModel implements Parcelable {
 
     public ContenidoGaceta() {
     }

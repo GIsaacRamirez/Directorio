@@ -91,7 +91,7 @@
             android:name=".util.zoom"
             android:theme="@style/AppTheme.NoActionBarBlack"></activity>
         <activity
-            android:name=".ListGacetaActivity"
+            android:name=".gaceta.ListGacetaActivity"
             android:label="@string/title_activity_list_gaceta"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

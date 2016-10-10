@@ -12,7 +12,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.ContenidoGaceta;
+import com.example.isaac.directorioudg.entities.ContenidoGaceta_Table;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
@@ -21,6 +23,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
@@ -35,7 +38,7 @@ public class ContenidosGacetaRepositoryImpl {
         this.context = getContext().getApplicationContext();
     }
 
-    public void descargarDatosContenidoGaceta(String url) {
+    private void descargarDatosContenidoGaceta(String url) {
         try {
 
             StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -69,7 +72,7 @@ public class ContenidosGacetaRepositoryImpl {
         descargarDatosContenidoGaceta(ruta);
     }
 
-    public void parsearDatosDBFlow(String json) {
+    private void parsearDatosDBFlow(String json) {
         try {
 
             Object objetoJson = JSONValue.parse(json);
@@ -93,6 +96,7 @@ public class ContenidosGacetaRepositoryImpl {
                                 public void processModel(ContenidoGaceta contenidoGaceta) {
                                     // do work here -- i.e. user.delete() or user.update()
                                     contenidoGaceta.save();
+
                                 }
                             }).addAll(list).build())  // add elements (can also handle multiple)
                     .error(new Transaction.Error() {
@@ -113,6 +117,24 @@ public class ContenidosGacetaRepositoryImpl {
         } catch (SQLiteException e) {
             Log.e("llenarBaseDatos: ", e.getMessage());
         }
+    }
+
+
+   public List<ContenidoGaceta> getList(/*int filter*/) {
+        List<ContenidoGaceta> List;
+            List = new Select().from(ContenidoGaceta.class).queryList();
+        return List;
+    }
+
+
+    public ContenidoGaceta getContenidoGaceta(int id) {
+        ContenidoGaceta contenidoGaceta = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.is(id)).querySingle();
+        return contenidoGaceta;
+    }
+
+    public int getMaxId() {
+        int max = (int) new Select().from(ContenidoGaceta.class).query().getCount();
+        return max;
     }
 
 }

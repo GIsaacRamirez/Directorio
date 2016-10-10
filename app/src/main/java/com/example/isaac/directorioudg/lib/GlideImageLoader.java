@@ -1,7 +1,6 @@
 package com.example.isaac.directorioudg.lib;
 
 import android.content.Context;
-import android.icu.text.DateFormat;
 import android.util.Log;
 import android.widget.ImageView;
 

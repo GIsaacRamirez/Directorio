@@ -19,7 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.example.isaac.directorioudg.ListGacetaActivity;
+import com.example.isaac.directorioudg.gaceta.ListGacetaActivity;
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
