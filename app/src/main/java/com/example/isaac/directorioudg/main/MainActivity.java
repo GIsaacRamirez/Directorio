@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.isaac.directorioudg.ListGacetaActivity;
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
@@ -27,7 +28,7 @@ import com.example.isaac.directorioudg.listaprepasrecycler.ui.PrepaList;
 import com.example.isaac.directorioudg.listcentros.CentroListRepository;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.listcentros.ui.CentroList;
-import com.example.isaac.directorioudg.pdfView;
+import com.example.isaac.directorioudg.gaceta.pdfView;
 import com.example.isaac.directorioudg.radio.RadioList.RadioList;
 import com.example.isaac.directorioudg.util.Helper;
 
@@ -228,7 +229,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_share) {
-
+            Intent intent = new Intent(this, ListGacetaActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
 
 
         } else if (id == R.id.nav_send) {

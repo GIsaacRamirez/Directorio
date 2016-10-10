@@ -16,10 +16,10 @@
     <application
         android:name=".DirectorioApp"
         android:allowBackup="true"
+        android:configChanges="keyboardHidden|orientation|screenSize"
         android:icon="@drawable/logo_udg"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:configChanges="keyboardHidden|orientation|screenSize"
         android:theme="@style/AppTheme">
         <service android:name=".radio.MusicService" />
 
@@ -72,7 +72,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".pdfView"
+            android:name=".gaceta.pdfView"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -87,10 +87,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".main.MainActivity" />
         </activity>
-
-        <activity android:name=".util.zoom"
-            android:theme="@style/AppTheme.NoActionBarBlack">
-        </activity>
+        <activity
+            android:name=".util.zoom"
+            android:theme="@style/AppTheme.NoActionBarBlack"></activity>
+        <activity
+            android:name=".ListGacetaActivity"
+            android:label="@string/title_activity_list_gaceta"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
