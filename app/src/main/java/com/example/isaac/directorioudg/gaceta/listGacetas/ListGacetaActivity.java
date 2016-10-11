@@ -1,20 +1,19 @@
 package com.example.isaac.directorioudg.gaceta.listGacetas;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.ContenidoGaceta;
-import com.example.isaac.directorioudg.gaceta.ContenidosGacetaRepositoryImpl;
 import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.GacetasAdapter;
 import com.example.isaac.directorioudg.util.Helper;
 
@@ -27,6 +26,7 @@ import butterknife.ButterKnife;
 public class ListGacetaActivity extends AppCompatActivity {
 
     Helper helper = new Helper(this);
+    private GacetaListPresenter presenter;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     @Bind(R.id.toolbar)
@@ -35,13 +35,13 @@ public class ListGacetaActivity extends AppCompatActivity {
     Spinner spinnerYears;
     @Bind(R.id.spinnerMonts)
     Spinner spinnerMonts;
-    SharedPreferences prefs;
     private List<ContenidoGaceta> GacetaList = new ArrayList<>();
     private  GacetasAdapter adapter = null;
 
 
-    private ContenidosGacetaRepositoryImpl repository;
-
+    public GacetasAdapter getAdapter() {
+        return adapter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,21 +53,28 @@ public class ListGacetaActivity extends AppCompatActivity {
         setupSpinnerMonts();
 
         setupGacetaListAdapter();
+        presenter = new GacetaListPresenterImpl(getAdapter());
+        GacetaList= presenter.getContenidoGacetas();
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        boolean firstStart = prefs.getBoolean("firstStartGaceta", true);
-        if (firstStart) {
-            SharedPreferences.Editor editor = prefs.edit();
+        if (GacetaList.isEmpty()) {
             if (helper.isConect()) {
-                repository = new ContenidosGacetaRepositoryImpl();
-                repository.descargarDatosContenidoGacetaCompletos();
+                presenter.descargarContenidoGacetas();
+            } else {
+                Toast.makeText(this,
+                        R.string._listaprepasrecycle_error_conexion,
+                        Toast.LENGTH_SHORT).show();
             }
-            editor.putBoolean("firstStartGaceta", false);
-            // commits your edits
-            editor.commit();
+        }else {
+            GacetaList=presenter.getContenidoGacetas();
+           setupGacetaListAdapter();
         }
+
         setupRecyclerView();
-        showSnackbar("max: " + repository.getMaxId());
+        Toast.makeText(this,
+               ""+GacetaList.size(),
+                Toast.LENGTH_SHORT).show();
+
+       // showSnackbar("max: " + repository.getMaxId());
     }
 
     public static String numMestoText(int num) {
@@ -160,17 +167,13 @@ public class ListGacetaActivity extends AppCompatActivity {
     }
 
     public final void setContenidoList(GacetasAdapter adapter){
-        //adapter.setList(presenter.getPrepas(filter));
+        adapter.setList(presenter.getContenidoGacetas());
     }
 
 
     private void setupRecyclerView() {
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerView.setAdapter(adapter);
-    }
-    private void showSnackbar(String msg) {
-        Snackbar.make(getWindow().findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

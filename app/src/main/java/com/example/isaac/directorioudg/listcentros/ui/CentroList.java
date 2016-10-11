@@ -44,7 +44,6 @@ public class CentroList extends Fragment implements CentroListView, OnItemClickL
     private View view = null;
     private List<Centro> centrosList = new ArrayList<>();
 
-
     private void setupRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

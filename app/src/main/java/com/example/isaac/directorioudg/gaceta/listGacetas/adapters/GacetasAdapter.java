@@ -3,6 +3,7 @@ package com.example.isaac.directorioudg.gaceta.listGacetas.adapters;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +37,14 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
 
     public void setList(List<ContenidoGaceta> list) {
         List = list;
+        notifyDataSetChanged();
     }
 
+    /**
+     * Encargado de crear
+     * los nuevos objetos ViewHolder
+     * necesarios para los elementos de la colección.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -45,15 +52,18 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
         return new ViewHolder(v);
     }
 
+    /**
+     * Encargado de actualizar
+     * los datos de un ViewHolder ya existente.
+     */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ContenidoGaceta contenidoGaceta=List.get(position);
         String url= contenidoGaceta.getUrlImage();
-        holder.txtidGaceta.setText(contenidoGaceta.getId());
+        holder.txtidGaceta.setText(""+contenidoGaceta.getId());
         holder.txtFecha.setText(contenidoGaceta.getFecha());
         holder.linkDescarga=contenidoGaceta.getUrlContenido();
-
-
+        imageLoader.load(holder.imgPortada,url,false);
     }
 
     @Override
@@ -63,9 +73,6 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
         }
         return List.size();
     }
-
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -88,8 +95,7 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.imgDownload:
-
-                    Snackbar.make(view.findViewById(android.R.id.content), "Download", Snackbar.LENGTH_SHORT).show();
+                    Log.v("Gaceta","click");
                     break;
                 case R.id.imgDelete:
                     break;
