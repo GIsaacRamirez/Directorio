@@ -1,10 +1,8 @@
 package com.example.isaac.directorioudg.gaceta.listGacetas;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -64,17 +62,12 @@ public class ListGacetaActivity extends AppCompatActivity {
                         R.string._listaprepasrecycle_error_conexion,
                         Toast.LENGTH_SHORT).show();
             }
-        }else {
+        } else {
             GacetaList=presenter.getContenidoGacetas();
            setupGacetaListAdapter();
         }
 
         setupRecyclerView();
-        Toast.makeText(this,
-               ""+GacetaList.size(),
-                Toast.LENGTH_SHORT).show();
-
-       // showSnackbar("max: " + repository.getMaxId());
     }
 
     public static String numMestoText(int num) {
