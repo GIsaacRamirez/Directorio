@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.isaac.directorioudg.gaceta.ListGacetaActivity">
+    tools:context="com.example.isaac.directorioudg.gaceta.listGacetas.ListGacetaActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,14 +23,37 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:navigationIcon="?homeAsUpIndicator"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                <Spinner
+                    android:id="@+id/spinnerYears"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:popupBackground="@color/colorPrimaryDark"
+                    android:textAlignment="center" />
+                <Spinner
+                    android:id="@+id/spinnerMonts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:popupBackground="@color/colorPrimaryDark"/>
+
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
 
-        <include layout="@layout/content_list_gaceta" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerView"/>
+
 
     </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
+
+
+
+
+

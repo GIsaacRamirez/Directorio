@@ -29,8 +29,6 @@ import butterknife.ButterKnife;
 
 public class PrepaList extends Fragment implements PrepaListView, OnItemClickListener {
     public static final int todas=0;
-    public static final int metropolitanas=1;
-    public static final int regionales=2;
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
