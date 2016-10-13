@@ -3,13 +3,14 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_Prepas"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Preparatorias" />
-        <item
             android:id="@+id/nav_Centros"
-            android:icon="@drawable/vector_drawable_ic_school_black___px"
+            android:icon="@drawable/centros"
             android:title="Centros Universitarios" />
+        <item
+            android:id="@+id/nav_Prepas"
+            android:icon="@drawable/preparatoria"
+            android:title="Preparatorias" />
+
         <item
             android:id="@+id/nav_Radio"
             android:icon="@drawable/ic_radio_black_px"
@@ -22,14 +23,15 @@
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="PDF" />
+        <item
+            android:id="@+id/nav_gaceta"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Gaceta" />
     </group>
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
