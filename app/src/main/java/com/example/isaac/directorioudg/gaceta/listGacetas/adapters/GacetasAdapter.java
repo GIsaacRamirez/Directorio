@@ -36,7 +36,7 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
     }
 
     public void setList(List<ContenidoGaceta> list) {
-        List = list;
+        this.List = list;
         notifyDataSetChanged();
     }
 
@@ -60,8 +60,8 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         ContenidoGaceta contenidoGaceta=List.get(position);
         String url= contenidoGaceta.getUrlImage();
-        holder.txtidGaceta.setText(""+contenidoGaceta.getId());
-        holder.txtFecha.setText(contenidoGaceta.getFecha());
+        holder.txtidGaceta.setText("Gaceta No."+contenidoGaceta.getId());
+        holder.txtFecha.setText("Fecha: "+contenidoGaceta.getFecha());
         holder.linkDescarga=contenidoGaceta.getUrlContenido();
         imageLoader.load(holder.imgPortada,url,false);
     }
@@ -89,17 +89,6 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
             super(itemView);
             this.view = itemView;
             ButterKnife.bind(this, view);
-        }
-
-        @OnClick({R.id.imgDownload, R.id.imgDelete})
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.imgDownload:
-                    Log.v("Gaceta","click");
-                    break;
-                case R.id.imgDelete:
-                    break;
-            }
         }
 
     }

@@ -69,7 +69,7 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
     }
 
 
-    public void descargarDatosPrepaCompletos(GacetasAdapter adapteraux) {
+    public void descargarDatosContenidoGaceta(GacetasAdapter adapteraux) {
         adapterisEmpty=false;
         adapter=adapteraux;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"contenidosGaceta.php";
@@ -108,7 +108,6 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
                                 public void processModel(ContenidoGaceta contenidoGaceta) {
                                     // do work here -- i.e. user.delete() or user.update()
                                     contenidoGaceta.save();
-
                                 }
                             }).addAll(list).build())  // add elements (can also handle multiple)
                     .error(new Transaction.Error() {
@@ -134,7 +133,7 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
     @Override
    public List<ContenidoGaceta> getList(/*int filter*/) {
         List<ContenidoGaceta> List;
-            List = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.greaterThan(880)).queryList();
+            List = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.greaterThan(800)).orderBy(ContenidoGaceta_Table.id,false).queryList();
         return List;
     }
 

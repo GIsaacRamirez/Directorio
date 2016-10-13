@@ -30,4 +30,11 @@ public class GacetaListPresenterImpl  implements GacetaListPresenter{
     public void descargarContenidoGacetas() {
             interactor.saveContenidoGacetas();
     }
+
+    @Override
+    public void descargarContenidoGacetas(GacetasAdapter adapter) {
+        repository= new ContenidosGacetaRepositoryImpl(adapter);
+        interactor= new GacetaListInteractorImpl(repository);
+        interactor.saveContenidoGacetas();
+    }
 }

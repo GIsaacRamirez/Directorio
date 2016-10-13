@@ -19,6 +19,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepository;
+import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepositoryImpl;
 import com.example.isaac.directorioudg.gaceta.listGacetas.ListGacetaActivity;
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity
 
     PrepaListRepository prepaListRepository = new PrepaListRepositoryImpl();
     CentroListRepository centroListRepository = new CentroListRepositoryImpl();
+    ContenidosGacetaRepository contenidosGacetaRepository= new ContenidosGacetaRepositoryImpl();
 
     PrepaList fragmentPrepaList = new PrepaList();
     CentroList fragmentCentroList = new CentroList();
@@ -115,13 +118,14 @@ public class MainActivity extends AppCompatActivity
             if (helper.isConect()) {
                 prepaListRepository.descargarDatosPrepaCompletos();
                 centroListRepository.descargarDatosCentroCompletos();
+                contenidosGacetaRepository.descargarDatosContenidoGacetaCompletos();
             }
             editor.putBoolean("firstStart", false);
             // commits your edits
             editor.commit();
         }
 
-        loadPrepaList();
+        loadCentroList();
 
         CmbToolbar.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
@@ -181,6 +185,7 @@ public class MainActivity extends AppCompatActivity
 
                 prepaListRepository.descargarDatosPrepaCompletos(fragmentPrepaList.getPrepaListAdapter());
                 centroListRepository.descargarDatosCentroCompletos(fragmentCentroList.getCentroListAdapter());
+                contenidosGacetaRepository.descargarDatosContenidoGacetaCompletos();
 
                 if(isPrepa==0){
                     showSnackbar("Se esta actualizando la informacion");
@@ -228,7 +233,7 @@ public class MainActivity extends AppCompatActivity
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_gaceta) {
             Intent intent = new Intent(this, ListGacetaActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
