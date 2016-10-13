@@ -58,38 +58,43 @@ public class MainActivity extends AppCompatActivity
     PrepaList fragmentPrepaList = new PrepaList();
     CentroList fragmentCentroList = new CentroList();
 
-    public void setupSpinner(){
-        String[] datos= new String[]{"Todo", "Metropolitanas", "Regionales"};
+
+    public void loadPrepaList( ){
+        isPrepa=0;
+        String[] datos= new String[]{"Todas", "Metropolitanas", "Regionales"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getSupportActionBar().getThemedContext(),
                 android.R.layout.simple_spinner_item,
                 datos);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         CmbToolbar.setAdapter(adapter);
-    }
 
-    public void loadPrepaList( ){
-
-        isPrepa=0;
         FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
 
         fragmentTransaction.replace(R.id.content_main, fragmentPrepaList);
         fragmentTransaction.commit();
         setTitle("Prepas");
-        setupSpinner();
         CmbToolbar.setVisibility(View.VISIBLE);
     }
 
     public void loadCentroList(){
         isPrepa = 1;
+        String[] datos= new String[]{"Todos", "Metropolitanos", "Tematicos"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getSupportActionBar().getThemedContext(),
+                android.R.layout.simple_spinner_item,
+                datos);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CmbToolbar.setAdapter(adapter);
+
+
         FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
 
         fragmentTransaction.replace(R.id.content_main, fragmentCentroList);
         fragmentTransaction.commit();
         setTitle("Centros");
-        setupSpinner();
         CmbToolbar.setVisibility(View.VISIBLE);
     }
 
@@ -234,12 +239,15 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_gaceta) {
-            Intent intent = new Intent(this, ListGacetaActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
 
-
+            if (helper.isConect()) {
+                Intent intent = new Intent(this, ListGacetaActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }else{
+                showSnackbar("Necesita conexion a internet para visualizar el contenido");
+            }
         } else if (id == R.id.nav_send) {
 
         }

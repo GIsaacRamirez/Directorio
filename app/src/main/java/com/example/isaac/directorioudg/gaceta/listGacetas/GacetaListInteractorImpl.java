@@ -23,4 +23,9 @@ public class GacetaListInteractorImpl  implements GacetaListInteractor{
     public void saveContenidoGacetas() {
         repository.descargarDatosContenidoGacetaCompletos();
     }
+
+    @Override
+    public void getPorFecha(int anyo, int mes) {
+         repository.getPorFecha(anyo,mes);
+    }
 }

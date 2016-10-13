@@ -37,4 +37,9 @@ public class GacetaListPresenterImpl  implements GacetaListPresenter{
         interactor= new GacetaListInteractorImpl(repository);
         interactor.saveContenidoGacetas();
     }
+
+    @Override
+    public void getPorFecha(int anyo, int mes) {
+        interactor.getPorFecha(anyo, mes);
+    }
 }

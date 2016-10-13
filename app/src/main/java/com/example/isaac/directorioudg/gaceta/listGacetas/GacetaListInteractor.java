@@ -12,4 +12,6 @@ import java.util.List;
 public interface GacetaListInteractor {
     List<ContenidoGaceta> execute();
     void saveContenidoGacetas();
+
+    void getPorFecha(int anyo, int mes);
 }

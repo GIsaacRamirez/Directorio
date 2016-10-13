@@ -14,4 +14,6 @@ public interface GacetaListPresenter {
     List<ContenidoGaceta> getContenidoGacetas();
     void descargarContenidoGacetas();
     void descargarContenidoGacetas(GacetasAdapter adapter);
+
+    void getPorFecha(int anyo, int mes);
 }

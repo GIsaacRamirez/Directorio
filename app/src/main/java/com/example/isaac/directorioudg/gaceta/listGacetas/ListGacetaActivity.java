@@ -1,11 +1,16 @@
 package com.example.isaac.directorioudg.gaceta.listGacetas;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -36,6 +41,11 @@ public class ListGacetaActivity extends AppCompatActivity {
     private List<ContenidoGaceta> GacetaList = new ArrayList<>();
     private  GacetasAdapter adapter = null;
 
+    List<String> listyear = new ArrayList<String>();
+    List<String> listmonts = new ArrayList<String>();
+    String anyo;
+    int anyoactual;
+
 
     public GacetasAdapter getAdapter() {
         return adapter;
@@ -47,7 +57,12 @@ public class ListGacetaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_gaceta);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        setupSpinnerYears();
+        //Se guarda el año actual para llenar el spinner hasta dicho año
+        anyo= (DateFormat.format("yyyy ", new java.util.Date()).toString());
+        anyo=anyo.trim();
+        anyoactual=Integer.parseInt(anyo);
+
+        setupSpinnerYears(anyoactual);
         setupSpinnerMonts();
 
         setupGacetaListAdapter();
@@ -62,10 +77,26 @@ public class ListGacetaActivity extends AppCompatActivity {
                         R.string._listaprepasrecycle_error_conexion,
                         Toast.LENGTH_SHORT).show();
             }
-        } else {
-            GacetaList=presenter.getContenidoGacetas();
-           setupGacetaListAdapter();
         }
+        spinnerYears.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> parent,
+                                               android.view.View v, int position, long id) {
+                        //Se carga cada vez el spinner de meses para que al seleccionar el año actual solo se carguen los que ya pasaron
+                        setupSpinnerMonts();
+                        mostrarporfecha(Integer.parseInt(spinnerYears.getSelectedItem().toString()),spinnerMonts.getSelectedItemPosition()+1);
+
+                    }
+                    public void onNothingSelected(AdapterView<?> parent) {}
+                });
+        spinnerMonts.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> parent,
+                                               android.view.View v, int position, long id) {
+                        mostrarporfecha(Integer.parseInt(spinnerYears.getSelectedItem().toString()),spinnerMonts.getSelectedItemPosition()+1);
+                    }
+                    public void onNothingSelected(AdapterView<?> parent) {}
+                });
 
         setupRecyclerView();
     }
@@ -129,25 +160,30 @@ public class ListGacetaActivity extends AppCompatActivity {
         return result;
     }
 
-    public void setupSpinnerYears() {
-        List<String> list = new ArrayList<String>();
-        for (int i = 2016; i > 1995; i--) {
-            list.add("" + i);
+    public void setupSpinnerYears(int anyolimite) {
+        for (int i = anyolimite; i >= 1995; i--) {
+            listyear.add("" + i);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinnertitle, list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinnertitle, listyear);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerYears.setAdapter(adapter);
     }
 
     public void setupSpinnerMonts() {
-        List<String> list = new ArrayList<String>();
-        for (int i = 0; i < 12; i++) {
+        listmonts.clear();
+        int mesLimite=12;
+        //Si esta seleccionado el año actual entonces se verifica el mes actual y hasta ese se carga
+        if(Integer.parseInt(spinnerYears.getSelectedItem().toString())==anyoactual){
+            String mes= (DateFormat.format("MM ", new java.util.Date()).toString().trim());
+            mesLimite=Integer.parseInt(mes);
+        }
+        for (int i = 0; i < mesLimite; i++) {
             String aux = numMestoText(i);
             if (aux != null) {
-                list.add(aux);
+                listmonts.add(aux);
             }
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinnertitle, list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinnertitle, listmonts);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMonts.setAdapter(adapter);
 
@@ -159,16 +195,16 @@ public class ListGacetaActivity extends AppCompatActivity {
         adapter = new GacetasAdapter(GacetaList,getApplicationContext());
     }
 
-    public final void setContenidoList(GacetasAdapter adapter){
-        adapter.setList(presenter.getContenidoGacetas());
-    }
-
 
     private void setupRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapter);
     }
 
+    public void mostrarporfecha(int anyo, int mes){
+
+        presenter.getPorFecha(anyo, mes);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

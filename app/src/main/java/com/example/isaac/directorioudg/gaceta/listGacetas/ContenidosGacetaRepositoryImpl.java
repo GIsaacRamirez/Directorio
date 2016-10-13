@@ -13,7 +13,6 @@ import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.ContenidoGaceta;
 import com.example.isaac.directorioudg.entities.ContenidoGaceta_Table;
-import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepository;
 import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.GacetasAdapter;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
@@ -24,7 +23,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
@@ -37,6 +39,8 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
     Context context;
     Boolean adapterisEmpty=true;
     GacetasAdapter adapter=null;
+
+
     public ContenidosGacetaRepositoryImpl() {
         this.context = getContext().getApplicationContext();
 
@@ -95,7 +99,18 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
                 //Crea sentencias sql para agregar a una lista
                 ContenidoGaceta contenidoGaceta = new ContenidoGaceta();
                 contenidoGaceta.setId( Integer.parseInt(jsonObject.get("id").toString()));
-                contenidoGaceta.setFecha(jsonObject.get("fecha").toString());
+
+                String fecha = jsonObject.get("fecha").toString();
+                Date date= new Date();
+
+                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    date = formatoDelTexto.parse(fecha);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                contenidoGaceta.setFecha(date);
+
                 contenidoGaceta.setUrlContenido(jsonObject.get("urlContenido").toString());
                 contenidoGaceta.setUrlImage(jsonObject.get("urlImage").toString());
                 list.add(contenidoGaceta);
@@ -147,5 +162,53 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
         int max = (int) new Select().from(ContenidoGaceta.class).query().getCount();
         return max;
     }
+
+
+    private void parsearDatosPorFecha(String json) {
+        List<Integer> listFecha= new ArrayList<Integer>();
+        List<ContenidoGaceta> list =new ArrayList<ContenidoGaceta>();
+        try {
+            Object objetoJson = JSONValue.parse(json);
+            JSONArray jsonArrayObject = (JSONArray) objetoJson;
+            for (int i = 0; i < jsonArrayObject.size(); i++) {
+                JSONObject jsonObject = (JSONObject) jsonArrayObject.get(i);
+                //Se agregan los id a una lista
+                listFecha.add( Integer.parseInt(jsonObject.get("id").toString()));
+            }
+            for (int i=0; i<listFecha.size();i++){
+                //Se lee la lista de ids para generar una lista de contenidoGaceta
+                list.add(getContenidoGaceta(listFecha.get(i)));
+            }
+            //Se manda la lista de contenidoGaceta al adaptador
+            adapter.setList(list);
+        } catch (SQLiteException e) {
+        }
+    }
+    @Override
+    public void getPorFecha(int anyo, int mes) {
+        //Se mandan los parametros en la url
+        String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"contenidosPorFecha.php?anyo="+anyo+"&mes="+mes;
+        try {
+            //Metodo donde se usa volley para descargar
+            StringRequest request = new StringRequest(ruta, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //Se parsean los datos que vienen en json
+                     parsearDatosPorFecha(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, "Error al cargar datos", Toast.LENGTH_LONG).show();
+                }
+            });
+            Volley.newRequestQueue(context).add(request);
+
+        } catch (Exception e) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 
 }

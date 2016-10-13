@@ -15,6 +15,8 @@ import com.example.isaac.directorioudg.entities.ContenidoGaceta;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.Bind;
@@ -59,9 +61,12 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ContenidoGaceta contenidoGaceta=List.get(position);
+
+        DateFormat fechaformat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaconvert = fechaformat.format(contenidoGaceta.getFecha());
         String url= contenidoGaceta.getUrlImage();
         holder.txtidGaceta.setText("Gaceta No."+contenidoGaceta.getId());
-        holder.txtFecha.setText("Fecha: "+contenidoGaceta.getFecha());
+        holder.txtFecha.setText("Fecha: "+fechaconvert);
         holder.linkDescarga=contenidoGaceta.getUrlContenido();
         imageLoader.load(holder.imgPortada,url,false);
     }

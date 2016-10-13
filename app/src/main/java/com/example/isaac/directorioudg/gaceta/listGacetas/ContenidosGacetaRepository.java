@@ -15,4 +15,5 @@ public interface ContenidosGacetaRepository {
      ContenidoGaceta getContenidoGaceta(int id);
      int getMaxId();
 
+     void getPorFecha(int anyo, int mes);
 }
