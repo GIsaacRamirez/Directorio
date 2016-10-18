@@ -95,6 +95,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setUpSpinner();
         Bundle bundle = getIntent().getExtras();
         isBundleEmpty = bundle.getBoolean("coordenadaVacia");
+        //Si se mandaron coordenadas
         if (!isBundleEmpty) {
             CmbToolbar.setVisibility(View.GONE);
             isPrepa = bundle.getBoolean("isPrepa");
@@ -239,6 +240,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             return;
         }
             mMap.setMyLocationEnabled(true);
+        mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+            @Override
+            public boolean onMyLocationButtonClick() {
+                mMap.setMyLocationEnabled(true);
+                return true;
+            }
+        });
     }
 
 

@@ -241,13 +241,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gaceta) {
 
             if (helper.isConect()) {
-                Intent intent = new Intent(this, ListGacetaActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }else{
-                showSnackbar("Necesita conexion a internet para visualizar el contenido");
+                contenidosGacetaRepository.descargarDatosContenidoGacetaCompletos();
             }
+            Intent intent = new Intent(this, ListGacetaActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         } else if (id == R.id.nav_send) {
 
         }
