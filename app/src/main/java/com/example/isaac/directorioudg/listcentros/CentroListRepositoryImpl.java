@@ -34,7 +34,6 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 public class CentroListRepositoryImpl implements CentroListRepository {
     Context context;
     CentrosAdapter adapter=null;
-    Boolean adapterisEmpty=true;
 
     public CentroListRepositoryImpl() {
         this.context = getContext().getApplicationContext();
@@ -46,13 +45,11 @@ public class CentroListRepositoryImpl implements CentroListRepository {
     }
     @Override
     public void descargarDatosCentroCompletos() {
-        adapterisEmpty=true;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"CentrosUniversitarios.php";
         descargarDatosCentro(ruta);
     }
     @Override
     public void descargarDatosCentroCompletos(CentrosAdapter adapteraux) {
-        adapterisEmpty=true;
         adapter=adapteraux;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"CentrosUniversitarios.php";
        // String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/WebService/CentrosUniversitarios.php";
@@ -143,7 +140,7 @@ public class CentroListRepositoryImpl implements CentroListRepository {
                     .success(new Transaction.Success() {
                         @Override
                         public void onSuccess(Transaction transaction) {
-                            if(!adapterisEmpty){
+                            if(adapter!=null){
                                 adapter.setCentroList(getListCentros(0));
                             }
                         }

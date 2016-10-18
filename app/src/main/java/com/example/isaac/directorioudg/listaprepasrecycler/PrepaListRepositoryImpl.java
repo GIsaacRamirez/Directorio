@@ -2,7 +2,6 @@ package com.example.isaac.directorioudg.listaprepasrecycler;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -36,7 +35,6 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
 
     Context context;
     PrepasAdapter adapter=null;
-    Boolean adapterisEmpty=true;
     public PrepaListRepositoryImpl() {
         this.context = getContext().getApplicationContext();
     }
@@ -71,14 +69,11 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
 
     @Override
     public void descargarDatosPrepaCompletos(PrepasAdapter adapteraux) {
-        adapterisEmpty=false;
-        adapter=adapteraux;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"preparatorias.php";
         descargarDatosPrepa(ruta);
     }
     @Override
     public void descargarDatosPrepaCompletos() {
-        adapterisEmpty=true;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"preparatorias.php";
         descargarDatosPrepa(ruta);
     }
@@ -121,30 +116,23 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
                                 @Override
                                 public void processModel(Prepa prepa) {
                                     // do work here -- i.e. user.delete() or user.update()
-                                    if(prepa.exists()){
-                                        prepa.update();
-                                    }else {
-                                        prepa.save();
-                                    }
+                                    prepa.save();
+
                                 }
                             }).addAll(listPrepas).build())  // add elements (can also handle multiple)
                     .error(new Transaction.Error() {
                         @Override
                         public void onError(Transaction transaction, Throwable error) {
-
                         }
                     })
                     .success(new Transaction.Success() {
                         @Override
                         public void onSuccess(Transaction transaction) {
-                            if(!adapterisEmpty){
-                                adapter.setPrepaList(getListPrepas(0));
-                            }
+
                         }
                     }).build().execute();
 
         } catch (SQLiteException e) {
-            Log.e("llenarBaseDatosPrepa: ", e.getMessage());
         }
     }
 
