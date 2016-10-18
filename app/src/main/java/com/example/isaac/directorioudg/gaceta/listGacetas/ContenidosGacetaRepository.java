@@ -11,9 +11,10 @@ public interface ContenidosGacetaRepository {
      void descargarDatosContenidoGaceta(String url);
      void descargarDatosContenidoGacetaCompletos() ;
      void parsearDatosDBFlow(String json) ;
-     List<ContenidoGaceta> getList(/*int filter*/);
-     ContenidoGaceta getContenidoGaceta(int id);
      int getMaxId();
 
+     List<ContenidoGaceta> getList(/*int filter*/);
+
+     ContenidoGaceta getContenidoGaceta(int id);
      void getPorFecha(int anyo, int mes);
 }

@@ -62,11 +62,10 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         ContenidoGaceta contenidoGaceta=List.get(position);
 
-        DateFormat fechaformat = new SimpleDateFormat("yyyy-MM-dd");
-        String fechaconvert = fechaformat.format(contenidoGaceta.getFecha());
+
         String url= contenidoGaceta.getUrlImage();
         holder.txtidGaceta.setText("Gaceta No."+contenidoGaceta.getId());
-        holder.txtFecha.setText("Fecha: "+fechaconvert);
+        holder.txtFecha.setText("Fecha: "+contenidoGaceta.getDia()+"/"+contenidoGaceta.getMes()+"/"+contenidoGaceta.getAnyo());
         holder.linkDescarga=contenidoGaceta.getUrlContenido();
         imageLoader.load(holder.imgPortada,url,false);
     }
