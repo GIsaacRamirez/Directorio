@@ -55,7 +55,7 @@ public class ListGacetaActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         //Se guarda el año actual para llenar el spinner hasta dicho año
-        anyo = (DateFormat.format("yyyy ", new java.util.Date()).toString());
+        anyo = (DateFormat.format("yyyy", new java.util.Date()).toString());
         anyo=anyo.trim();
         anyoactual=Integer.parseInt(anyo);
 
