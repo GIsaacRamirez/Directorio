@@ -1,14 +1,11 @@
 package com.example.isaac.directorioudg.gaceta.listGacetas;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -58,9 +55,11 @@ public class ListGacetaActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         //Se guarda el año actual para llenar el spinner hasta dicho año
-        anyo= (DateFormat.format("yyyy ", new java.util.Date()).toString());
+        anyo = (DateFormat.format("yyyy ", new java.util.Date()).toString());
         anyo=anyo.trim();
         anyoactual=Integer.parseInt(anyo);
+
+
 
         setupSpinnerYears(anyoactual);
         setupSpinnerMonts();
@@ -187,6 +186,10 @@ public class ListGacetaActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMonts.setAdapter(adapter);
 
+        String mesS  = (DateFormat.format("MM", new java.util.Date()).toString());
+        mesS.trim();
+        int mes=Integer.parseInt(mesS)-1;
+        spinnerMonts.setSelection(mes);
     }
 
     /////////////////////////////////////
