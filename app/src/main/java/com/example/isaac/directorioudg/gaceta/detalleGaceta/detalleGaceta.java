@@ -25,6 +25,7 @@ public class detalleGaceta extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_gaceta);
         ButterKnife.bind(this);
         setSupportActionBar(toolbarDetalleGaceta);
+
         Bundle bundle = this.getIntent().getExtras();
         idGaceta=bundle.getInt("idGaceta");
         setTitle("Gaceta No." + idGaceta);
