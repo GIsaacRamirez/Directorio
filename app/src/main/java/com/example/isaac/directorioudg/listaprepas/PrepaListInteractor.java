@@ -1,4 +1,4 @@
-package com.example.isaac.directorioudg.listaprepasrecycler;
+package com.example.isaac.directorioudg.listaprepas;
 
 import com.example.isaac.directorioudg.entities.Prepa;
 import java.util.List;

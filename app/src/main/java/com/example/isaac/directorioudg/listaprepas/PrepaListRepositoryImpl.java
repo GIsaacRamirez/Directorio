@@ -1,4 +1,4 @@
-package com.example.isaac.directorioudg.listaprepasrecycler;
+package com.example.isaac.directorioudg.listaprepas;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
@@ -12,7 +12,7 @@ import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.entities.Prepa_Table;
-import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
+import com.example.isaac.directorioudg.listaprepas.adapters.PrepasAdapter;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;

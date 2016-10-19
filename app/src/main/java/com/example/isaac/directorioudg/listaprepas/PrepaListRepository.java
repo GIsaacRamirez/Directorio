@@ -1,7 +1,7 @@
-package com.example.isaac.directorioudg.listaprepasrecycler;
+package com.example.isaac.directorioudg.listaprepas;
 
 import com.example.isaac.directorioudg.entities.Prepa;
-import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
+import com.example.isaac.directorioudg.listaprepas.adapters.PrepasAdapter;
 
 import java.util.List;
 

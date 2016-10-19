@@ -1,4 +1,4 @@
-package com.example.isaac.directorioudg.listaprepasrecycler.ui;
+package com.example.isaac.directorioudg.listaprepas.ui;
 
 
 import android.app.Activity;
@@ -16,10 +16,10 @@ import com.example.isaac.directorioudg.detalleprepa.DetallePrepaActivity;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListPresenter;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListPresenterImpl;
-import com.example.isaac.directorioudg.listaprepasrecycler.adapters.OnItemClickListener;
-import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
+import com.example.isaac.directorioudg.listaprepas.PrepaListPresenter;
+import com.example.isaac.directorioudg.listaprepas.PrepaListPresenterImpl;
+import com.example.isaac.directorioudg.listaprepas.adapters.OnItemClickListener;
+import com.example.isaac.directorioudg.listaprepas.adapters.PrepasAdapter;
 import com.example.isaac.directorioudg.util.Helper;
 
 import java.util.ArrayList;

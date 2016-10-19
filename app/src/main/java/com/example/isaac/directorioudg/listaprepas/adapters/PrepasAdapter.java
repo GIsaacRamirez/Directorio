@@ -1,4 +1,4 @@
-package com.example.isaac.directorioudg.listaprepasrecycler.adapters;
+package com.example.isaac.directorioudg.listaprepas.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
