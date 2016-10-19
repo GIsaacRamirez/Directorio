@@ -227,7 +227,7 @@ public class ListGacetaActivity extends AppCompatActivity implements OnItemClick
         Intent intent = new Intent(this.getApplicationContext(), detalleGaceta.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Bundle bundle = new Bundle();
-        bundle.putParcelable("contenidoGaceta",contenidoGaceta);
+        bundle.putInt("idGaceta",contenidoGaceta.getId());
         intent.putExtras(bundle);//ponerlos en el intent
         startActivity(intent);//iniciar la actividad
     }

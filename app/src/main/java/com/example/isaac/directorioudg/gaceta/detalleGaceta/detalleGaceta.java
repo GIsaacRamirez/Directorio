@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.isaac.directorioudg.R;
-import com.example.isaac.directorioudg.entities.ContenidoGaceta;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,7 +17,7 @@ public class detalleGaceta extends AppCompatActivity {
     Toolbar toolbarDetalleGaceta;
     @Bind(R.id.recyclerViewDetalleGaceta)
     RecyclerView recyclerViewDetalleGaceta;
-    ContenidoGaceta contenidoGaceta;
+    int idGaceta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +26,8 @@ public class detalleGaceta extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbarDetalleGaceta);
         Bundle bundle = this.getIntent().getExtras();
-        contenidoGaceta=bundle.getParcelable("contenidoGaceta");
-        setTitle("Gaceta No." + contenidoGaceta.getId());
+        idGaceta=bundle.getInt("idGaceta");
+        setTitle("Gaceta No." + idGaceta);
 
 
     }
