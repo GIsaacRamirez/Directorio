@@ -20,8 +20,8 @@ import android.widget.Spinner;
 
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.entities.Prepa;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepository;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
+import com.example.isaac.directorioudg.listaprepas.PrepaListRepository;
+import com.example.isaac.directorioudg.listaprepas.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.listcentros.CentroListRepository;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.google.android.gms.common.ConnectionResult;

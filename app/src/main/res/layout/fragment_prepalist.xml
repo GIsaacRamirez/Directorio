@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
         android:id="@+id/linearLayout"
-        tools:context=".listaprepasrecycler.ui.PrepaList">
+        tools:context=".listaprepas.ui.PrepaList">
 
         <android.support.v7.widget.RecyclerView
             android:scrollbars="vertical"

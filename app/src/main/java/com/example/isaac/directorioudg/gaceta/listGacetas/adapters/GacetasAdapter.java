@@ -31,10 +31,12 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
 
     public List<ContenidoGaceta> List = null;
     private ImageLoader imageLoader;
+    OnItemClickListener onItemClickListener;
 
-    public GacetasAdapter(List<ContenidoGaceta> List, Context context) {
+    public GacetasAdapter(List<ContenidoGaceta> List, Context context, OnItemClickListener onItemClickListener) {
         this.List = List;
         this.imageLoader = new GlideImageLoader(context);
+        this.onItemClickListener=onItemClickListener;
     }
 
     public void setList(List<ContenidoGaceta> list) {
@@ -61,6 +63,7 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ContenidoGaceta contenidoGaceta=List.get(position);
+        holder.setOnItemClickListener(contenidoGaceta, onItemClickListener);
 
 
         String url= contenidoGaceta.getUrlImage();
@@ -93,6 +96,16 @@ public class GacetasAdapter extends RecyclerView.Adapter<GacetasAdapter.ViewHold
             super(itemView);
             this.view = itemView;
             ButterKnife.bind(this, view);
+        }
+        public void setOnItemClickListener(final ContenidoGaceta contenidoGaceta,
+                                           final OnItemClickListener listener) {
+            view.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(contenidoGaceta);
+                }
+            });
         }
 
     }

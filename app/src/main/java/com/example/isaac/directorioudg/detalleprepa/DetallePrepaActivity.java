@@ -18,7 +18,7 @@ import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
-import com.example.isaac.directorioudg.listaprepasrecycler.PrepaListRepositoryImpl;
+import com.example.isaac.directorioudg.listaprepas.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.util.Helper;
 import com.example.isaac.directorioudg.util.zoom;
 import com.google.android.gms.maps.CameraUpdate;

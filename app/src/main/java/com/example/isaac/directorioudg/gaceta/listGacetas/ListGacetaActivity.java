@@ -1,5 +1,6 @@
 package com.example.isaac.directorioudg.gaceta.listGacetas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +15,9 @@ import android.widget.Toast;
 
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.ContenidoGaceta;
+import com.example.isaac.directorioudg.gaceta.detalleGaceta.detalleGaceta;
 import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.GacetasAdapter;
+import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.OnItemClickListener;
 import com.example.isaac.directorioudg.util.Helper;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ListGacetaActivity extends AppCompatActivity {
+public class ListGacetaActivity extends AppCompatActivity implements OnItemClickListener{
 
     Helper helper = new Helper(this);
     private GacetaListPresenter presenter;
@@ -195,7 +198,7 @@ public class ListGacetaActivity extends AppCompatActivity {
     /////////////////////////////////////
 
     public void setupGacetaListAdapter() {
-        adapter = new GacetasAdapter(GacetaList,getApplicationContext());
+        adapter = new GacetasAdapter(GacetaList,getApplicationContext(),this);
     }
 
 
@@ -217,5 +220,15 @@ public class ListGacetaActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onItemClick(ContenidoGaceta contenidoGaceta) {
+        Intent intent = new Intent(this.getApplicationContext(), detalleGaceta.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("contenidoGaceta",contenidoGaceta);
+        intent.putExtras(bundle);//ponerlos en el intent
+        startActivity(intent);//iniciar la actividad
     }
 }
