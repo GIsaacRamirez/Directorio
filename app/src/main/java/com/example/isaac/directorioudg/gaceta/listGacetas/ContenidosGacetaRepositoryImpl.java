@@ -142,22 +142,17 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
     }
 
     @Override
-   public List<ContenidoGaceta> getList(/*int filter*/) {
+   public List<ContenidoGaceta> getList() {
         List<ContenidoGaceta> List;
-            List = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.greaterThan(800)).orderBy(ContenidoGaceta_Table.id,false).queryList();
+            List = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.lessThan(10)).orderBy(ContenidoGaceta_Table.id,false).queryList();
         return List;
     }
 
-    @Override
     public ContenidoGaceta getContenidoGaceta(int id) {
         ContenidoGaceta contenidoGaceta = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.is(id)).querySingle();
         return contenidoGaceta;
     }
-    @Override
-    public int getMaxId() {
-        int max = (int) new Select().from(ContenidoGaceta.class).query().getCount();
-        return max;
-    }
+
 
 
 

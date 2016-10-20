@@ -21,7 +21,7 @@ import android.widget.Spinner;
 
 import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepository;
 import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepositoryImpl;
-import com.example.isaac.directorioudg.gaceta.listGacetas.ListGacetaActivity;
+import com.example.isaac.directorioudg.gaceta.listGacetas.ui.ListGacetaActivity;
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.listaprepas.PrepaListRepository;

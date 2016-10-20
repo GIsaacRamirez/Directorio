@@ -1,4 +1,4 @@
-package com.example.isaac.directorioudg.gaceta.listGacetas;
+package com.example.isaac.directorioudg.gaceta.listGacetas.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.ContenidoGaceta;
-import com.example.isaac.directorioudg.gaceta.detalleGaceta.detalleGaceta;
+import com.example.isaac.directorioudg.gaceta.detalleGaceta.ui.detalleGaceta;
+import com.example.isaac.directorioudg.gaceta.listGacetas.GacetaListPresenter;
+import com.example.isaac.directorioudg.gaceta.listGacetas.GacetaListPresenterImpl;
 import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.GacetasAdapter;
 import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.OnItemClickListener;
 import com.example.isaac.directorioudg.util.Helper;
@@ -103,65 +105,6 @@ public class ListGacetaActivity extends AppCompatActivity implements OnItemClick
         setupRecyclerView();
     }
 
-    public static String numMestoText(int num) {
-        String result = "";
-        switch (num) {
-            case 0: {
-                result = "Enero";
-                break;
-            }
-            case 1: {
-                result = "Febrero";
-                break;
-            }
-            case 2: {
-                result = "Marzo";
-                break;
-            }
-            case 3: {
-                result = "Abril";
-                break;
-            }
-            case 4: {
-                result = "Mayo";
-                break;
-            }
-            case 5: {
-                result = "Junio";
-                break;
-            }
-            case 6: {
-                result = "Julio";
-                break;
-            }
-            case 7: {
-                result = "Agosto";
-                break;
-            }
-            case 8: {
-                result = "Septiembre";
-                break;
-            }
-            case 9: {
-                result = "Octubre";
-                break;
-            }
-            case 10: {
-                result = "Noviembre";
-                break;
-            }
-            case 11: {
-                result = "Diciembre";
-                break;
-            }
-            default: {
-                result = null;
-                break;
-            }
-        }
-        return result;
-    }
-
     public void setupSpinnerYears(int anyolimite) {
         for (int i = anyolimite; i >= 1995; i--) {
             listyear.add("" + i);
@@ -230,5 +173,63 @@ public class ListGacetaActivity extends AppCompatActivity implements OnItemClick
         bundle.putInt("idGaceta",contenidoGaceta.getId());
         intent.putExtras(bundle);//ponerlos en el intent
         startActivity(intent);//iniciar la actividad
+    }
+    public static String numMestoText(int num) {
+        String result = "";
+        switch (num) {
+            case 0: {
+                result = "Enero";
+                break;
+            }
+            case 1: {
+                result = "Febrero";
+                break;
+            }
+            case 2: {
+                result = "Marzo";
+                break;
+            }
+            case 3: {
+                result = "Abril";
+                break;
+            }
+            case 4: {
+                result = "Mayo";
+                break;
+            }
+            case 5: {
+                result = "Junio";
+                break;
+            }
+            case 6: {
+                result = "Julio";
+                break;
+            }
+            case 7: {
+                result = "Agosto";
+                break;
+            }
+            case 8: {
+                result = "Septiembre";
+                break;
+            }
+            case 9: {
+                result = "Octubre";
+                break;
+            }
+            case 10: {
+                result = "Noviembre";
+                break;
+            }
+            case 11: {
+                result = "Diciembre";
+                break;
+            }
+            default: {
+                result = null;
+                break;
+            }
+        }
+        return result;
     }
 }
