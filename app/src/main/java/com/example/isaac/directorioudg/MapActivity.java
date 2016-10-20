@@ -3,7 +3,6 @@ package com.example.isaac.directorioudg;
 import android.Manifest;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,9 +19,7 @@ import android.widget.Spinner;
 
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.entities.Prepa;
-import com.example.isaac.directorioudg.listaprepas.PrepaListRepository;
 import com.example.isaac.directorioudg.listaprepas.PrepaListRepositoryImpl;
-import com.example.isaac.directorioudg.listcentros.CentroListRepository;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -47,7 +44,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient apiClient;
-    private Location lastKnowLocation;
 
     private boolean resolvingError=false;
 
@@ -128,8 +124,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         final int metropolitanas = 11;
         int zoom = foraneas;
 
-        PrepaListRepository prepaListRepository = new PrepaListRepositoryImpl();
-        CentroListRepository centroListRepository = new CentroListRepositoryImpl();
+        PrepaListRepositoryImpl prepaListRepository = new PrepaListRepositoryImpl();
+        CentroListRepositoryImpl centroListRepository = new CentroListRepositoryImpl();
 
         List<Prepa> prepaList = new ArrayList<>();
         List<Centro> centroList = new ArrayList<>();

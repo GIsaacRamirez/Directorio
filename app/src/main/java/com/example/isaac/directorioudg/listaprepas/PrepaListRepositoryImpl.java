@@ -31,7 +31,7 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 /**
  * Created by isaac on 14/07/16.
  */
-public class PrepaListRepositoryImpl implements PrepaListRepository{
+public class PrepaListRepositoryImpl{
 
     Context context;
     PrepasAdapter adapter=null;
@@ -45,7 +45,6 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
     }
 
 
-    @Override
     public void descargarDatosPrepa(String url) {
         try {
 
@@ -67,12 +66,11 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
         }
     }
 
-    @Override
     public void descargarDatosPrepaCompletos(PrepasAdapter adapteraux) {
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"preparatorias.php";
         descargarDatosPrepa(ruta);
     }
-    @Override
+
     public void descargarDatosPrepaCompletos() {
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"preparatorias.php";
         descargarDatosPrepa(ruta);
@@ -136,7 +134,7 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
         }
     }
 
-    @Override
+
     public List<Prepa> getListPrepas(int filter) {
         List<Prepa> prepaList;
         if(filter==0){
@@ -150,7 +148,7 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
         return prepaList;
     }
 
-    @Override
+
     public Prepa getPrepa(int id) {
         Prepa prepa = new Select().from(Prepa.class).where(Prepa_Table.idPrepa.is(id)).querySingle();
         return prepa;

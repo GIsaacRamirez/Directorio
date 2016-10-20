@@ -23,10 +23,8 @@ import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaReposi
 import com.example.isaac.directorioudg.gaceta.listGacetas.ui.ListGacetaActivity;
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
-import com.example.isaac.directorioudg.listaprepas.PrepaListRepository;
 import com.example.isaac.directorioudg.listaprepas.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.listaprepas.ui.PrepaList;
-import com.example.isaac.directorioudg.listcentros.CentroListRepository;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.listcentros.ui.CentroList;
 import com.example.isaac.directorioudg.gaceta.pdfView;
@@ -50,8 +48,8 @@ public class MainActivity extends AppCompatActivity
     NavigationView navView;
     int isPrepa;
 
-    PrepaListRepository prepaListRepository = new PrepaListRepositoryImpl();
-    CentroListRepository centroListRepository = new CentroListRepositoryImpl();
+    PrepaListRepositoryImpl prepaListRepository = new PrepaListRepositoryImpl();
+    CentroListRepositoryImpl centroListRepository = new CentroListRepositoryImpl();
     ContenidosGacetaRepositoryImpl contenidosGacetaRepository= new ContenidosGacetaRepositoryImpl();
 
     PrepaList fragmentPrepaList = new PrepaList();

@@ -17,7 +17,6 @@ import com.example.isaac.directorioudg.detallecentro.DetalleCentroActivity;
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
-import com.example.isaac.directorioudg.listcentros.CentroListPresenter;
 import com.example.isaac.directorioudg.listcentros.CentroListPresenterImpl;
 import com.example.isaac.directorioudg.listcentros.adapters.CentrosAdapter;
 import com.example.isaac.directorioudg.listcentros.adapters.OnItemClickListener;
@@ -38,7 +37,7 @@ public class CentroList extends Fragment implements CentroListView, OnItemClickL
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    private CentroListPresenter presenter;
+    private CentroListPresenterImpl presenter;
     private  CentrosAdapter adapter = null;
     private Helper helper;
     private View view = null;

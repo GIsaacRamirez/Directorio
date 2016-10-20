@@ -16,7 +16,6 @@ import com.example.isaac.directorioudg.detalleprepa.DetallePrepaActivity;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
-import com.example.isaac.directorioudg.listaprepas.PrepaListPresenter;
 import com.example.isaac.directorioudg.listaprepas.PrepaListPresenterImpl;
 import com.example.isaac.directorioudg.listaprepas.adapters.OnItemClickListener;
 import com.example.isaac.directorioudg.listaprepas.adapters.PrepasAdapter;
@@ -32,7 +31,7 @@ public class PrepaList extends Fragment implements PrepaListView, OnItemClickLis
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
-    private PrepaListPresenter presenter;
+    private PrepaListPresenterImpl presenter;
     private  PrepasAdapter adapter = null;
     private Helper helper;
     private  View view = null;
