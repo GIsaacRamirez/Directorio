@@ -28,14 +28,12 @@ public class RadioAdapter extends RecyclerView.Adapter<RadioAdapter.ViewHolder> 
 
     private ImageLoader imageLoader;
     OnItemClickListener onItemClickListener;
-    private Context context;
 
 
-    public RadioAdapter(Context context, List<Radio> radioList,
+    public RadioAdapter(List<Radio> radioList,
                         ImageLoader imageLoader,
                         OnItemClickListener onItemClickListener) {
         this.radioList = radioList;
-        this.context = context;
         this.onItemClickListener = onItemClickListener;
         this.imageLoader=imageLoader;
     }

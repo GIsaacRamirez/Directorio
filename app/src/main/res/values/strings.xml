@@ -24,8 +24,8 @@
     <string name=".listaprepasrecycle.direccionDatosPrepas">http://appdirectorioudg.com/preparatoriasMetropolitanas.php</string>
     <string name=".listaprepasrecycle.error.conexion">"Es necesario conectarse a Internet \n para descargar los datos "</string>
 
-    <string name="notification_playing">Playing radio</string>
-    <string name="notification_stop">Click to stop playing</string>
+    <string name="notification_playing">Reproduciendo radio</string>
+    <string name="notification_stop">Click para abrir la radio</string>
     <string name="radio_playing_other">Se esta reproduciendo otra estación. Pulsar el icono de reproduccion detiene la otra estación .</string>
     <string name="ad_id" />
     <string name="volume_low">Turn your volume up!</string>

@@ -106,7 +106,7 @@ public class RadioList extends Fragment implements OnItemClickListener {
     }
 
     private void setupAdapter() {
-        adapter = new RadioAdapter(getContext(), radioList, provideImageLoader(getActivity()), this);
+        adapter = new RadioAdapter(radioList, provideImageLoader(getActivity()), this);
     }
 
     private void setupRecyclerView() {

@@ -32,8 +32,6 @@ import butterknife.ButterKnife;
 public class CentroList extends Fragment implements CentroListView, OnItemClickListener {
 
     public static final int todos=0;
-    public static final int metropolitanos=1;
-    public static final int regionales=2;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
