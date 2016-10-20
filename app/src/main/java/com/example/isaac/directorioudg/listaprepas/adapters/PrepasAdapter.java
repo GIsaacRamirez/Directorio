@@ -80,7 +80,7 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
      */
     @Override
     public int getItemCount() {
-        if(prepaList.isEmpty()){
+        if(prepaList==null){
             return 0;
         }
         return prepaList.size();
