@@ -30,10 +30,10 @@ import java.util.StringTokenizer;
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 /**
- * Created by Usuario on 10/10/2016.
+ * Created by Isaac on 10/10/2016.
  */
 
-public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepository{
+public class ContenidosGacetaRepositoryImpl{
     Context context;
     Boolean adapterisEmpty=true;
     GacetasAdapter adapter=null;
@@ -48,8 +48,8 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
         this.adapter=adapter;
     }
 
-    @Override
-    public void descargarDatosContenidoGaceta(String url) {
+
+    private void descargarDatosContenidoGaceta(String url) {
         try {
 
             StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -78,15 +78,15 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
         descargarDatosContenidoGaceta(ruta);
     }
 
-    @Override
+
     public void descargarDatosContenidoGacetaCompletos() {
         adapterisEmpty=true;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"contenidosGaceta.php";
         descargarDatosContenidoGaceta(ruta);
     }
 
-    @Override
-    public void parsearDatosDBFlow(String json) {
+
+    private void parsearDatosDBFlow(String json) {
         try {
 
             Object objetoJson = JSONValue.parse(json);
@@ -141,7 +141,6 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
         }
     }
 
-    @Override
    public List<ContenidoGaceta> getList() {
         List<ContenidoGaceta> List;
             List = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.lessThan(10)).orderBy(ContenidoGaceta_Table.id,false).queryList();
@@ -153,10 +152,6 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
         return contenidoGaceta;
     }
 
-
-
-
-    @Override
     public void getPorFecha(int anyo, int mes) {
         List<ContenidoGaceta> List;
         List = new Select().from(ContenidoGaceta.class)

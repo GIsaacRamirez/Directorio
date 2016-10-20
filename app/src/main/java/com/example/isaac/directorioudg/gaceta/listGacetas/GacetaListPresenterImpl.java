@@ -12,33 +12,33 @@ import java.util.List;
  * Created by isaac on 21/09/16.
  */
 
-public class GacetaListPresenterImpl  implements GacetaListPresenter{
+public class GacetaListPresenterImpl{
 
-    GacetaListInteractor interactor;
-    ContenidosGacetaRepository  repository;
+    GacetaListInteractorImpl interactor;
+    ContenidosGacetaRepositoryImpl  repository;
 
     public GacetaListPresenterImpl(GacetasAdapter adapter) {
         repository= new ContenidosGacetaRepositoryImpl(adapter);
         interactor= new GacetaListInteractorImpl(repository);
     }
-    @Override
+
     public List<ContenidoGaceta> getContenidoGacetas() {
         return interactor.execute();
     }
 
-    @Override
+
     public void descargarContenidoGacetas() {
             interactor.saveContenidoGacetas();
     }
 
-    @Override
+
     public void descargarContenidoGacetas(GacetasAdapter adapter) {
         repository= new ContenidosGacetaRepositoryImpl(adapter);
         interactor= new GacetaListInteractorImpl(repository);
         interactor.saveContenidoGacetas();
     }
 
-    @Override
+
     public void getPorFecha(int anyo, int mes) {
         interactor.getPorFecha(anyo, mes);
     }

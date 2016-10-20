@@ -19,7 +19,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepository;
 import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepositoryImpl;
 import com.example.isaac.directorioudg.gaceta.listGacetas.ui.ListGacetaActivity;
 import com.example.isaac.directorioudg.MapActivity;
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity
 
     PrepaListRepository prepaListRepository = new PrepaListRepositoryImpl();
     CentroListRepository centroListRepository = new CentroListRepositoryImpl();
-    ContenidosGacetaRepository contenidosGacetaRepository= new ContenidosGacetaRepositoryImpl();
+    ContenidosGacetaRepositoryImpl contenidosGacetaRepository= new ContenidosGacetaRepositoryImpl();
 
     PrepaList fragmentPrepaList = new PrepaList();
     CentroList fragmentCentroList = new CentroList();

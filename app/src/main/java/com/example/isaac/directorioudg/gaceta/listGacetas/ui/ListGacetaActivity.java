@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.ContenidoGaceta;
 import com.example.isaac.directorioudg.gaceta.detalleGaceta.ui.detalleGaceta;
-import com.example.isaac.directorioudg.gaceta.listGacetas.GacetaListPresenter;
 import com.example.isaac.directorioudg.gaceta.listGacetas.GacetaListPresenterImpl;
 import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.GacetasAdapter;
 import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.OnItemClickListener;
@@ -31,7 +30,7 @@ import butterknife.ButterKnife;
 public class ListGacetaActivity extends AppCompatActivity implements OnItemClickListener{
 
     Helper helper = new Helper(this);
-    private GacetaListPresenter presenter;
+    private GacetaListPresenterImpl presenter;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     @Bind(R.id.toolbar)
