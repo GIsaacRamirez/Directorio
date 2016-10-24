@@ -23,19 +23,17 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 /**
- * Created by Usuario on 10/10/2016.
+ * Created by Isaac on 10/10/2016.
  */
 
-public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepository{
+public class ContenidosGacetaRepositoryImpl{
     Context context;
     Boolean adapterisEmpty=true;
     GacetasAdapter adapter=null;
@@ -50,8 +48,8 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
         this.adapter=adapter;
     }
 
-    @Override
-    public void descargarDatosContenidoGaceta(String url) {
+
+    private void descargarDatosContenidoGaceta(String url) {
         try {
 
             StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -80,15 +78,15 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
         descargarDatosContenidoGaceta(ruta);
     }
 
-    @Override
+
     public void descargarDatosContenidoGacetaCompletos() {
         adapterisEmpty=true;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"contenidosGaceta.php";
         descargarDatosContenidoGaceta(ruta);
     }
 
-    @Override
-    public void parsearDatosDBFlow(String json) {
+
+    private void parsearDatosDBFlow(String json) {
         try {
 
             Object objetoJson = JSONValue.parse(json);
@@ -101,15 +99,13 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
                 contenidoGaceta.setId( Integer.parseInt(jsonObject.get("id").toString()));
 
                 String fecha = jsonObject.get("fecha").toString();
-                Date date= new Date();
-
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    date = formatoDelTexto.parse(fecha);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                contenidoGaceta.setFecha(date);
+                StringTokenizer tokens=new StringTokenizer(fecha, "-");
+                String anyo=tokens.nextToken();
+                String mes=tokens.nextToken();
+                String dia=tokens.nextToken();
+                contenidoGaceta.setAnyo(Integer.parseInt(anyo));
+                contenidoGaceta.setMes(Integer.parseInt(mes));
+                contenidoGaceta.setDia(Integer.parseInt(dia));
 
                 contenidoGaceta.setUrlContenido(jsonObject.get("urlContenido").toString());
                 contenidoGaceta.setUrlImage(jsonObject.get("urlImage").toString());
@@ -145,70 +141,24 @@ public class ContenidosGacetaRepositoryImpl implements ContenidosGacetaRepositor
         }
     }
 
-    @Override
-   public List<ContenidoGaceta> getList(/*int filter*/) {
+   public List<ContenidoGaceta> getList() {
         List<ContenidoGaceta> List;
-            List = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.greaterThan(800)).orderBy(ContenidoGaceta_Table.id,false).queryList();
+            List = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.lessThan(10)).orderBy(ContenidoGaceta_Table.id,false).queryList();
         return List;
     }
 
-    @Override
     public ContenidoGaceta getContenidoGaceta(int id) {
         ContenidoGaceta contenidoGaceta = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.is(id)).querySingle();
         return contenidoGaceta;
     }
-    @Override
-    public int getMaxId() {
-        int max = (int) new Select().from(ContenidoGaceta.class).query().getCount();
-        return max;
-    }
 
-
-    private void parsearDatosPorFecha(String json) {
-        List<Integer> listFecha= new ArrayList<Integer>();
-        List<ContenidoGaceta> list =new ArrayList<ContenidoGaceta>();
-        try {
-            Object objetoJson = JSONValue.parse(json);
-            JSONArray jsonArrayObject = (JSONArray) objetoJson;
-            for (int i = 0; i < jsonArrayObject.size(); i++) {
-                JSONObject jsonObject = (JSONObject) jsonArrayObject.get(i);
-                //Se agregan los id a una lista
-                listFecha.add( Integer.parseInt(jsonObject.get("id").toString()));
-            }
-            for (int i=0; i<listFecha.size();i++){
-                //Se lee la lista de ids para generar una lista de contenidoGaceta
-                list.add(getContenidoGaceta(listFecha.get(i)));
-            }
-            //Se manda la lista de contenidoGaceta al adaptador
-            adapter.setList(list);
-        } catch (SQLiteException e) {
-        }
-    }
-    @Override
     public void getPorFecha(int anyo, int mes) {
-        //Se mandan los parametros en la url
-        String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"contenidosPorFecha.php?anyo="+anyo+"&mes="+mes;
-        try {
-            //Metodo donde se usa volley para descargar
-            StringRequest request = new StringRequest(ruta, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    //Se parsean los datos que vienen en json
-                     parsearDatosPorFecha(response);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Error al cargar datos", Toast.LENGTH_LONG).show();
-                }
-            });
-            Volley.newRequestQueue(context).add(request);
-
-        } catch (Exception e) {
-            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
-        }
-
+        List<ContenidoGaceta> List;
+        List = new Select().from(ContenidoGaceta.class)
+                .where(ContenidoGaceta_Table.anyo.is(anyo))
+                .and(ContenidoGaceta_Table.mes.is(mes))
+                .orderBy(ContenidoGaceta_Table.id,false).queryList();
+        adapter.setList(List);
     }
-
 
 }

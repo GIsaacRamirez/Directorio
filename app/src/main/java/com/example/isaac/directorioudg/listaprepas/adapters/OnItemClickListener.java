@@ -1,4 +1,4 @@
-package com.example.isaac.directorioudg.listaprepasrecycler.adapters;
+package com.example.isaac.directorioudg.listaprepas.adapters;
 
 import com.example.isaac.directorioudg.entities.Prepa;
 

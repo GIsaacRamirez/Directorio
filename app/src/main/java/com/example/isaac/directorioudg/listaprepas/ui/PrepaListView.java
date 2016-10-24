@@ -1,6 +1,6 @@
-package com.example.isaac.directorioudg.listaprepasrecycler.ui;
+package com.example.isaac.directorioudg.listaprepas.ui;
 
-import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
+import com.example.isaac.directorioudg.listaprepas.adapters.PrepasAdapter;
 
 
 

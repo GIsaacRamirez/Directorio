@@ -89,11 +89,13 @@
         </activity>
         <activity
             android:name=".util.zoom"
-            android:theme="@style/AppTheme.NoActionBarBlack"></activity>
+            android:theme="@style/AppTheme.NoActionBarBlack" />
         <activity
-            android:name=".gaceta.listGacetas.ListGacetaActivity"
+            android:name=".gaceta.listGacetas.ui.ListGacetaActivity"
             android:label="@string/title_activity_list_gaceta"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".gaceta.detalleGaceta.ui.detalleGaceta"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

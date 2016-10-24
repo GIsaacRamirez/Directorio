@@ -1,4 +1,4 @@
-package com.example.isaac.directorioudg.listaprepasrecycler.adapters;
+package com.example.isaac.directorioudg.listaprepas.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -80,7 +80,7 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
      */
     @Override
     public int getItemCount() {
-        if(prepaList.isEmpty()){
+        if(prepaList==null){
             return 0;
         }
         return prepaList.size();

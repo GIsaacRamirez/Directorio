@@ -123,7 +123,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="129dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -137,8 +137,7 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_vertical_margin">
+                        android:layout_height="wrap_content">
                         <!--Contenerdor de nombreRector y telefono-->
 
                         <!-- Etiqueta Rector -->
@@ -148,7 +147,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:layout_marginTop="@dimen/activity_vertical_margin"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="@string/nombrerector"
                             android:textSize="20sp"
@@ -204,11 +202,19 @@
             card_view:cardCornerRadius="@dimen/card.radius"
             card_view:elevation="@dimen/card.detalle.2person.elevation">
 
+
             <!--Contiene Tod0 incluso el correo-->
             <LinearLayout
                 style="@style/Widget.CardContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tituloCardSecAcademico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:text="@string/SecretarioAcademico"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <!--Layout de (imgen, nombre y telefono)-->
                 <LinearLayout
@@ -279,13 +285,7 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tituloCardSecAcademico"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:text="@string/SecretarioAcademico"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
 
         </android.support.v7.widget.CardView>
 

@@ -80,6 +80,9 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHold
      */
     @Override
     public int getItemCount() {
+        if(centroList==null){
+            return 0;
+        }
         return centroList.size();
     }
 

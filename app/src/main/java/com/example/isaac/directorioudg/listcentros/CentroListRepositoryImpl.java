@@ -31,10 +31,9 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 /**
  * Created by isaac on 29/08/16.
  */
-public class CentroListRepositoryImpl implements CentroListRepository {
+public class CentroListRepositoryImpl{
     Context context;
     CentrosAdapter adapter=null;
-    Boolean adapterisEmpty=true;
 
     public CentroListRepositoryImpl() {
         this.context = getContext().getApplicationContext();
@@ -44,22 +43,20 @@ public class CentroListRepositoryImpl implements CentroListRepository {
         this.context = getContext().getApplicationContext();
         this.adapter=adapter;
     }
-    @Override
+
     public void descargarDatosCentroCompletos() {
-        adapterisEmpty=true;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"CentrosUniversitarios.php";
         descargarDatosCentro(ruta);
     }
-    @Override
+
     public void descargarDatosCentroCompletos(CentrosAdapter adapteraux) {
-        adapterisEmpty=true;
         adapter=adapteraux;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"CentrosUniversitarios.php";
        // String ruta = "http://s512984961.onlinehome.mx/DirectorioUDG/WebService/CentrosUniversitarios.php";
         descargarDatosCentro(ruta);
     }
-    @Override
-    public void descargarDatosCentro(String url) {
+
+    private void descargarDatosCentro(String url) {
         try {
 
             StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -80,8 +77,8 @@ public class CentroListRepositoryImpl implements CentroListRepository {
         }
     }
 
-    @Override
-    public void parsearDatosCentroDBFlow(String json) {
+
+    private void parsearDatosCentroDBFlow(String json) {
         try {
 
             Object objetoJson = JSONValue.parse(json);
@@ -143,7 +140,7 @@ public class CentroListRepositoryImpl implements CentroListRepository {
                     .success(new Transaction.Success() {
                         @Override
                         public void onSuccess(Transaction transaction) {
-                            if(!adapterisEmpty){
+                            if(adapter!=null){
                                 adapter.setCentroList(getListCentros(0));
                             }
                         }
@@ -156,7 +153,7 @@ public class CentroListRepositoryImpl implements CentroListRepository {
         }
     }
 
-    @Override
+
     public List<Centro> getListCentros(int filter) {
         List<Centro> centroList;
         if(filter==0){
@@ -170,7 +167,7 @@ public class CentroListRepositoryImpl implements CentroListRepository {
         return centroList;
     }
 
-    @Override
+
     public Centro getCentro(int id) {
         Centro centro = new Select().from(Centro.class).where(Centro_Table.IdCentro.is(id)).querySingle();
         return centro;

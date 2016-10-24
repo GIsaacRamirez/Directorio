@@ -1,8 +1,7 @@
-package com.example.isaac.directorioudg.listaprepasrecycler;
+package com.example.isaac.directorioudg.listaprepas;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -13,7 +12,7 @@ import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.Prepa;
 import com.example.isaac.directorioudg.entities.Prepa_Table;
-import com.example.isaac.directorioudg.listaprepasrecycler.adapters.PrepasAdapter;
+import com.example.isaac.directorioudg.listaprepas.adapters.PrepasAdapter;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
@@ -32,11 +31,10 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 /**
  * Created by isaac on 14/07/16.
  */
-public class PrepaListRepositoryImpl implements PrepaListRepository{
+public class PrepaListRepositoryImpl{
 
     Context context;
     PrepasAdapter adapter=null;
-    Boolean adapterisEmpty=true;
     public PrepaListRepositoryImpl() {
         this.context = getContext().getApplicationContext();
     }
@@ -47,7 +45,6 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
     }
 
 
-    @Override
     public void descargarDatosPrepa(String url) {
         try {
 
@@ -69,16 +66,12 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
         }
     }
 
-    @Override
     public void descargarDatosPrepaCompletos(PrepasAdapter adapteraux) {
-        adapterisEmpty=false;
-        adapter=adapteraux;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"preparatorias.php";
         descargarDatosPrepa(ruta);
     }
-    @Override
+
     public void descargarDatosPrepaCompletos() {
-        adapterisEmpty=true;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"preparatorias.php";
         descargarDatosPrepa(ruta);
     }
@@ -121,34 +114,27 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
                                 @Override
                                 public void processModel(Prepa prepa) {
                                     // do work here -- i.e. user.delete() or user.update()
-                                    if(prepa.exists()){
-                                        prepa.update();
-                                    }else {
-                                        prepa.save();
-                                    }
+                                    prepa.save();
+
                                 }
                             }).addAll(listPrepas).build())  // add elements (can also handle multiple)
                     .error(new Transaction.Error() {
                         @Override
                         public void onError(Transaction transaction, Throwable error) {
-
                         }
                     })
                     .success(new Transaction.Success() {
                         @Override
                         public void onSuccess(Transaction transaction) {
-                            if(!adapterisEmpty){
-                                adapter.setPrepaList(getListPrepas(0));
-                            }
+
                         }
                     }).build().execute();
 
         } catch (SQLiteException e) {
-            Log.e("llenarBaseDatosPrepa: ", e.getMessage());
         }
     }
 
-    @Override
+
     public List<Prepa> getListPrepas(int filter) {
         List<Prepa> prepaList;
         if(filter==0){
@@ -162,7 +148,7 @@ public class PrepaListRepositoryImpl implements PrepaListRepository{
         return prepaList;
     }
 
-    @Override
+
     public Prepa getPrepa(int id) {
         Prepa prepa = new Select().from(Prepa.class).where(Prepa_Table.idPrepa.is(id)).querySingle();
         return prepa;
