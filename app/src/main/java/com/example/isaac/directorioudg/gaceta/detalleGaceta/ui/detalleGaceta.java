@@ -3,6 +3,7 @@ package com.example.isaac.directorioudg.gaceta.detalleGaceta.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -45,7 +46,7 @@ public class detalleGaceta extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        recyclerViewDetalleGaceta.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recyclerViewDetalleGaceta.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewDetalleGaceta.setAdapter(adapter);
     }
 

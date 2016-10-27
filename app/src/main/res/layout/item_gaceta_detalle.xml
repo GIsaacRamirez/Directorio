@@ -18,12 +18,22 @@
         android:padding="@dimen/activity_vertical_margin">
 
         <TextView
-            android:id="@+id/txtidGaceta"
+            android:id="@+id/lblTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Titulo"
+            android:textAppearance="@style/MapCardTitle"
+            android:theme="@style/AlertDialog.AppCompat.Light" />
+        <TextView
+            android:id="@+id/lblidGaceta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Descripcion"
             android:textAppearance="@style/MapCardTitle"
+            android:layout_below="@+id/lblTitulo"
             android:theme="@style/AlertDialog.AppCompat.Light" />
+
+
 
         <Button
             android:text="Descargar"
@@ -32,7 +42,7 @@
             android:id="@+id/btnDescargar"
             android:elevation="4dp"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_below="@+id/txtidGaceta"
+            android:layout_below="@+id/lblidGaceta"
             android:layout_centerHorizontal="true" />
 
 

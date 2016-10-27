@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.LinksPdfGaceta;
 
@@ -21,6 +22,7 @@ import butterknife.OnClick;
 
 public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.ViewHolder> {
     public List<LinksPdfGaceta> List = null;
+
     public PdfGacetaAdapter() {
     }
 
@@ -48,14 +50,14 @@ public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         LinksPdfGaceta linksPdfGaceta = List.get(position);
-
-        holder.txtidGaceta.setText(linksPdfGaceta.getDescripcion());
+        holder.lblTitulo.setText(linksPdfGaceta.getTitulo());
+        holder.lblidGaceta.setText(linksPdfGaceta.getDescripcion());
         holder.linkDescarga = linksPdfGaceta.getLinkPdf();
     }
 
     @Override
     public int getItemCount() {
-        if(List==null){
+        if (List == null) {
             return 0;
         }
         return List.size();
@@ -64,11 +66,11 @@ public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private View view;
-        @Bind(R.id.txtidGaceta)
-        TextView txtidGaceta;
+        @Bind(R.id.lblTitulo)
+        TextView lblTitulo;
+        @Bind(R.id.lblidGaceta)
+        TextView lblidGaceta;
 
-        @Bind(R.id.btnDescargar)
-        Button btnDescargar;
 
         protected String linkDescarga;
 

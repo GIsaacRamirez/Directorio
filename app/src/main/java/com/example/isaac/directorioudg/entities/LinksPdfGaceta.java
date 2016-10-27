@@ -7,10 +7,20 @@ package com.example.isaac.directorioudg.entities;
 public class LinksPdfGaceta {
     int numeroGaceta;
     String linkPdf;
+    String titulo;
     String descripcion;
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
     public int getNumeroGaceta() {
         return numeroGaceta;
+
     }
 
     public void setNumeroGaceta(int numeroGaceta) {

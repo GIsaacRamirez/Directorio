@@ -68,6 +68,7 @@ public class PdfGacetaRepositoryImpl {
                 //Crea sentencias sql para agregar a una lista
                 LinksPdfGaceta linksPdfGaceta = new LinksPdfGaceta();
                 linksPdfGaceta.setLinkPdf(jsonObject.get("linkPdf").toString());
+                linksPdfGaceta.setTitulo(jsonObject.get("titulo").toString());
                 linksPdfGaceta.setDescripcion(jsonObject.get("descripcion").toString());
                 list.add(linksPdfGaceta);
             }
