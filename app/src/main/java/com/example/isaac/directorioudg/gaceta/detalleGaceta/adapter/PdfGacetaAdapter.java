@@ -116,8 +116,9 @@ public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.View
                     downloadmanager = (DownloadManager) context.getSystemService(servicestring);
                     Uri uri = Uri.parse(linkDescarga);
                     DownloadManager.Request request = new DownloadManager.Request(uri);
-
+                    request.setVisibleInDownloadsUi(false);//Oculta la descarga
                     request.setDestinationInExternalFilesDir(context, null,nombre_archivo);
+
                     Long reference = downloadmanager.enqueue(request);
                     context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
                     break;
