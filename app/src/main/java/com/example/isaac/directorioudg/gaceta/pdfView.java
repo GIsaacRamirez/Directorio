@@ -4,17 +4,19 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.isaac.directorioudg.R;
 import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.ScrollBar;
 import com.github.barteksc.pdfviewer.exception.FileNotFoundException;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 
 import java.io.File;
 
@@ -26,6 +28,8 @@ public class pdfView extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_READ_EXTERNAL = 1;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    String nombre_archivo;
+    String directorio=Environment.getExternalStorageDirectory().getAbsolutePath().toString()+"/Android/data/com.example.isaac.directorioudg/files/";
     private void setToolbar() {
         // Añadir la Toolbar
         setSupportActionBar(toolbar);
@@ -37,6 +41,7 @@ public class pdfView extends AppCompatActivity {
         setContentView(R.layout.activity_pdf_view);
         ButterKnife.bind(this);
         setToolbar();
+
 
         //Pedir permiso de lectura
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) !=
@@ -54,25 +59,26 @@ public class pdfView extends AppCompatActivity {
 
     private void loadGaceta() {
         PDFView pdfView= (PDFView) findViewById(R.id.pdfView);
-        String directory = "/sdcard/";
-
         try{
-            File file = new File(directory, "889.pdf");
 
-            ScrollBar scrollBar = (ScrollBar) findViewById(R.id.scrollBar);
-            scrollBar.setHorizontal(true);
-            pdfView.setScrollBar(scrollBar);
+            Bundle bundle = getIntent().getExtras();
+            nombre_archivo=bundle.getString("nombreArchivo");
+
+            File file = new File(directorio, nombre_archivo);
+            Log.v("directorio",directorio);
+
+            pdfView.useBestQuality(false);
 
             pdfView.fromFile(file)
                     .enableSwipe(true)
                     .enableDoubletap(true)
-                    .swipeVertical(false)
-                    .defaultPage(1)
-                    .showPageWithAnimation(true)
-                    .showMinimap(true)
+                    .scrollHandle(new DefaultScrollHandle(this))
+                    .defaultPage(0)
+                    .swipeHorizontal(false)
+                    .enableAnnotationRendering(false)
                     .load();
         }catch (FileNotFoundException e){
-            showSnackbar("No se encontro el archivo");
+            showSnackbar(directorio);
         }
 
         setTitle("Gaceta");
@@ -108,7 +114,7 @@ public class pdfView extends AppCompatActivity {
     }
 
     private void showSnackbar(String msg) {
-        Snackbar.make(getWindow().findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show();
     }
 
 

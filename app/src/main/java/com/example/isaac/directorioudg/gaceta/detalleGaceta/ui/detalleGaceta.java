@@ -34,6 +34,7 @@ public class detalleGaceta extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbarDetalleGaceta);
         adapter= new PdfGacetaAdapter();
+        adapter.setContext(getApplicationContext());
         adapter.setList( null);
         presenter= new PdfGacetaPresenterImpl(getApplicationContext());
 

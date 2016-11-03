@@ -45,12 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-            <com.github.barteksc.pdfviewer.ScrollBar
-                android:id="@+id/scrollBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:sb_horizontal="true"
-                android:layout_alignParentBottom="true" />
+
 
         </RelativeLayout>
 

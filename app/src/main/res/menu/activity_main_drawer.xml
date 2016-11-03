@@ -19,10 +19,7 @@
             android:id="@+id/nav_Map"
             android:icon="@android:drawable/ic_dialog_map"
             android:title="Mapas" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="PDF" />
+
         <item
             android:id="@+id/nav_gaceta"
             android:icon="@drawable/ic_menu_share"
