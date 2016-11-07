@@ -189,11 +189,8 @@ public class MainActivity extends AppCompatActivity
                 centroListRepository.descargarDatosCentroCompletos(fragmentCentroList.getCentroListAdapter());
                 contenidosGacetaRepository.descargarDatosContenidoGacetaCompletos();
 
-                if(isPrepa==0){
-                    showSnackbar("Se esta actualizando la informacion");
-                }else if(isPrepa==1){
-                    showSnackbar("Se esta actualizando la informacion");
-                }
+                showSnackbar("Se esta actualizando la informacion");
+
             }else{
                 showSnackbar("Necesita conexion a internet");
             }

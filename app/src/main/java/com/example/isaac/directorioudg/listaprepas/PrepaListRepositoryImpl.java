@@ -126,7 +126,9 @@ public class PrepaListRepositoryImpl{
                     .success(new Transaction.Success() {
                         @Override
                         public void onSuccess(Transaction transaction) {
-
+                            if(adapter!=null){
+                                adapter.setPrepaList(getListPrepas(0));
+                            }
                         }
                     }).build().execute();
 
