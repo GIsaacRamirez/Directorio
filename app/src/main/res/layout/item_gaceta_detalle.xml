@@ -17,33 +17,68 @@
         android:orientation="vertical"
         android:padding="@dimen/activity_vertical_margin">
 
-        <TextView
-            android:id="@+id/lblTitulo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Titulo"
-            android:textAppearance="@style/MapCardTitle"
-            android:theme="@style/AlertDialog.AppCompat.Light" />
-        <TextView
-            android:id="@+id/lblidGaceta"
+            android:orientation="vertical"
+            android:id="@+id/etiquetas">
+
+            <TextView
+                android:id="@+id/lblTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Titulo"
+                android:textAppearance="@style/MapCardTitle"
+                android:theme="@style/AlertDialog.AppCompat.Light" />
+            <TextView
+                android:id="@+id/lblidGaceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripcion"
+                android:textAppearance="@style/MapCardTitle"
+                android:layout_below="@+id/lblTitulo"
+                android:theme="@style/AlertDialog.AppCompat.Light" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripcion"
-            android:textAppearance="@style/MapCardTitle"
-            android:layout_below="@+id/lblTitulo"
-            android:theme="@style/AlertDialog.AppCompat.Light" />
+            android:orientation="horizontal"
+            android:layout_below="@+id/etiquetas"
+            android:weightSum="3">
 
+            <Button
+                android:text="Visualizar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnVisualizar"
+                android:elevation="4dp"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:visibility="invisible"/>
 
+            <Button
+                android:text="Descargar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDescargar"
+                android:layout_weight="1"
+                android:elevation="4dp"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:visibility="visible"
+                />
 
-        <Button
-            android:text="Descargar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnDescargar"
-            android:elevation="4dp"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_below="@+id/lblidGaceta"
-            android:layout_centerHorizontal="true" />
+            <Button
+                android:text="Eliminar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnEliminar"
+                android:layout_weight="1"
+                android:elevation="4dp"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
 
 
     </RelativeLayout>

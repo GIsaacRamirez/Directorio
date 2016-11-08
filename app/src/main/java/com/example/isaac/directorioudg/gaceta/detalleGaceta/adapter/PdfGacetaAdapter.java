@@ -13,13 +13,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.LinksPdfGaceta;
+import com.example.isaac.directorioudg.entities.LinksPdfGaceta_Table;
 import com.example.isaac.directorioudg.gaceta.pdfView;
+import com.raizlabs.android.dbflow.sql.language.Select;
 
+import java.io.File;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -36,12 +41,11 @@ public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.View
     Context context;
     String nombre_archivo;
 
-
     public PdfGacetaAdapter() {
     }
 
-    public void setContext(Context context){
-        this.context=context;
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public void setList(List<LinksPdfGaceta> list) {
@@ -70,7 +74,18 @@ public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.View
         LinksPdfGaceta linksPdfGaceta = List.get(position);
         holder.lblTitulo.setText(linksPdfGaceta.getTitulo());
         holder.lblidGaceta.setText(linksPdfGaceta.getDescripcion());
-        holder.linkDescarga = linksPdfGaceta.getLinkPdf();
+        holder.linksPdfGaceta = linksPdfGaceta;
+        LinksPdfGaceta auxLinkPdf = new Select().from(LinksPdfGaceta.class).where(LinksPdfGaceta_Table.id.is(linksPdfGaceta.getId())).querySingle();
+        if(auxLinkPdf==null){
+            holder.btnEliminar.setVisibility(View.INVISIBLE);
+            holder.btnVisualizar.setVisibility(View.INVISIBLE);
+            holder.btnDescargar.setVisibility(View.VISIBLE);
+        }else {
+            holder.btnEliminar.setVisibility(View.VISIBLE);
+            holder.btnVisualizar.setVisibility(View.VISIBLE);
+            holder.btnDescargar.setVisibility(View.INVISIBLE);
+            holder.linksPdfGaceta=auxLinkPdf;
+        }
 
     }
 
@@ -82,6 +97,8 @@ public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.View
         return List.size();
     }
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private View view;
@@ -90,8 +107,16 @@ public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.View
         @Bind(R.id.lblidGaceta)
         TextView lblidGaceta;
 
+        @Bind(R.id.btnVisualizar)
+        Button btnVisualizar;
+        @Bind(R.id.btnDescargar)
+        Button btnDescargar;
+        @Bind(R.id.btnEliminar)
+        Button btnEliminar;
 
-        protected String linkDescarga;
+         LinksPdfGaceta linksPdfGaceta =new LinksPdfGaceta();
+
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -99,38 +124,73 @@ public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.View
             ButterKnife.bind(this, view);
         }
 
-        @OnClick({R.id.btnDescargar})
+
+        @OnClick({R.id.btnVisualizar, R.id.btnDescargar, R.id.btnEliminar})
         public void onClick(View view) {
+
             switch (view.getId()) {
+                case R.id.btnVisualizar:
+                    Bundle bundle = new Bundle();
+                    bundle.putString("nombreArchivo", linksPdfGaceta.getNombreArchivo());
+                    Intent intent = new Intent(context, pdfView.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtras(bundle);
+                   context.startActivity(intent);
+
+                    break;
                 case R.id.btnDescargar:
                     String servicestring = Context.DOWNLOAD_SERVICE;
 
-                    StringTokenizer st = new StringTokenizer(linkDescarga);
-                    while (st.hasMoreTokens()){
-                        nombre_archivo=st.nextToken("/");
+                    StringTokenizer st = new StringTokenizer(linksPdfGaceta.getLinkPdf());
+                    while (st.hasMoreTokens()) {
+                        nombre_archivo = st.nextToken("/");
                     }
-                    nombre_archivo=nombre_archivo.replaceAll("%20","");
-                    Log.e("nombre",nombre_archivo);
+                    nombre_archivo = nombre_archivo.replaceAll("%20", "");//Remplaza los espacios en blanco por %20 para el link
 
+                    linksPdfGaceta.setNombreArchivo(nombre_archivo);
+                    linksPdfGaceta.save();
                     DownloadManager downloadmanager;
                     downloadmanager = (DownloadManager) context.getSystemService(servicestring);
-                    Uri uri = Uri.parse(linkDescarga);
+                    Uri uri = Uri.parse(linksPdfGaceta.getLinkPdf());
                     DownloadManager.Request request = new DownloadManager.Request(uri);
                     request.setVisibleInDownloadsUi(false);//Oculta la descarga
-                    request.setDestinationInExternalFilesDir(context, null,nombre_archivo);
+                    request.setDestinationInExternalFilesDir(context, null, nombre_archivo);
 
                     Long reference = downloadmanager.enqueue(request);
                     context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+
+                    break;
+                case R.id.btnEliminar:
+                    String pathArchivo= Environment.getExternalStorageDirectory().getAbsolutePath().toString()+"/Android/data/com.example.isaac.directorioudg/files/";
+                    //pathArchivo+=linksPdfGaceta.getNombreArchivo();
+
+                    linksPdfGaceta.delete();
+                    try {
+                        File archivo = new File(pathArchivo,linksPdfGaceta.getNombreArchivo());
+                        archivo.delete();
+                    }catch (Exception e){}
+
+
+                    btnEliminar.setVisibility(View.INVISIBLE);
+                    btnVisualizar.setVisibility(View.INVISIBLE);
+                    btnDescargar.setVisibility(View.VISIBLE);
+
                     break;
             }
         }
 
-        BroadcastReceiver onComplete=new BroadcastReceiver() {
+        //Accion a ejecutar cuando se completa la descarga
+        BroadcastReceiver onComplete = new BroadcastReceiver() {
             public void onReceive(Context ctxt, Intent intent) {
                 intent = new Intent(ctxt, pdfView.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("nombreArchivo",nombre_archivo);
+                bundle.putString("nombreArchivo", nombre_archivo);
                 intent.putExtras(bundle);
+                btnDescargar.setVisibility(View.INVISIBLE);
+                btnVisualizar.setVisibility(View.VISIBLE);
+                btnEliminar.setVisibility(View.VISIBLE);
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                         | Intent.FLAG_ACTIVITY_NEW_TASK);
                 ctxt.startActivity(intent);

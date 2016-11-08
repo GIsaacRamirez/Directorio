@@ -2,7 +2,6 @@ package com.example.isaac.directorioudg.gaceta.detalleGaceta.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -11,8 +10,6 @@ import android.view.MenuItem;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.gaceta.detalleGaceta.PdfGacetaPresenterImpl;
 import com.example.isaac.directorioudg.gaceta.detalleGaceta.adapter.PdfGacetaAdapter;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -64,6 +64,7 @@ public class pdfView extends AppCompatActivity {
             Bundle bundle = getIntent().getExtras();
             nombre_archivo=bundle.getString("nombreArchivo");
 
+            Log.v("nombre",nombre_archivo);
             File file = new File(directorio, nombre_archivo);
             Log.v("directorio",directorio);
 
@@ -78,7 +79,6 @@ public class pdfView extends AppCompatActivity {
                     .enableAnnotationRendering(false)
                     .load();
         }catch (FileNotFoundException e){
-            showSnackbar(directorio);
         }
 
         setTitle("Gaceta");
