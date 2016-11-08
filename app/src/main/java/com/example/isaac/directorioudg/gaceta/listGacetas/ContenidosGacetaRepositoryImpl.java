@@ -60,7 +60,6 @@ public class ContenidosGacetaRepositoryImpl{
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Error al cargar datos", Toast.LENGTH_LONG).show();
                 }
             });
             Volley.newRequestQueue(context).add(request);
