@@ -20,8 +20,6 @@ import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.LinksPdfGaceta;
 import com.example.isaac.directorioudg.entities.LinksPdfGaceta_Table;
 import com.example.isaac.directorioudg.gaceta.pdfView;
-import com.raizlabs.android.dbflow.annotation.Database;
-import com.raizlabs.android.dbflow.config.DatabaseDefinition;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.sql.language.Select;

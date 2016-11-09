@@ -27,7 +27,6 @@ import com.example.isaac.directorioudg.listaprepas.PrepaListRepositoryImpl;
 import com.example.isaac.directorioudg.listaprepas.ui.PrepaList;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
 import com.example.isaac.directorioudg.listcentros.ui.CentroList;
-import com.example.isaac.directorioudg.gaceta.pdfView;
 import com.example.isaac.directorioudg.radio.RadioList.RadioList;
 import com.example.isaac.directorioudg.util.Helper;
 
