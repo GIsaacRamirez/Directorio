@@ -2,7 +2,6 @@ package com.example.isaac.directorioudg.gaceta.detalleGaceta;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -22,8 +21,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -93,9 +90,7 @@ public class PdfGacetaRepositoryImpl {
                 linksPdfGaceta.setTitulo(jsonObject.get("titulo").toString());
                 linksPdfGaceta.setDescripcion(jsonObject.get("descripcion").toString());
                 list.add(linksPdfGaceta);
-
             }
-
 
             adapter.setList(list);
         } catch (SQLiteException e) {}
