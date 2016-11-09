@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.example.isaac.directorioudg.R;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.exception.FileNotFoundException;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 
 import java.io.File;
@@ -24,8 +25,8 @@ import java.io.File;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class pdfView extends AppCompatActivity {
-
+public class pdfView extends AppCompatActivity implements OnLoadCompleteListener {
+    PDFView pdfView;
     private static final int PERMISSIONS_REQUEST_READ_EXTERNAL = 1;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -42,6 +43,7 @@ public class pdfView extends AppCompatActivity {
         setContentView(R.layout.activity_pdf_view);
         ButterKnife.bind(this);
         setToolbar();
+        pdfView= (PDFView) findViewById(R.id.pdfView);
 
 
         //Pedir permiso de lectura
@@ -59,7 +61,7 @@ public class pdfView extends AppCompatActivity {
     }
 
     private void loadGaceta() {
-        PDFView pdfView= (PDFView) findViewById(R.id.pdfView);
+
         try{
 
             Bundle bundle = getIntent().getExtras();
@@ -70,25 +72,37 @@ public class pdfView extends AppCompatActivity {
             Log.v("directorio",directorio);
             // Checks the orientation of the screen
 
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                pdfView.setScaleX((float) 2.0);
-                pdfView.setScaleY((float) 2.0);
-            }
+
+
             pdfView.useBestQuality(false);
             pdfView.fromFile(file)
                     .enableSwipe(true)
                     .enableDoubletap(true)
+                    .onLoad(this)
                     .scrollHandle(new DefaultScrollHandle(this))
                     .defaultPage(0)
                     .swipeHorizontal(false)
                     .enableAnnotationRendering(false)
                     .load();
+
+
         }catch (FileNotFoundException e){
         }
 
         setTitle(nombre_archivo);
     }
 
+    @Override
+    public void loadComplete(int nbPages) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            pdfView.zoomTo((float) 2.0);
+            pdfView.zoomTo((float) 2.0);
+            pdfView.setMinZoom((float) 2.0);
+            pdfView.setMidZoom((float) 3.0);
+            pdfView.setMaxZoom((float) 4.0);
+
+        }
+    }
 
     //Respuesta de los permisos
     @Override
