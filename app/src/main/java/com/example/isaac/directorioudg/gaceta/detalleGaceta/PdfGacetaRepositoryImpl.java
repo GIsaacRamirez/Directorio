@@ -92,7 +92,6 @@ public class PdfGacetaRepositoryImpl {
                 linksPdfGaceta.setDescripcion(jsonObject.get("descripcion").toString());
                 list.add(linksPdfGaceta);
             }
-            LinksPdfGaceta linksPdfGaceta = new LinksPdfGaceta();
 
             adapter.setList(list);
         } catch (SQLiteException e) {}
