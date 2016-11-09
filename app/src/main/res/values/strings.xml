@@ -50,6 +50,8 @@
     <string name="guillermoisaac_gmail_com">guillermoisaac@gmail.com</string>
     <string name="nombrerector">NombreRector</string>
 
+    <string name="Descargar">Descargar</string>
+    <string name="Cancelar">Cancelar</string>
     <string name="nombre_transicion_imagen">imagen_visualizada</string>
 
     <string name="title_activity_list_gaceta">Gaceta</string>

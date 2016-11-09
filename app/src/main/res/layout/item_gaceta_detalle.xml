@@ -58,7 +58,7 @@
                 android:visibility="invisible"/>
 
             <Button
-                android:text="Descargar"
+                android:text="@string/Descargar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnDescargar"

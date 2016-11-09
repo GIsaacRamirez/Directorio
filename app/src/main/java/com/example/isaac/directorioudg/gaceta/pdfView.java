@@ -2,6 +2,7 @@ package com.example.isaac.directorioudg.gaceta;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -67,9 +68,13 @@ public class pdfView extends AppCompatActivity {
             Log.v("nombre",nombre_archivo);
             File file = new File(directorio, nombre_archivo);
             Log.v("directorio",directorio);
+            // Checks the orientation of the screen
 
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                pdfView.setScaleX((float) 2.0);
+                pdfView.setScaleY((float) 2.0);
+            }
             pdfView.useBestQuality(false);
-
             pdfView.fromFile(file)
                     .enableSwipe(true)
                     .enableDoubletap(true)
@@ -81,7 +86,7 @@ public class pdfView extends AppCompatActivity {
         }catch (FileNotFoundException e){
         }
 
-        setTitle("Gaceta");
+        setTitle(nombre_archivo);
     }
 
 

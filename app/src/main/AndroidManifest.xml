@@ -16,7 +16,6 @@
     <application
         android:name=".DirectorioApp"
         android:allowBackup="true"
-        android:configChanges="keyboardHidden|orientation|screenSize"
         android:icon="@drawable/logo_udg"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -25,7 +24,7 @@
 
         <activity
             android:name=".main.MainActivity"
-            android:configChanges="orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -42,6 +41,7 @@
         <activity
             android:name=".detalleprepa.DetallePrepaActivity"
             android:label="@string/title_activity_detalle_prepa"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -51,6 +51,7 @@
         <activity
             android:name=".detallecentro.DetalleCentroActivity"
             android:parentActivityName=".main.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -58,6 +59,7 @@
         </activity>
         <activity
             android:name=".radio.RadioActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -81,6 +83,7 @@
         </activity>
         <activity
             android:name=".MapActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -89,12 +92,15 @@
         </activity>
         <activity
             android:name=".util.zoom"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBarBlack" />
         <activity
             android:name=".gaceta.listGacetas.ui.ListGacetaActivity"
             android:label="@string/title_activity_list_gaceta"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".gaceta.detalleGaceta.ui.detalleGaceta"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

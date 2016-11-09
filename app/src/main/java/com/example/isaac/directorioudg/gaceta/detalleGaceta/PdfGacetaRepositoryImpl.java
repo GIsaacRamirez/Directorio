@@ -10,6 +10,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.isaac.directorioudg.R;
 
+import com.example.isaac.directorioudg.db.DirectorioDataBase;
 import com.example.isaac.directorioudg.entities.LinksPdfGaceta;
 import com.example.isaac.directorioudg.entities.LinksPdfGaceta_Table;
 import com.example.isaac.directorioudg.gaceta.detalleGaceta.adapter.PdfGacetaAdapter;
@@ -91,6 +92,7 @@ public class PdfGacetaRepositoryImpl {
                 linksPdfGaceta.setDescripcion(jsonObject.get("descripcion").toString());
                 list.add(linksPdfGaceta);
             }
+            LinksPdfGaceta linksPdfGaceta = new LinksPdfGaceta();
 
             adapter.setList(list);
         } catch (SQLiteException e) {}
