@@ -191,15 +191,14 @@ public class PdfGacetaAdapter extends RecyclerView.Adapter<PdfGacetaAdapter.View
                     break;
                 case R.id.btnEliminar:
                     String pathArchivo= Environment.getExternalStorageDirectory().getAbsolutePath().toString()+"/Android/data/com.example.isaac.directorioudg/files/";
-                    //pathArchivo+=linksPdfGaceta.getNombreArchivo();
-
-                    SQLite.delete(LinksPdfGaceta.class)
-                            .where(LinksPdfGaceta_Table.id.is(linksPdfGaceta.getId()))
-                            .async()
-                            .execute();
                     try {
                         File archivo = new File(pathArchivo,linksPdfGaceta.getNombreArchivo());
                         archivo.delete();
+                        SQLite.delete(LinksPdfGaceta.class)
+                                .where(LinksPdfGaceta_Table.id.is(linksPdfGaceta.getId()))
+                                .async()
+                                .execute();
+                        btnDescargar.setText(context.getResources().getString(R.string.Descargar));
                     }catch (Exception e){}
 
 
