@@ -1,11 +1,17 @@
 package com.example.isaac.directorioudg.detallecentro;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +20,12 @@ import android.widget.TextView;
 
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
+import com.example.isaac.directorioudg.detallecentro.adapters.TrabajadorCentrosAdapter;
+import com.example.isaac.directorioudg.detallecentro.ui.trabajador_centro;
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
-import com.example.isaac.directorioudg.util.Helper;
 import com.example.isaac.directorioudg.util.zoom;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -50,41 +57,17 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     @Bind(R.id.DirWeb)
     TextView DirWeb;
 
-    //CardRector
-    @Bind(R.id.imageRector)
-    ImageView imageRector;
-    @Bind(R.id.lblNombreRector)
-    TextView lblNombreRector;
-    @Bind(R.id.txtTelefonoRector)
-    TextView txtTelefonoRector;
-    @Bind(R.id.txtCorreoRector)
-    TextView txtCorreoRector;
-
-    //Card Secretario academico
-    @Bind(R.id.imageSecacademico)
-    ImageView imageSecacademico;
-    @Bind(R.id.lblNombreSecAcademico)
-    TextView lblNombreSecAcademico;
-    @Bind(R.id.txtTelefonoSecAcademico)
-    TextView txtTelefonoSecAcademico;
-    @Bind(R.id.txtCorreoSecAcademico)
-    TextView txtCorreoSecAcademico;
-
-    //Card secretario administrativo
-    @Bind(R.id.imageSecAdministrativo)
-    ImageView imageSecAdministrativo;
-    @Bind(R.id.lblNombreSecAdministrativo)
-    TextView lblNombreSecAdministrativo;
-    @Bind(R.id.txtTelefonoSecAdministrativo)
-    TextView txtTelefonoSecAdministrativo;
-    @Bind(R.id.txtCorreoSecAdministrativo)
-    TextView txtCorreoSecAdministrativo;
     @Bind(R.id.map)
     MapView map;
     @Bind(R.id.fab)
     FloatingActionButton fab;
 
-    Helper helper = new Helper(this);
+
+    @Bind(R.id.cardCentro)
+    CardView cardCentro;
+    @Bind(R.id.cardMap)
+    CardView cardMap;
+
     private GoogleMap mMap;
 
     private CameraUpdate mCamera;
@@ -94,6 +77,8 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     Centro centro = new Centro();
     ImageLoader imageLoader;
     CentroListRepositoryImpl repository;
+    trabajador_centro fragmentTrabajadorCentro = new trabajador_centro();
+
 
     private void setToolbar() {
         // Añadir la Toolbar
@@ -140,39 +125,24 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         DirWeb.setText(centro.getWeb());
         String url = centro.getImagenURL().toString();
         if (url.equalsIgnoreCase("No Disponible")) {
-            imageLoader.load(imageParalax,R.drawable.fotolugarvacio);
-        }else {
+            imageLoader.load(imageParalax, R.drawable.fotolugarvacio);
+        } else {
             imageLoader.load(imageParalax, url, true);
         }
 
         Latitud = centro.getLatitud();
         Longitud = centro.getLongitud();
 
-        //CardRector
-        if (helper.isConect()) {
-            imageLoader.load(imageRector, centro.getFotoRectorURL(), false);
-            imageLoader.load(imageSecacademico, centro.getFotoSecAcademicoURL(), false);
-            imageLoader.load(imageSecAdministrativo, centro.getFotoSecAdministrativoURL(), false);
-        }else {
-            imageLoader.load(imageRector, R.drawable.fotonodisponible);
-            imageLoader.load(imageSecacademico, R.drawable.fotonodisponible);
-            imageLoader.load(imageSecAdministrativo, R.drawable.fotonodisponible);
-        }
-        lblNombreRector.setText(centro.getRector());
-        txtTelefonoRector.setText(centro.getTelefonoRector());
-        txtCorreoRector.setText(centro.getCorreoRector());
-        //Card secretario academico
-
-        lblNombreSecAcademico.setText(centro.getSecretarioAcademico());
-        txtTelefonoSecAcademico.setText(centro.getTelefonoSecAcademico());
-        txtCorreoSecAcademico.setText(centro.getCorreoSecAcademico());
-        //Card secretario administrativo
-
-        lblNombreSecAdministrativo.setText(centro.getSecretarioAdministrativo());
-        txtTelefonoSecAdministrativo.setText(centro.getTelefonoSecAdministrativo());
-        txtCorreoSecAdministrativo.setText(centro.getCorreoSecAdministrativo());
+        Bundle bundle = new Bundle();
+        bundle.putInt("idcentro", centro.getIdCentro());
+        fragmentTrabajadorCentro.setArguments(bundle);
+        FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.content_main, fragmentTrabajadorCentro);
+        fragmentTransaction.commit();
 
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -195,11 +165,11 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                         | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("coordenadaVacia",false);
-                bundle.putDouble("Latitud",centro.latitude);
-                bundle.putDouble("Longitud",centro.longitude);
-                bundle.putBoolean("isPrepa",false);
-                bundle.putString("Name",title);
+                bundle.putBoolean("coordenadaVacia", false);
+                bundle.putDouble("Latitud", centro.latitude);
+                bundle.putDouble("Longitud", centro.longitude);
+                bundle.putBoolean("isPrepa", false);
+                bundle.putString("Name", title);
                 intent.putExtras(bundle);//ponerlos en el intent
                 startActivity(intent);
 
@@ -218,7 +188,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         }
     }
 
-    @OnClick({R.id.layoutweb, R.id.txtCorreoRector, R.id.txtCorreoSecAcademico, R.id.txtCorreoSecAdministrativo, R.id.image_paralax})
+    @OnClick({R.id.layoutweb, R.id.image_paralax})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layoutweb:
@@ -226,39 +196,25 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 intent.setData(Uri.parse(centro.getWeb()));
                 startActivity(intent);
                 break;
-            case R.id.txtCorreoRector:
-                sendEmail(txtCorreoRector.getText().toString());
-                break;
-            case R.id.txtCorreoSecAcademico:
-                sendEmail(txtCorreoSecAcademico.getText().toString());
-                break;
-            case R.id.txtCorreoSecAdministrativo:
-                sendEmail(txtCorreoSecAdministrativo.getText().toString());
-                break;
-            case  R.id.image_paralax:
+
+            case R.id.image_paralax:
                 zoomImage(imageParalax);
                 break;
         }
     }
 
 
-    private void sendEmail(String emailTo) {
-        Intent email = new Intent(Intent.ACTION_SENDTO);
-        email.setData(Uri.parse("mailto:"));
-        email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
-        startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
-    }
     private void shareCentro() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         String aux = "Centro: " + centro.getNombreCentro();
-        aux+=" \n Imagen: "+centro.getImagenURL()+"\n";
-        aux+=" \nDir. " + centro.getDireccion() + ", " + centro.getMunicipio() + "Jalisco";
+        aux += " \n Imagen: " + centro.getImagenURL() + "\n";
+        aux += " \nDir. " + centro.getDireccion() + ", " + centro.getMunicipio() + "Jalisco";
         aux += "\nCP:" + centro.getCP();
         aux += "\n" + centro.getWeb();
-        aux += "\nRector: " + centro.getRector() +"\n Tel."+centro.getTelefonoRector() +"\n email: " + centro.getCorreoRector();
-        aux += "\nSec. Academico: " + centro.getSecretarioAcademico() +"\n Tel."+centro.getTelefonoSecAcademico() +"\n email: " + centro.getCorreoSecAcademico();
-        aux += "\nSec. Administrativo: " + centro.getSecretarioAdministrativo() +"\n Tel."+centro.getTelefonoSecAdministrativo() +"\n email: " + centro.getCorreoSecAdministrativo();
+        aux += "\nRector: " + centro.getRector() + "\n Tel." + centro.getTelefonoRector() + "\n email: " + centro.getCorreoRector();
+        aux += "\nSec. Academico: " + centro.getSecretarioAcademico() + "\n Tel." + centro.getTelefonoSecAcademico() + "\n email: " + centro.getCorreoSecAcademico();
+        aux += "\nSec. Administrativo: " + centro.getSecretarioAdministrativo() + "\n Tel." + centro.getTelefonoSecAdministrativo() + "\n email: " + centro.getCorreoSecAdministrativo();
 
         intent.putExtra(Intent.EXTRA_TEXT, aux);
 
@@ -266,13 +222,13 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     }
 
 
-    private void zoomImage(ImageView imageView){
+    private void zoomImage(ImageView imageView) {
         //pasamos el ImageView al metodo imageFileCache para que se pueda compartir la imagen
 
         Intent intentzoom = new Intent(this, zoom.class);
         intentzoom.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Bundle bundle = new Bundle();
-        bundle.putString("urlfile",centro.getImagenURL());
+        bundle.putString("urlfile", centro.getImagenURL());
         intentzoom.putExtras(bundle);//ponerlos en el intent
         startActivity(intentzoom);//iniciar la actividad
     }

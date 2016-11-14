@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!-- Card Rector -->
+    <android.support.v7.widget.CardView
+        style="@style/Widget.CardDetalle"
+        android:id="@+id/cardRector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="@dimen/card.radius"
+        >
+
+        <!--card_view:elevation="@dimen/card.detalle.1person.elevation" Contiene Tod0 incluso el correo-->
+        <LinearLayout
+            style="@style/Widget.CardContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/puestoTrabajador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/puesto"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/fotonodisponible"
+                    android:background="@color/white_transparent"
+                    android:id="@+id/imageTrabajador"
+                    android:contentDescription="@string/imagen_no_disponible" />
+                <!--otro layout del nombre y telefono-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- Etiqueta Rector -->
+
+                    <!--NombreRector-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/nombre"
+                        android:textSize="20sp"
+                        android:longClickable="true"
+                        android:id="@+id/lblNombreTrabajador" />
+                    <!--TelefonoRector-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/numero"
+                        android:id="@+id/txtTelefonoTrabajador" />
+
+                    <!--CorreoRector-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/wallet_holo_blue_light"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:text="@string/guillermoisaac_gmail_com"
+                        android:id="@+id/txtCorreoTrabajador" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

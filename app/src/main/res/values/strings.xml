@@ -32,7 +32,7 @@
     <string name="isnotConnected">\"Esta accion requiere conexion a Internet\"</string>
     <string name="Website">Web:</string>
     <string name="centro">Centro</string>
-    <string name="rector">Rector</string>
+    <string name="puesto">Puesto</string>
     <string name="SecretarioAcademico">SecretarioAcademico</string>
     <string name="SecretarioAdministrativo">Secretario Administrativo</string>
     <string name="botonreproducir">botonReproducir</string>
@@ -48,7 +48,7 @@
     <string name="nombresecacademico">NombreSecAcademico</string>
     <string name="nombresecadministrativo">NombreSecAdministrativo</string>
     <string name="guillermoisaac_gmail_com">guillermoisaac@gmail.com</string>
-    <string name="nombrerector">NombreRector</string>
+    <string name="nombre">Nombre</string>
 
     <string name="Descargar">Descargar</string>
     <string name="Cancelar">Cancelar</string>
@@ -60,5 +60,8 @@
     <string name="prefijoWebService">http://s512984961.onlinehome.mx/DirectorioUDG/WebService/</string>
     <string name="anyo">Año</string>
     <string name="mes">Mes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

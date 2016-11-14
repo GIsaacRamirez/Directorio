@@ -19,6 +19,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.isaac.directorioudg.detallecentro.TrabajadorCentroListRepositoryImpl;
+import com.example.isaac.directorioudg.detallecentro.ui.trabajador_centro;
 import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepositoryImpl;
 import com.example.isaac.directorioudg.gaceta.listGacetas.ui.ListGacetaActivity;
 import com.example.isaac.directorioudg.MapActivity;
@@ -47,12 +49,16 @@ public class MainActivity extends AppCompatActivity
     NavigationView navView;
     int isPrepa;
 
+    trabajador_centro fragmentTrabajadorCentro = new trabajador_centro();
+
     PrepaListRepositoryImpl prepaListRepository = new PrepaListRepositoryImpl();
     CentroListRepositoryImpl centroListRepository = new CentroListRepositoryImpl();
     ContenidosGacetaRepositoryImpl contenidosGacetaRepository= new ContenidosGacetaRepositoryImpl();
+    TrabajadorCentroListRepositoryImpl trabajadorCentroListRepository = new TrabajadorCentroListRepositoryImpl();
 
     PrepaList fragmentPrepaList = new PrepaList();
     CentroList fragmentCentroList = new CentroList();
+
 
 
     public void loadPrepaList( ){
@@ -120,6 +126,7 @@ public class MainActivity extends AppCompatActivity
                 prepaListRepository.descargarDatosPrepaCompletos();
                 centroListRepository.descargarDatosCentroCompletos();
                 contenidosGacetaRepository.descargarDatosContenidoGacetaCompletos();
+                trabajadorCentroListRepository.descargarDatosTrabajadorCentroCompletos();
             }
             editor.putBoolean("firstStart", false);
             // commits your edits
@@ -187,7 +194,7 @@ public class MainActivity extends AppCompatActivity
                 prepaListRepository.descargarDatosPrepaCompletos(fragmentPrepaList.getPrepaListAdapter());
                 centroListRepository.descargarDatosCentroCompletos(fragmentCentroList.getCentroListAdapter());
                 contenidosGacetaRepository.descargarDatosContenidoGacetaCompletos();
-
+                trabajadorCentroListRepository.descargarDatosTrabajadorCentroCompletos();
                 showSnackbar("Se esta actualizando la informacion");
 
             }else{
@@ -235,7 +242,6 @@ public class MainActivity extends AppCompatActivity
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

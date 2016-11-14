@@ -28,7 +28,6 @@ def dbflow_version = "4.0.0-beta1"
 def playservice_version = "9.6.1"
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
 
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
@@ -38,14 +37,8 @@ dependencies {
 
     //Imagenes circulares
     //Carga asincrona de imagenes
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'de.hdodenhof:circleimageview:1.3.0'
-    compile 'it.sephiroth.android.library.imagezoom:imagezoom:+'
     //Descarga de datos
-    compile 'com.googlecode.json-simple:json-simple:1.1'
-    compile 'com.android.volley:volley:1.0.0'
     //PDFViewer
-    compile 'com.github.barteksc:android-pdf-viewer:2.1.0'
     // DBFlow
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
@@ -53,10 +46,18 @@ dependencies {
 
 
 
-    compile 'com.jakewharton:butterknife:7.0.1'
     compile "com.google.android.gms:play-services:${playservice_version}"
     compile "com.google.android.gms:play-services-auth:${playservice_version}"
     compile "com.google.android.gms:play-services-gcm:${playservice_version}"
 
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'de.hdodenhof:circleimageview:1.3.0'
+    compile 'it.sephiroth.android.library.imagezoom:imagezoom:+'
+    compile 'com.googlecode.json-simple:json-simple:1.1'
+    compile 'com.android.volley:volley:1.0.0'
+    compile 'com.github.barteksc:android-pdf-viewer:2.1.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:multidex:1.0.0'
+    compile 'com.android.support:support-v4:24.2.1'
+    testCompile 'junit:junit:4.12'
 }
