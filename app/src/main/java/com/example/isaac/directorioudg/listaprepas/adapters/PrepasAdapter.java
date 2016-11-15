@@ -61,11 +61,7 @@ public class PrepasAdapter extends RecyclerView.Adapter<PrepasAdapter.ViewHolder
         holder.setOnItemClickListener(prepa, onItemClickListener);
 
         String url = prepa.getImagenURL().toString();
-        if (url.equalsIgnoreCase("No Disponible")) {
-            imageLoader.load(holder.imagePrepa, R.drawable.fotolugarvacio);
-        }else {
-            imageLoader.load(holder.imagePrepa, url, true);
-        }
+        imageLoader.load(holder.imagePrepa, url, true,R.drawable.fotolugarvacio);
 
         holder.txtPrepa.setVisibility(View.VISIBLE);
         holder.txtPrepa.setText(prepa.getPreparatoria());

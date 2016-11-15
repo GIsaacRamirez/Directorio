@@ -124,9 +124,9 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         DirWeb.setText(centro.getWeb());
         String url = centro.getImagenURL().toString();
         if (url.equalsIgnoreCase("No Disponible")) {
-            imageLoader.load(imageParalax, R.drawable.fotolugarvacio);
+            imageLoader.load(imageParalax, R.drawable.fotolugarvacio,R.drawable.fotolugarvacio);
         } else {
-            imageLoader.load(imageParalax, url, true);
+            imageLoader.load(imageParalax, url, true,R.drawable.fotolugarvacio);
         }
 
         Latitud = centro.getLatitud();

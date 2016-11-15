@@ -63,7 +63,6 @@ public class GlideImageLoader implements ImageLoader {
 
     @Override
     public void load(ImageView imageView, String URL, Boolean cache) {
-
         //Con dropbox se sustituye www por dl
         //String URL= "https://dl.drop)box.com/sh/ismxakaopf6wma0/AABAAgcJdHcNYurN6MdBCgPNa/Voca-1.jpg";
         //Desde el hosting
@@ -85,13 +84,47 @@ public class GlideImageLoader implements ImageLoader {
                     .into(imageView);
         }
     }
+    @Override
+    public void load(ImageView imageView, String URL, Boolean cache,int error) {
+        if(cache){
+            glideRequestManager
+                    .load(URL)
+                    .error(error)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
+                    .into(imageView);
+        }else {
+            glideRequestManager
+                    .load(URL)
+                    .error(error)
+                    .centerCrop()
+                    .into(imageView);
+        }
+    }
 
     @Override
     public void load(ImageView imageView, int resource) {
-
         if (onFinishedImageLoadingListener != null) {
             glideRequestManager
                     .load(resource)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
+                    .listener(onFinishedImageLoadingListener)
+                    .into(imageView);
+        } else {
+            glideRequestManager
+                    .load(resource)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
+                    .into(imageView);
+        }
+    }
+    @Override
+    public void load(ImageView imageView, int resource, int error) {
+        if (onFinishedImageLoadingListener != null) {
+            glideRequestManager
+                    .load(resource)
+                    .error(error)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .listener(onFinishedImageLoadingListener)

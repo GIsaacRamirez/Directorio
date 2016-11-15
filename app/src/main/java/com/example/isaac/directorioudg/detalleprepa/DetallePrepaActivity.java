@@ -128,17 +128,12 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
 
         txtweb.setText(prepa.getWEB());
         String url = prepa.getImagenURL().toString();
-        if (url.equalsIgnoreCase("No Disponible")) {
-            imageLoader.load(imageParalax,R.drawable.fotolugarvacio);
-        }else {
-            imageLoader.load(imageParalax, url, true);
-        }
 
-        if (helper.isConect()) {
-            imageLoader.load(imageDirector, prepa.getFotoDirectorURL(), false);
-        } else {
-            imageLoader.load(imageDirector, R.drawable.fotonodisponible);
-        }
+        imageLoader.load(imageParalax, url, true,R.drawable.fotolugarvacio);
+
+
+        imageLoader.load(imageDirector, prepa.getFotoDirectorURL(), false,R.drawable.fotonodisponible);
+
 
         Latitud = prepa.getLatitud();
         Longitud = prepa.getLongitud();

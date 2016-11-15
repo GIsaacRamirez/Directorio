@@ -60,11 +60,9 @@ public class CentrosAdapter extends RecyclerView.Adapter<CentrosAdapter.ViewHold
 
 
         String url = centro.getImagenURL().toString();
-        if (url.equalsIgnoreCase("No Disponible")) {
-            imageLoader.load(holder.imageCentro, R.drawable.fotolugarvacio);
-        }else{
-            imageLoader.load(holder.imageCentro, url, true);
-        }
+
+        imageLoader.load(holder.imageCentro, url, true,R.drawable.fotolugarvacio);
+
 
         holder.nombreCentro.setVisibility(View.VISIBLE);
         holder.txtCentro.setText(centro.getSigla());

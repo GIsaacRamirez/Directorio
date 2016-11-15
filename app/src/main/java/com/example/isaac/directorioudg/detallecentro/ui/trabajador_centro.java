@@ -63,6 +63,7 @@ public class trabajador_centro extends Fragment  implements TrabajadorCentroList
     }
 
     private void setupRecyclerView() {
+        recyclerViewTrabajador.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
         recyclerViewTrabajador.setHasFixedSize(true);
         recyclerViewTrabajador.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerViewTrabajador.setAdapter(adapter);
