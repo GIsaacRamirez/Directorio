@@ -66,6 +66,7 @@ public class trabajador_centro extends Fragment  implements TrabajadorCentroList
         recyclerViewTrabajador.setHasFixedSize(true);
         recyclerViewTrabajador.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerViewTrabajador.setAdapter(adapter);
+        recyclerViewTrabajador.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -87,7 +88,7 @@ public class trabajador_centro extends Fragment  implements TrabajadorCentroList
 
     @Override
     public void setupTrabajadorCentroListAdapter() {
-        adapter = new TrabajadorCentrosAdapter(trabajadorCentroList,provideImageLoader(getActivity()));
+        adapter = new TrabajadorCentrosAdapter(provideImageLoader(getActivity()));
         adapter.setContext(getContext());
     }
 

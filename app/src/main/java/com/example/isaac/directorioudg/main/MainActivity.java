@@ -242,6 +242,13 @@ public class MainActivity extends AppCompatActivity
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else if (id == R.id.nav_send) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("idcentro", 4);
+            fragmentTrabajadorCentro.setArguments(bundle);
+            FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_main, fragmentTrabajadorCentro);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

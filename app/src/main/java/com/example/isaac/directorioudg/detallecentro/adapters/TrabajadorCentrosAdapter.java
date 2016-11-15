@@ -34,8 +34,7 @@ public class TrabajadorCentrosAdapter extends RecyclerView.Adapter<TrabajadorCen
     private ImageLoader imageLoader;
 
 
-    public TrabajadorCentrosAdapter(List<TrabajadorCentro> trabajadorCentroList, ImageLoader imageLoader) {
-        this.trabajadorCentroList = trabajadorCentroList;
+    public TrabajadorCentrosAdapter(ImageLoader imageLoader) {
         this.imageLoader = imageLoader;
     }
 

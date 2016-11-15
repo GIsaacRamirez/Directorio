@@ -231,6 +231,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     map:liteMode="true"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/wallet_holo_blue_light"
+                    android:textSize="16sp"
+                    android:text="Visualizar"
+                    android:id="@+id/btnVisualizar"
+                    android:elevation="2dp" />
 
             </LinearLayout>
 

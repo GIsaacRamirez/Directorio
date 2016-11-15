@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".detallecentro.DetalleCentroActivity"
-    tools:showIn="@layout/activity_detalle_centro">
+    tools:showIn="@layout/activity_detalle_centro"
+    android:id="@+id/nestedscroll">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,8 +24,7 @@
             android:id="@+id/cardCentro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardCornerRadius="@dimen/card.radius"
-            >
+            card_view:cardCornerRadius="@dimen/card.radius">
 
             <LinearLayout
                 style="@style/Widget.CardContent"
@@ -118,6 +118,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     map:liteMode="true"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/wallet_holo_blue_light"
+                    android:textSize="16sp"
+                    android:text="Visualizar"
+                    android:id="@+id/btnVisualizar"
+                    android:elevation="2dp" />
 
             </LinearLayout>
 

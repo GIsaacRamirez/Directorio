@@ -94,7 +94,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
 
         Bundle bundle = this.getIntent().getExtras();
         prepa = bundle.getParcelable("prepa");
-        mapView.onCreate(null);
+        mapView.onCreate(bundle);
         mapView.setDrawingCacheEnabled(true);
         mapView.getDrawingCache();
         mapView.getMapAsync(this);
@@ -163,24 +163,6 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(guadalajara));
         mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(Latitud, Longitud), 15);
         mMap.animateCamera(mCamera);
-
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        | Intent.FLAG_ACTIVITY_NEW_TASK);
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("coordenadaVacia", false);
-                bundle.putDouble("Latitud", prepa.getLatitud());
-                bundle.putDouble("Longitud", prepa.getLongitud());
-                bundle.putBoolean("isPrepa", true);
-                bundle.putString("Name", "Preparatoria " + prepa.getPreparatoria());
-                intent.putExtras(bundle);//ponerlos en el intent
-                startActivity(intent);
-            }
-
-        });
     }
 
     @Override
@@ -195,7 +177,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     }
 
 
-    @OnClick({R.id.layoutweb, R.id.lblCorreoDirector, R.id.lblCorreoSecretario,R.id.image_paralax})
+    @OnClick({R.id.layoutweb, R.id.lblCorreoDirector, R.id.lblCorreoSecretario,R.id.image_paralax,R.id.btnVisualizar})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layoutweb:
@@ -212,6 +194,19 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
 
             case  R.id.image_paralax:
                 zoomImage(imageParalax);
+                break;
+            case R.id.btnVisualizar:
+                Intent intentmap = new Intent(getApplicationContext(), MapActivity.class);
+                intentmap.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("coordenadaVacia", false);
+                bundle.putDouble("Latitud", prepa.getLatitud());
+                bundle.putDouble("Longitud", prepa.getLongitud());
+                bundle.putBoolean("isPrepa", true);
+                bundle.putString("Name", "Preparatoria " + prepa.getPreparatoria());
+                intentmap.putExtras(bundle);//ponerlos en el intent
+                startActivity(intentmap);
                 break;
 
         }

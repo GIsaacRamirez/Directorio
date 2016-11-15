@@ -1,17 +1,14 @@
 package com.example.isaac.directorioudg.detallecentro;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
-import com.example.isaac.directorioudg.detallecentro.adapters.TrabajadorCentrosAdapter;
 import com.example.isaac.directorioudg.detallecentro.ui.trabajador_centro;
 import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
@@ -32,6 +28,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -67,6 +64,8 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     CardView cardCentro;
     @Bind(R.id.cardMap)
     CardView cardMap;
+    @Bind(R.id.nestedscroll)
+    NestedScrollView nestedscroll;
 
     private GoogleMap mMap;
 
@@ -97,7 +96,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
 
         Bundle bundle = this.getIntent().getExtras();
         centro = bundle.getParcelable("centro");
-        map.onCreate(null);
+        map.onCreate(bundle);
         map.setDrawingCacheEnabled(true);
         map.getDrawingCache();
         map.getMapAsync(this);
@@ -140,6 +139,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.content_main, fragmentTrabajadorCentro);
         fragmentTransaction.commit();
+        nestedscroll.requestChildFocus(cardCentro, cardCentro);//Visualizar primero
 
     }
 
@@ -147,34 +147,14 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        final String title = "Centro " + centro.getSigla();
-
-        final LatLng centro = new LatLng(Latitud, Longitud);
+        final LatLng latlongcentro = new LatLng(Latitud, Longitud);
         mMap.addMarker(new MarkerOptions()
-                .position(centro)
-                .title(title));
+                .position(latlongcentro)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_centros))
+                .title(centro.getSigla()));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(guadalajara));
         mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(Latitud, Longitud), 15);
         mMap.animateCamera(mCamera);
-
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-
-                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        | Intent.FLAG_ACTIVITY_NEW_TASK);
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("coordenadaVacia", false);
-                bundle.putDouble("Latitud", centro.latitude);
-                bundle.putDouble("Longitud", centro.longitude);
-                bundle.putBoolean("isPrepa", false);
-                bundle.putString("Name", title);
-                intent.putExtras(bundle);//ponerlos en el intent
-                startActivity(intent);
-
-            }
-        });
     }
 
     @Override
@@ -188,7 +168,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         }
     }
 
-    @OnClick({R.id.layoutweb, R.id.image_paralax})
+    @OnClick({R.id.layoutweb, R.id.image_paralax,R.id.btnVisualizar})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layoutweb:
@@ -199,6 +179,19 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
 
             case R.id.image_paralax:
                 zoomImage(imageParalax);
+                break;
+            case R.id.btnVisualizar:
+                Intent intentmap = new Intent(getApplicationContext(), MapActivity.class);
+                intentmap.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("coordenadaVacia", false);
+                bundle.putDouble("Latitud", centro.getLatitud());
+                bundle.putDouble("Longitud", centro.getLongitud());
+                bundle.putBoolean("isPrepa", false);
+                bundle.putString("Name", centro.getSigla());
+                intentmap.putExtras(bundle);//ponerlos en el intent
+                startActivity(intentmap);
                 break;
         }
     }
