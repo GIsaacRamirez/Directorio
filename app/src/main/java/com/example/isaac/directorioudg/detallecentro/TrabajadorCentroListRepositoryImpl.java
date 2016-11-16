@@ -15,7 +15,7 @@ import com.example.isaac.directorioudg.detallecentro.adapters.TrabajadorCentrosA
 import com.example.isaac.directorioudg.entities.TrabajadorCentro;
 import com.example.isaac.directorioudg.entities.TrabajadorCentro_Table;
 import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
@@ -50,17 +50,17 @@ public class TrabajadorCentroListRepositoryImpl {
 
     public void descargarDatosTrabajadorCentroCompletos() {
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"TrabajadorCentro.php";
-        descargarDatosCentro(ruta);
+        descargarDatos(ruta);
     }
     public void descargarDatosTrabajadorCentroCompletos(int id, TrabajadorCentrosAdapter adapter) {
         this.adapter=adapter;
         this.id=id;
         String ruta= getContext().getResources().getString(R.string.prefijoWebService)+"TrabajadorCentro.php";
-        descargarDatosCentro(ruta);
+        descargarDatos(ruta);
     }
 
 
-    private void descargarDatosCentro(String url) {
+    private void descargarDatos(String url) {
         try {
                 limpiar();
             StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -92,7 +92,6 @@ public class TrabajadorCentroListRepositoryImpl {
                 //Crea sentencias sql para agregar a una lista
                 TrabajadorCentro trabajador = new TrabajadorCentro();
 
-                trabajador.setIdTrabCent(Integer.parseInt(jsonObject.get("idTrabCent").toString()));
                 trabajador.setIdcentro(Integer.parseInt(jsonObject.get("idcentro").toString()));
                 trabajador.setNombre(jsonObject.get("nombre").toString());
                 trabajador.setImagen(jsonObject.get("imagen").toString());
@@ -140,6 +139,6 @@ public class TrabajadorCentroListRepositoryImpl {
     }
 
     public void limpiar(){
-        SQLite.delete().from(TrabajadorCentro.class);
+        Delete.table(TrabajadorCentro.class);
     }
 }

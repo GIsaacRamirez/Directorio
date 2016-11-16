@@ -14,24 +14,18 @@ public class TrabajadorCentro extends BaseModel {
     public TrabajadorCentro() {
     }
 
-    @Column
-    @PrimaryKey private int idTrabCent;
-
+    @PrimaryKey
+    @Column(name = "puesto") private String puesto;
+    @PrimaryKey
+    @Column (name = "nombre")private String nombre;
     @Column private int idcentro;
-    @Column private String puesto;
+
     @Column private String imagen;
-    @Column private String nombre;
+
     @Column private String telefono;
     @Column private String correo;
     @Column private int Estatus;
 
-    public int getIdTrabCent() {
-        return idTrabCent;
-    }
-
-    public void setIdTrabCent(int idTrabCent) {
-        this.idTrabCent = idTrabCent;
-    }
 
     public int getIdcentro() {
         return idcentro;

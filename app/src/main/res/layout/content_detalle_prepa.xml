@@ -100,6 +100,42 @@
 
         </android.support.v7.widget.CardView>
 
+        <!-- Card Map -->
+        <android.support.v7.widget.CardView
+            style="@style/Widget.CardDetalle"
+            android:id="@+id/cardExtra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="@dimen/card.radius"
+            card_view:elevation="@dimen/card.detalle.map.elevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.gms.maps.MapView
+                    xmlns:map="http://schemas.android.com/apk/res-auto"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:id="@+id/map"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    map:liteMode="true"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/wallet_holo_blue_light"
+                    android:textSize="16sp"
+                    android:text="Visualizar"
+                    android:id="@+id/btnVisualizar"
+                    android:elevation="2dp" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
         <!-- Card Director -->
         <android.support.v7.widget.CardView
             style="@style/Widget.CardDetalle"
@@ -210,41 +246,6 @@
 
         </android.support.v7.widget.CardView>
 
-        <!-- Card Map -->
-        <android.support.v7.widget.CardView
-            style="@style/Widget.CardDetalle"
-            android:id="@+id/cardExtra"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="@dimen/card.radius"
-            card_view:elevation="@dimen/card.detalle.map.elevation">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.gms.maps.MapView
-                    xmlns:map="http://schemas.android.com/apk/res-auto"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:id="@+id/map"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    map:liteMode="true"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:textColor="@color/wallet_holo_blue_light"
-                    android:textSize="16sp"
-                    android:text="Visualizar"
-                    android:id="@+id/btnVisualizar"
-                    android:elevation="2dp" />
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 

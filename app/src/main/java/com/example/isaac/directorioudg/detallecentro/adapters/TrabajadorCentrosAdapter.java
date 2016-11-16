@@ -63,13 +63,13 @@ public class TrabajadorCentrosAdapter extends RecyclerView.Adapter<TrabajadorCen
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        TrabajadorCentro trabajadorCentro = trabajadorCentroList.get(position);
-        String url = trabajadorCentro.getImagen().toString();
-        imageLoader.load(holder.imageTrabajador, url, false);
-        holder.puestoTrabajador.setText(trabajadorCentro.getPuesto());
-        holder.lblNombreTrabajador.setText(trabajadorCentro.getNombre());
-        holder.txtTelefonoTrabajador.setText("Tel. " + trabajadorCentro.getTelefono());
-        holder.txtCorreoTrabajador.setText(trabajadorCentro.getCorreo());
+        holder.trabajadorCentro = trabajadorCentroList.get(position);
+
+        imageLoader.load(holder.imageTrabajador, holder.trabajadorCentro.getImagen().toString(), false);
+        holder.puestoTrabajador.setText(holder.trabajadorCentro.getPuesto());
+        holder.lblNombreTrabajador.setText(holder.trabajadorCentro.getNombre());
+        holder.txtTelefonoTrabajador.setText("Tel. " + holder.trabajadorCentro.getTelefono());
+        holder.txtCorreoTrabajador.setText(holder.trabajadorCentro.getCorreo());
     }
 
     /**
@@ -88,6 +88,7 @@ public class TrabajadorCentrosAdapter extends RecyclerView.Adapter<TrabajadorCen
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        TrabajadorCentro trabajadorCentro;
         @Bind(R.id.imageTrabajador)
         ImageView imageTrabajador;
         @Bind(R.id.puestoTrabajador)
@@ -108,6 +109,7 @@ public class TrabajadorCentrosAdapter extends RecyclerView.Adapter<TrabajadorCen
         }
         @OnClick(R.id.txtCorreoTrabajador)
         public void onClick() {
+            sendEmail(trabajadorCentro.getCorreo());
         }
 
         private void sendEmail(String emailTo) {

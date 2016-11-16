@@ -33,22 +33,6 @@ public class Centro extends BaseModel implements Parcelable {
     @Column private String ImagenURL;
     @Column private String Web;
 
-    @Column private String Rector;
-    @Column private String TelefonoRector;
-    @Column private String CorreoRector;
-    @Column private String FotoRectorURL;
-
-    @Column private String SecretarioAcademico;
-    @Column private String TelefonoSecAcademico;
-    @Column private String CorreoSecAcademico;
-    @Column private String FotoSecAcademicoURL;
-
-    @Column private String SecretarioAdministrativo;
-    @Column private String TelefonoSecAdministrativo;
-    @Column private String CorreoSecAdministrativo;
-    @Column private String FotoSecAdministrativoURL;
-
-
     /*Getters*/
     public int getIdCentro() {
         return IdCentro;
@@ -94,53 +78,6 @@ public class Centro extends BaseModel implements Parcelable {
         return Web;
     }
 
-    public String getRector() {
-        return Rector;
-    }
-
-    public String getTelefonoRector() {
-        return TelefonoRector;
-    }
-
-    public String getCorreoRector() {
-        return CorreoRector;
-    }
-
-    public String getFotoRectorURL() {
-        return FotoRectorURL;
-    }
-
-    public String getSecretarioAcademico() {
-        return SecretarioAcademico;
-    }
-
-    public String getTelefonoSecAcademico() {
-        return TelefonoSecAcademico;
-    }
-
-    public String getCorreoSecAcademico() {
-        return CorreoSecAcademico;
-    }
-
-    public String getFotoSecAcademicoURL() {
-        return FotoSecAcademicoURL;
-    }
-
-    public String getSecretarioAdministrativo() {
-        return SecretarioAdministrativo;
-    }
-
-    public String getTelefonoSecAdministrativo() {
-        return TelefonoSecAdministrativo;
-    }
-
-    public String getCorreoSecAdministrativo() {
-        return CorreoSecAdministrativo;
-    }
-
-    public String getFotoSecAdministrativoURL() {
-        return FotoSecAdministrativoURL;
-    }
 
     /**Setters**/
     public void setIdCentro(int idCentro) {
@@ -187,53 +124,8 @@ public class Centro extends BaseModel implements Parcelable {
         Web = web;
     }
 
-    public void setRector(String rector) {
-        Rector = rector;
-    }
 
-    public void setTelefonoRector(String telefonoRector) {
-        TelefonoRector = telefonoRector;
-    }
 
-    public void setCorreoRector(String correoRector) {
-        CorreoRector = correoRector;
-    }
-
-    public void setFotoRectorURL(String fotoRectorURL) {
-        FotoRectorURL = fotoRectorURL;
-    }
-
-    public void setSecretarioAcademico(String secretarioAcademico) {
-        SecretarioAcademico = secretarioAcademico;
-    }
-
-    public void setTelefonoSecAcademico(String telefonoSecAcademico) {
-        TelefonoSecAcademico = telefonoSecAcademico;
-    }
-
-    public void setCorreoSecAcademico(String correoSecAcademico) {
-        CorreoSecAcademico = correoSecAcademico;
-    }
-
-    public void setFotoSecAcademicoURL(String fotoSecAcademicoURL) {
-        FotoSecAcademicoURL = fotoSecAcademicoURL;
-    }
-
-    public void setSecretarioAdministrativo(String secretarioAdministrativo) {
-        SecretarioAdministrativo = secretarioAdministrativo;
-    }
-
-    public void setTelefonoSecAdministrativo(String telefonoSecAdministrativo) {
-        TelefonoSecAdministrativo = telefonoSecAdministrativo;
-    }
-
-    public void setCorreoSecAdministrativo(String correoSecAdministrativo) {
-        CorreoSecAdministrativo = correoSecAdministrativo;
-    }
-
-    public void setFotoSecAdministrativoURL(String fotoSecAdministrativoURL) {
-        FotoSecAdministrativoURL = fotoSecAdministrativoURL;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -271,21 +163,6 @@ public class Centro extends BaseModel implements Parcelable {
 
         parcel.writeString(this.ImagenURL);
         parcel.writeString(this.Web);
-
-        parcel.writeString(this.Rector);
-        parcel.writeString(this.TelefonoRector);
-        parcel.writeString(this.CorreoRector);
-        parcel.writeString(this.FotoRectorURL);
-
-        parcel.writeString(this.SecretarioAcademico);
-        parcel.writeString(this.TelefonoSecAcademico);
-        parcel.writeString(this.CorreoSecAcademico);
-        parcel.writeString(this.FotoSecAcademicoURL);
-
-        parcel.writeString(this.SecretarioAdministrativo);
-        parcel.writeString(this.TelefonoSecAdministrativo);
-        parcel.writeString(this.CorreoSecAdministrativo);
-        parcel.writeString(this.FotoSecAdministrativoURL);
     }
 
     protected Centro(Parcel in) {
@@ -300,18 +177,6 @@ public class Centro extends BaseModel implements Parcelable {
         Longitud = in.readDouble();
         ImagenURL = in.readString();
         Web = in.readString();
-        Rector = in.readString();
-        TelefonoRector = in.readString();
-        CorreoRector = in.readString();
-        FotoRectorURL = in.readString();
-        SecretarioAcademico = in.readString();
-        TelefonoSecAcademico = in.readString();
-        CorreoSecAcademico = in.readString();
-        FotoSecAcademicoURL = in.readString();
-        SecretarioAdministrativo = in.readString();
-        TelefonoSecAdministrativo = in.readString();
-        CorreoSecAdministrativo = in.readString();
-        FotoSecAdministrativoURL = in.readString();
     }
 
     public static final Creator<Centro> CREATOR = new Creator<Centro>() {

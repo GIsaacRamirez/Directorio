@@ -2,7 +2,6 @@ package com.example.isaac.directorioudg.listcentros;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -103,22 +102,6 @@ public class CentroListRepositoryImpl{
                 centro.setImagenURL(jsonObject.get("ImagenURL").toString());
                 centro.setWeb(jsonObject.get("Web").toString());
 
-                centro.setRector(jsonObject.get("Rector").toString());
-                centro.setTelefonoRector(jsonObject.get("TelefonoRector").toString());
-                centro.setCorreoRector(jsonObject.get("CorreoRector").toString());
-                centro.setFotoRectorURL(jsonObject.get("FotoRectorURL").toString());
-
-                centro.setSecretarioAcademico(jsonObject.get("SecretarioAcademico").toString());
-                centro.setTelefonoSecAcademico(jsonObject.get("TelefonoSecAcademico").toString());
-                centro.setCorreoSecAcademico(jsonObject.get("CorreoSecAcademico").toString());
-                centro.setFotoSecAcademicoURL(jsonObject.get("FotoSecAcademicoURL").toString());
-
-                centro.setSecretarioAdministrativo(jsonObject.get("SecretarioAdministrativo").toString());
-                centro.setTelefonoSecAdministrativo(jsonObject.get("TelefonoSecAdministrativo").toString());
-                centro.setCorreoSecAdministrativo(jsonObject.get("CorreoSecAdministrativo").toString());
-                centro.setFotoSecAdministrativoURL(jsonObject.get("FotoSecAdministrativoURL").toString());
-
-
                 listCentros.add(centro);
             }
 
@@ -149,7 +132,6 @@ public class CentroListRepositoryImpl{
 
 
         } catch (SQLiteException e) {
-            Log.e("llenarBaseDatosCentro: ", e.getMessage());
         }
     }
 

@@ -96,7 +96,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
 
         Bundle bundle = this.getIntent().getExtras();
         centro = bundle.getParcelable("centro");
-        map.onCreate(bundle);
+        map.onCreate(null);
         map.setDrawingCacheEnabled(true);
         map.getDrawingCache();
         map.getMapAsync(this);
@@ -205,9 +205,6 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         aux += " \nDir. " + centro.getDireccion() + ", " + centro.getMunicipio() + "Jalisco";
         aux += "\nCP:" + centro.getCP();
         aux += "\n" + centro.getWeb();
-        aux += "\nRector: " + centro.getRector() + "\n Tel." + centro.getTelefonoRector() + "\n email: " + centro.getCorreoRector();
-        aux += "\nSec. Academico: " + centro.getSecretarioAcademico() + "\n Tel." + centro.getTelefonoSecAcademico() + "\n email: " + centro.getCorreoSecAcademico();
-        aux += "\nSec. Administrativo: " + centro.getSecretarioAdministrativo() + "\n Tel." + centro.getTelefonoSecAdministrativo() + "\n email: " + centro.getCorreoSecAdministrativo();
 
         intent.putExtra(Intent.EXTRA_TEXT, aux);
 

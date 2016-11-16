@@ -94,7 +94,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
 
         Bundle bundle = this.getIntent().getExtras();
         prepa = bundle.getParcelable("prepa");
-        mapView.onCreate(bundle);
+        mapView.onCreate(null);
         mapView.setDrawingCacheEnabled(true);
         mapView.getDrawingCache();
         mapView.getMapAsync(this);
