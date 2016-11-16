@@ -158,6 +158,12 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(guadalajara));
         mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(Latitud, Longitud), 15);
         mMap.animateCamera(mCamera);
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+            }
+        });
     }
 
     @Override
