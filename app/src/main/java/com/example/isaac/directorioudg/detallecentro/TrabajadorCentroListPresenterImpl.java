@@ -27,5 +27,8 @@ public class TrabajadorCentroListPresenterImpl {
     public List<TrabajadorCentro> getList(int id){
         return interactor.execute(id);
     }
+    public List<TrabajadorCentro> getSearch(String cadena,int idcentro){
+        return interactor.search(cadena,idcentro);
+    }
 
 }

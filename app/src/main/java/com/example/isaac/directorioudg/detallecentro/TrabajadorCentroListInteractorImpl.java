@@ -19,6 +19,9 @@ public class TrabajadorCentroListInteractorImpl {
     public List<TrabajadorCentro> execute(int id) {
         return  repository.getListTrabajadoresCentro(id);
     }
+    public List<TrabajadorCentro> search(String cadena,int idcentro) {
+        return  repository.getListSearch(cadena,idcentro);
+    }
 
 
     public void saveTrabajadoresCentros() {

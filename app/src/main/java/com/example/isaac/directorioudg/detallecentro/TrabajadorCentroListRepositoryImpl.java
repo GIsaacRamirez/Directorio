@@ -15,6 +15,8 @@ import com.example.isaac.directorioudg.detallecentro.adapters.TrabajadorCentrosA
 import com.example.isaac.directorioudg.entities.TrabajadorCentro;
 import com.example.isaac.directorioudg.entities.TrabajadorCentro_Table;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Condition;
+import com.raizlabs.android.dbflow.sql.language.ConditionGroup;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
@@ -140,5 +142,9 @@ public class TrabajadorCentroListRepositoryImpl {
 
     public void limpiar(){
         Delete.table(TrabajadorCentro.class);
+    }
+
+    public List<TrabajadorCentro> getListSearch(String cadena, int idcentro) {
+        return  new Select().from(TrabajadorCentro.class).where(TrabajadorCentro_Table.nombre.like("%"+cadena+"%")).and(TrabajadorCentro_Table.idcentro.is(idcentro)).queryList();
     }
 }

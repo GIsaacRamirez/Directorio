@@ -43,6 +43,11 @@ public class trabajador_centro extends Fragment  implements TrabajadorCentroList
     public trabajador_centro() { }
 
 
+    public void setTrabajadorCentroList(List<TrabajadorCentro> trabajadorCentroList) {
+        this.trabajadorCentroList = trabajadorCentroList;
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,6 +96,10 @@ public class trabajador_centro extends Fragment  implements TrabajadorCentroList
     public void setupTrabajadorCentroListAdapter() {
         adapter = new TrabajadorCentrosAdapter(provideImageLoader(getActivity()));
         adapter.setContext(getContext());
+    }
+
+    public void search(String cadena){
+        adapter.setTrabajadorCentroList(presenter.getSearch(cadena,idCentro));
     }
 
     ImageLoader provideImageLoader(Activity activity) {

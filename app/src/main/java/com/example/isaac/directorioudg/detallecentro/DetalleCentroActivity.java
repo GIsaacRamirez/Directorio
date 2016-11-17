@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SearchViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -174,6 +178,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         }
     }
 
+
     @OnClick({R.id.layoutweb, R.id.image_paralax,R.id.btnVisualizar})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -203,6 +208,28 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detalle_centro, menu);
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                fragmentTrabajadorCentro.search(newText);
+                return true;
+            }
+        });
+
+
+        return  super.onCreateOptionsMenu(menu);
+    }
+
     private void shareCentro() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -228,6 +255,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         intentzoom.putExtras(bundle);//ponerlos en el intent
         startActivity(intentzoom);//iniciar la actividad
     }
+
 
 }
 
