@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
     public void loadCentroList(){
         isPrepa = 1;
-        String[] datos= new String[]{"Todos", "Metropolitanos", "Tematicos"};
+        String[] datos= new String[]{"Todos", "Metropolitanos", "Regionales"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getSupportActionBar().getThemedContext(),
                 android.R.layout.simple_spinner_item,
@@ -242,13 +242,6 @@ public class MainActivity extends AppCompatActivity
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else if (id == R.id.nav_send) {
-            Bundle bundle = new Bundle();
-            bundle.putInt("idcentro", 4);
-            fragmentTrabajadorCentro.setArguments(bundle);
-            FragmentTransaction fragmentTransaction =
-                    getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_main, fragmentTrabajadorCentro);
-            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
