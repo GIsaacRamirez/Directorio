@@ -145,6 +145,13 @@ public class TrabajadorCentroListRepositoryImpl {
     }
 
     public List<TrabajadorCentro> getListSearch(String cadena, int idcentro) {
-        return  new Select().from(TrabajadorCentro.class).where(TrabajadorCentro_Table.nombre.like("%"+cadena+"%")).and(TrabajadorCentro_Table.idcentro.is(idcentro)).queryList();
+
+        ConditionGroup conditionGroup = ConditionGroup.clause()
+                .and(ConditionGroup.clause()
+                        .or(TrabajadorCentro_Table.nombre.like("%"+cadena+"%"))
+                        .or(TrabajadorCentro_Table.puesto.like("%"+cadena+"%")))
+                .and(TrabajadorCentro_Table.idcentro.is(idcentro));
+        return  new Select().from(TrabajadorCentro.class).where(conditionGroup).queryList();
+        //return  new Select().from(TrabajadorCentro.class).where(TrabajadorCentro_Table.nombre.like("%"+cadena+"%")).and(TrabajadorCentro_Table.idcentro.is(idcentro)).queryList();
     }
 }

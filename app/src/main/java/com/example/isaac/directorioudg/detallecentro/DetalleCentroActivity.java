@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v4.widget.SearchViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
@@ -189,7 +188,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 break;
 
             case R.id.image_paralax:
-                zoomImage(imageParalax);
+                zoomImage();
                 break;
             case R.id.btnVisualizar:
                 Intent intentmap = new Intent(getApplicationContext(), MapActivity.class);
@@ -213,10 +212,11 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         getMenuInflater().inflate(R.menu.menu_detalle_centro, menu);
         final MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                setTitle(centro.getSigla());
+                fragmentTrabajadorCentro.setTrabajadorCentroList(centro.getIdCentro(),fragmentTrabajadorCentro.getTrabajadorCentroListAdapter());
                 return true;
             }
             @Override
@@ -225,8 +225,6 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 return true;
             }
         });
-
-
         return  super.onCreateOptionsMenu(menu);
     }
 
@@ -245,7 +243,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     }
 
 
-    private void zoomImage(ImageView imageView) {
+    private void zoomImage() {
         //pasamos el ImageView al metodo imageFileCache para que se pueda compartir la imagen
 
         Intent intentzoom = new Intent(this, zoom.class);
