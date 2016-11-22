@@ -21,9 +21,7 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <!-- Imagen del detalle -->
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
             <ImageView
                 android:id="@+id/image_paralax"
                 android:layout_width="match_parent"
@@ -34,18 +32,34 @@
                 android:transitionName="@string/nombre_transicion_imagen"
                 android:src="@drawable/fotolugarvacio" />
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <!-- Imagen del detalle -->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:navigationIcon="?homeAsUpIndicator"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                />
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="pin">
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:navigationIcon="?homeAsUpIndicator"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+                </android.support.v7.widget.Toolbar>
+
+                <com.miguelcatalan.materialsearchview.MaterialSearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+            </RelativeLayout>
+
 
         </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
 
+
+
+    </android.support.design.widget.AppBarLayout>
     <include layout="@layout/content_detalle_centro" />
 
     <android.support.design.widget.FloatingActionButton

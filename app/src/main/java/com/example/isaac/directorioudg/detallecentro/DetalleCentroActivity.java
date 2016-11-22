@@ -1,22 +1,24 @@
 package com.example.isaac.directorioudg.detallecentro;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
@@ -34,6 +36,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -81,7 +84,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     CentroListRepositoryImpl repository;
     trabajador_centro fragmentTrabajadorCentro = new trabajador_centro();
 
-
+    private MaterialSearchView searchView;
     private void setToolbar() {
         // Añadir la Toolbar
         setSupportActionBar(toolbar);
@@ -94,6 +97,7 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         setContentView(R.layout.activity_detalle_centro);
         ButterKnife.bind(this);
         setToolbar();// Añadir action bar
+        searchView = (MaterialSearchView) findViewById(R.id.search_view);
         repository = new CentroListRepositoryImpl();
         imageLoader = new GlideImageLoader(this.getApplicationContext());
 
@@ -111,10 +115,39 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
                 shareCentro();
             }
         });
+
+
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                fragmentTrabajadorCentro.search(newText);
+                return false;}
+        });
+
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                //Do some magic
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+                fragmentTrabajadorCentro.setTrabajadorCentroList(centro.getIdCentro(),
+                        fragmentTrabajadorCentro.getTrabajadorCentroListAdapter());
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
+            }
+        });
     }
 
     private void setDataInView() {
-        collapser.setTitle(centro.getSigla());
+        //collapser.setTitle(centro.getSigla());
+        setTitle(centro.getSigla());
+        toolbar.setTitle(centro.getSigla());
 
         //Card centro
         nombreCentro.setText(centro.getNombreCentro());
@@ -206,28 +239,24 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detalle_centro, menu);
-        final MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                setTitle(centro.getSigla());
-                fragmentTrabajadorCentro.setTrabajadorCentroList(centro.getIdCentro(),fragmentTrabajadorCentro.getTrabajadorCentroListAdapter());
-                return true;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                fragmentTrabajadorCentro.search(newText);
-                return true;
-            }
-        });
-        return  super.onCreateOptionsMenu(menu);
+        MenuItem item = menu.findItem(R.id.search);
+        searchView.setMenuItem(item);
+        searchView.setEllipsize(true);
+        searchView.setHintTextColor(Color.GRAY);
+        return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (searchView.isSearchOpen()) {
+            searchView.closeSearch();
+        } else {
+            super.onBackPressed();
+        }
+    }
     private void shareCentro() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");

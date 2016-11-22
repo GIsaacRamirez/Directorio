@@ -103,6 +103,7 @@ public class CentroListRepositoryImpl{
                 centro.setWeb(jsonObject.get("Web").toString());
 
                 listCentros.add(centro);
+
             }
 
             FlowManager.getDatabase(DirectorioDataBase.class)
@@ -139,7 +140,7 @@ public class CentroListRepositoryImpl{
     public List<Centro> getListCentros(int filter) {
         List<Centro> centroList;
         if(filter==0){
-            centroList = new Select().from(Centro.class).queryList();
+            centroList = new Select().from(Centro.class).where(Centro_Table.Tematico.isNot(2)).queryList();
         }else if (filter==1){
             centroList = new Select().from(Centro.class).where(Centro_Table.Tematico.is(1)).queryList();
         }

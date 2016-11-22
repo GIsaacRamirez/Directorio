@@ -44,7 +44,7 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
 
-
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
 
     compile "com.google.android.gms:play-services:${playservice_version}"
     compile "com.google.android.gms:play-services-auth:${playservice_version}"

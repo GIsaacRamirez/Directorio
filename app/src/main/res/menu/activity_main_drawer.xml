@@ -11,28 +11,54 @@
             android:icon="@drawable/preparatoria"
             android:title="Preparatorias" />
 
-        <item
-            android:id="@+id/nav_Radio"
-            android:icon="@drawable/ic_radio_black_px"
-            android:title="Radio UDG" />
-        <item
-            android:id="@+id/nav_Map"
-            android:icon="@android:drawable/ic_dialog_map"
-            android:title="Mapas" />
+        <item android:title="Medios UDG">
+            <menu>
+                <item
+                    android:id="@+id/nav_Radio"
+                    android:icon="@drawable/ic_radio_black_px"
+                    android:title="Radio UDG" />
 
-        <item
-            android:id="@+id/nav_gaceta"
-            android:icon="@drawable/gaceta"
-            android:title="Gaceta" />
+                <item
+                    android:id="@+id/nav_Map"
+                    android:icon="@android:drawable/ic_dialog_map"
+                    android:title="Mapas" />
+
+                <item
+                    android:id="@+id/nav_gaceta"
+                    android:icon="@drawable/gaceta"
+                    android:title="Gaceta Universitaria" />
+            </menu>
+
+        </item>
+
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Rectoria General">
         <menu>
 
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_Rectoria"
+                android:title="Rectoria" />
+            <item
+                android:id="@+id/nav_ViceRectoria"
+                android:title="Vicerectoria" />
+            <item
+                android:id="@+id/nav_Secretaria"
+                android:title="Secretaria General" />
+        </menu>
+    </item>
+    <item android:title="Ayuda">
+        <menu>
+
+            <item
+                android:id="@+id/nav_Configuracion"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Configuración" />
+            <item
+                android:id="@+id/nav_ayuda"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Ayuda y Comentarios" />
         </menu>
     </item>
 

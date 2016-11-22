@@ -19,8 +19,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.isaac.directorioudg.detallecentro.DetalleCentroActivity;
 import com.example.isaac.directorioudg.detallecentro.TrabajadorCentroListRepositoryImpl;
 import com.example.isaac.directorioudg.detallecentro.ui.trabajador_centro;
+import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepositoryImpl;
 import com.example.isaac.directorioudg.gaceta.listGacetas.ui.ListGacetaActivity;
 import com.example.isaac.directorioudg.MapActivity;
@@ -241,7 +243,32 @@ public class MainActivity extends AppCompatActivity
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_Rectoria) {
+            Intent intent = new Intent(getApplicationContext(), DetalleCentroActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            Bundle bundle = new Bundle();
+            Centro centro= centroListRepository.getCentro(20);
+            bundle.putParcelable("centro",centro);
+            intent.putExtras(bundle);//ponerlos en el intent
+            startActivity(intent);//iniciar la actividad
+        } else if (id == R.id.nav_ViceRectoria) {
+            Intent intent = new Intent(getApplicationContext(), DetalleCentroActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            Bundle bundle = new Bundle();
+            Centro centro= centroListRepository.getCentro(21);
+            bundle.putParcelable("centro",centro);
+            intent.putExtras(bundle);//ponerlos en el intent
+            startActivity(intent);//iniciar la actividad
+        }else if (id == R.id.nav_Secretaria) {
+            Intent intent = new Intent(getApplicationContext(), DetalleCentroActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            Bundle bundle = new Bundle();
+            Centro centro= centroListRepository.getCentro(22);
+            bundle.putParcelable("centro",centro);
+            intent.putExtras(bundle);//ponerlos en el intent
+            startActivity(intent);//iniciar la actividad
+
+        }else if (id == R.id.nav_Configuracion) {
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
