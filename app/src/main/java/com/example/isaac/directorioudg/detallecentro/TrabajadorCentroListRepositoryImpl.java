@@ -101,6 +101,7 @@ public class TrabajadorCentroListRepositoryImpl {
                 trabajador.setTelefono(jsonObject.get("telefono").toString());
                 trabajador.setCorreo(jsonObject.get("correo").toString());
                 trabajador.setEstatus(Integer.parseInt(jsonObject.get("Estatus").toString()));
+                trabajador.setNumerodeOrdenamiento(Integer.parseInt(jsonObject.get("numerodeOrdenamiento").toString()));
 
                 listTrabajadores.add(trabajador);
             }
@@ -129,15 +130,13 @@ public class TrabajadorCentroListRepositoryImpl {
                         }
                     }).build().execute();
 
-
-
         } catch (SQLiteException e) {
             Log.e("llenarBaseDatosCentro: ", e.getMessage());
         }
     }
 
     public List<TrabajadorCentro> getListTrabajadoresCentro(int id) {
-        return  new Select().from(TrabajadorCentro.class).where(TrabajadorCentro_Table.idcentro.is(id)).queryList();
+        return  new Select().from(TrabajadorCentro.class).where(TrabajadorCentro_Table.idcentro.is(id)).orderBy(TrabajadorCentro_Table.numerodeOrdenamiento,true).queryList();
     }
 
     public void limpiar(){
@@ -151,7 +150,8 @@ public class TrabajadorCentroListRepositoryImpl {
                         .or(TrabajadorCentro_Table.nombre.like("%"+cadena+"%"))
                         .or(TrabajadorCentro_Table.puesto.like("%"+cadena+"%")))
                 .and(TrabajadorCentro_Table.idcentro.is(idcentro));
-        return  new Select().from(TrabajadorCentro.class).where(conditionGroup).queryList();
+
+        return  new Select().from(TrabajadorCentro.class).where(conditionGroup).orderBy(TrabajadorCentro_Table.numerodeOrdenamiento,true).queryList();
         //return  new Select().from(TrabajadorCentro.class).where(TrabajadorCentro_Table.nombre.like("%"+cadena+"%")).and(TrabajadorCentro_Table.idcentro.is(idcentro)).queryList();
     }
 }

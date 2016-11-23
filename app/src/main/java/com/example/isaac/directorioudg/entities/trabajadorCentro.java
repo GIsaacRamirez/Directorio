@@ -7,7 +7,7 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
- * Created by Usuario on 14/11/2016.
+ * Created by Isaac on 14/11/2016.
  */
 @Table( database= DirectorioDataBase.class)
 public class TrabajadorCentro extends BaseModel {
@@ -25,6 +25,7 @@ public class TrabajadorCentro extends BaseModel {
     @Column private String telefono;
     @Column private String correo;
     @Column private int Estatus;
+    @Column private int numerodeOrdenamiento;
 
 
     public int getIdcentro() {
@@ -82,4 +83,13 @@ public class TrabajadorCentro extends BaseModel {
     public void setEstatus(int estatus) {
         Estatus = estatus;
     }
+
+    public int getNumerodeOrdenamiento() {
+        return numerodeOrdenamiento;
+    }
+
+    public void setNumerodeOrdenamiento(int numerodeOrdenamiento) {
+        this.numerodeOrdenamiento = numerodeOrdenamiento;
+    }
+
 }

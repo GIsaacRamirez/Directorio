@@ -7,6 +7,6 @@ import com.raizlabs.android.dbflow.annotation.Database;
  */
 @Database(name = DirectorioDataBase.NAME, version = DirectorioDataBase.VERSION)
 public class DirectorioDataBase {
-    public static final int VERSION = 1;
+    public static final int VERSION = 2;
     public static final String NAME = "Directorio";
 }

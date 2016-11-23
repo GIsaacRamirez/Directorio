@@ -8,7 +8,7 @@
             android:title="Centros Universitarios" />
         <item
             android:id="@+id/nav_Prepas"
-            android:icon="@drawable/preparatoria"
+            android:icon="@drawable/preparatorias"
             android:title="Preparatorias" />
 
         <item android:title="Medios UDG">
@@ -39,9 +39,11 @@
 
             <item
                 android:id="@+id/nav_Rectoria"
+                android:icon="@drawable/rectoria"
                 android:title="Rectoria" />
             <item
                 android:id="@+id/nav_ViceRectoria"
+                android:icon="@drawable/vicerectoria"
                 android:title="Vicerectoria" />
             <item
                 android:id="@+id/nav_Secretaria"
@@ -58,7 +60,7 @@
             <item
                 android:id="@+id/nav_ayuda"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Ayuda y Comentarios" />
+                android:title="Comentarios" />
         </menu>
     </item>
 
