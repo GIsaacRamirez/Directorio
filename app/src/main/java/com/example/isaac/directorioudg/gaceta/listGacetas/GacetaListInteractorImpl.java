@@ -26,4 +26,7 @@ public class GacetaListInteractorImpl {
     public void getPorFecha(int anyo, int mes) {
          repository.getPorFecha(anyo,mes);
     }
+    public ContenidoGaceta getPorId(int id) {
+        return repository.getPorId(id);
+    }
 }

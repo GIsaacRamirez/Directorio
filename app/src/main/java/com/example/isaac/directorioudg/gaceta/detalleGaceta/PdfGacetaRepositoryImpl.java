@@ -58,19 +58,23 @@ public class PdfGacetaRepositoryImpl {
     }
 
 
-    public void cargarPdfGaceta(PdfGacetaAdapter adapteraux, int numerogaceta) {
+    public void cargarPdfGaceta(PdfGacetaAdapter adapteraux, int numerogaceta,boolean option_isdownloaded) {
         adapter=adapteraux;
         String ruta= context.getResources().getString(R.string.prefijoWebService)+"PdfGacetas.php?id="+numerogaceta;
         Helper helper =new Helper(context);
-        if(!helper.isConect()){
+
+
+        if(!helper.isConect() || option_isdownloaded) {
             List<LinksPdfGaceta> auxLinkPdf = new Select().from(LinksPdfGaceta.class).where(LinksPdfGaceta_Table.numeroGaceta.is(numerogaceta)).queryList();
-            if(auxLinkPdf!=null){
-                list=auxLinkPdf;
+            if (auxLinkPdf != null) {
+                list = auxLinkPdf;
                 adapter.setList(list);
             }
         }else {
             cargarDatosPdfGaceta(ruta);
         }
+
+
     }
 
     private void parsearDatos(String json) {
@@ -95,5 +99,14 @@ public class PdfGacetaRepositoryImpl {
             adapter.setList(list);
         } catch (SQLiteException e) {}
     }
+
+    public List<LinksPdfGaceta> getPdfDownloaded(){
+
+        List<LinksPdfGaceta> list =new Select(LinksPdfGaceta_Table.numeroGaceta)
+                .from(LinksPdfGaceta.class)
+                .groupBy(LinksPdfGaceta_Table.numeroGaceta).orderBy(LinksPdfGaceta_Table.numeroGaceta,false).queryList();
+        return list;
+    }
+
 
 }

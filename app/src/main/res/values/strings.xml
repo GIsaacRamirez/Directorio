@@ -65,5 +65,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_buscar">Buscar</string>
     <string name="directorio_de_la_universidad_de_guadalajara">Directorio de la Universidad de Guadalajara</string>
+    <string name="sinConexion">sin conexion</string>
 
 </resources>

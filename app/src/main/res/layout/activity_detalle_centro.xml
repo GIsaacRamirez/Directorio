@@ -14,6 +14,7 @@
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+
         <!-- Collapser -->
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapser"
@@ -21,7 +22,8 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|snap">
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+            <!-- Imagen del detalle -->
             <ImageView
                 android:id="@+id/image_paralax"
                 android:layout_width="match_parent"
@@ -32,11 +34,10 @@
                 android:transitionName="@string/nombre_transicion_imagen"
                 android:src="@drawable/fotolugarvacio" />
 
-            <!-- Imagen del detalle -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_collapseMode="parallax">
+                app:layout_collapseMode="pin">
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"

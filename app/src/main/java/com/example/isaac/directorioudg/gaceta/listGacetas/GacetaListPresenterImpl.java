@@ -38,7 +38,9 @@ public class GacetaListPresenterImpl{
         interactor.saveContenidoGacetas();
     }
 
-
+    public ContenidoGaceta getPorId(int id) {
+        return interactor.getPorId(id);
+    }
     public void getPorFecha(int anyo, int mes) {
         interactor.getPorFecha(anyo, mes);
     }

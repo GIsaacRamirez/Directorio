@@ -146,7 +146,7 @@ public class ContenidosGacetaRepositoryImpl{
         return List;
     }
 
-    public ContenidoGaceta getContenidoGaceta(int id) {
+    public ContenidoGaceta getPorId(int id) {
         ContenidoGaceta contenidoGaceta = new Select().from(ContenidoGaceta.class).where(ContenidoGaceta_Table.id.is(id)).querySingle();
         return contenidoGaceta;
     }

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +31,7 @@ import butterknife.ButterKnife;
 public class ListGacetaActivity extends AppCompatActivity implements OnItemClickListener{
 
     Helper helper = new Helper(this);
-    private GacetaListPresenterImpl presenter;
+
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     @Bind(R.id.toolbar)
@@ -39,6 +40,7 @@ public class ListGacetaActivity extends AppCompatActivity implements OnItemClick
     Spinner spinnerYears;
     @Bind(R.id.spinnerMonts)
     Spinner spinnerMonts;
+    private GacetaListPresenterImpl presenter;
     private List<ContenidoGaceta> GacetaList = new ArrayList<>();
     private  GacetasAdapter adapter = null;
 
@@ -159,10 +161,15 @@ public class ListGacetaActivity extends AppCompatActivity implements OnItemClick
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.sinconexion:
+                verDescargadas();
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
     @Override
     public void onItemClick(ContenidoGaceta contenidoGaceta) {
@@ -170,6 +177,7 @@ public class ListGacetaActivity extends AppCompatActivity implements OnItemClick
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Bundle bundle = new Bundle();
         bundle.putInt("idGaceta",contenidoGaceta.getId());
+        bundle.putBoolean("isdownloaded",false);
         intent.putExtras(bundle);//ponerlos en el intent
         startActivity(intent);//iniciar la actividad
     }
@@ -230,5 +238,18 @@ public class ListGacetaActivity extends AppCompatActivity implements OnItemClick
             }
         }
         return result;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list_gaceta, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void verDescargadas(){
+        Intent intent = new Intent(this.getApplicationContext(), PdfDownloaded.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);//iniciar la actividad
+
     }
 }

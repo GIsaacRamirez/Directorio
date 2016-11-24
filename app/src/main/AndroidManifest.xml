@@ -40,8 +40,8 @@
 
         <activity
             android:name=".detalleprepa.DetallePrepaActivity"
-            android:label="@string/title_activity_detalle_prepa"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_detalle_prepa"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -50,8 +50,8 @@
         </activity>
         <activity
             android:name=".detallecentro.DetalleCentroActivity"
-            android:parentActivityName=".main.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -96,11 +96,14 @@
             android:theme="@style/AppTheme.NoActionBarBlack" />
         <activity
             android:name=".gaceta.listGacetas.ui.ListGacetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_list_gaceta"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".gaceta.detalleGaceta.ui.detalleGaceta"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".gaceta.detalleGaceta.ui.detalleGaceta"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+        <activity android:name=".gaceta.listGacetas.ui.PdfDownloaded"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
