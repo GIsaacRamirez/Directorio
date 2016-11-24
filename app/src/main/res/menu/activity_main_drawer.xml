@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_Centros"
             android:icon="@drawable/centros"
@@ -31,9 +30,6 @@
 
         </item>
 
-
-    </group>
-
     <item android:title="Rectoria General">
         <menu>
 
@@ -47,6 +43,7 @@
                 android:title="Vicerectoria" />
             <item
                 android:id="@+id/nav_Secretaria"
+                android:icon="@drawable/gafete"
                 android:title="Secretaria General" />
         </menu>
     </item>
@@ -55,13 +52,12 @@
 
             <item
                 android:id="@+id/nav_Configuracion"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_settings_black_24dp"
                 android:title="Configuración" />
             <item
                 android:id="@+id/nav_ayuda"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_help_black_24dp"
                 android:title="Comentarios" />
         </menu>
     </item>
-
 </menu>
