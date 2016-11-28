@@ -284,6 +284,7 @@ public class MainActivity extends AppCompatActivity
         email.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         email.setData(Uri.parse("mailto:"));
         email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
+        email.putExtra(Intent.EXTRA_SUBJECT,"Comentario app DirectorioUDG");
         try {
             startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
         } catch (android.content.ActivityNotFoundException ex) {
