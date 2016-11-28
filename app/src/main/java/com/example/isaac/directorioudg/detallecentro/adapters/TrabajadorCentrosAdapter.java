@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.TrabajadorCentro;
 import com.example.isaac.directorioudg.lib.ImageLoader;
+import com.example.isaac.directorioudg.main.MainActivity;
 
 import java.util.List;
 
@@ -114,9 +116,14 @@ public class TrabajadorCentrosAdapter extends RecyclerView.Adapter<TrabajadorCen
 
         private void sendEmail(String emailTo) {
             Intent email = new Intent(Intent.ACTION_SENDTO);
+            email.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             email.setData(Uri.parse("mailto:"));
             email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
-            context.startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
+            try {
+                context.startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(context, "No hay un cliente de correo instalado.", Toast.LENGTH_SHORT).show();
+            }
         }
 
     }

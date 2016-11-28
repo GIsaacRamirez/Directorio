@@ -2,6 +2,7 @@ package com.example.isaac.directorioudg.main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.isaac.directorioudg.detallecentro.DetalleCentroActivity;
 import com.example.isaac.directorioudg.detallecentro.TrabajadorCentroListRepositoryImpl;
@@ -269,10 +271,23 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);//iniciar la actividad
 
         }else if (id == R.id.nav_Configuracion) {
+        }else if (id == R.id.nav_ayuda){
+            sendEmail("luis.medellin@cucei.udg.mx");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void sendEmail(String emailTo) {
+        Intent email = new Intent(Intent.ACTION_SENDTO);
+        email.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        email.setData(Uri.parse("mailto:"));
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
+        try {
+            startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getApplicationContext(), "No hay un cliente de correo instalado.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

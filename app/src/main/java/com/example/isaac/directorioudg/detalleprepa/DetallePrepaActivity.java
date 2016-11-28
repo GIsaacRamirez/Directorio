@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.isaac.directorioudg.MapActivity;
 import com.example.isaac.directorioudg.R;
@@ -227,7 +228,11 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         Intent email = new Intent(Intent.ACTION_SENDTO);
         email.setData(Uri.parse("mailto:"));
         email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
-        startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
+        try {
+            startActivity(Intent.createChooser(email, "Seleccionar aplicación"));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getApplicationContext(), "No hay un cliente de correo instalado.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void sharePrepa() {
