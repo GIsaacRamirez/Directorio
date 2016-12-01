@@ -2,9 +2,11 @@ package com.example.isaac.directorioudg.detallecentro;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -27,6 +29,7 @@ import com.example.isaac.directorioudg.entities.Centro;
 import com.example.isaac.directorioudg.lib.GlideImageLoader;
 import com.example.isaac.directorioudg.lib.ImageLoader;
 import com.example.isaac.directorioudg.listcentros.CentroListRepositoryImpl;
+import com.example.isaac.directorioudg.util.Helper;
 import com.example.isaac.directorioudg.util.zoom;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -83,6 +86,9 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     ImageLoader imageLoader;
     CentroListRepositoryImpl repository;
     trabajador_centro fragmentTrabajadorCentro = new trabajador_centro();
+    Helper helper = new Helper(this);
+    String theme;
+    SharedPreferences prefs;
 
     private MaterialSearchView searchView;
     private void setToolbar() {
@@ -94,9 +100,13 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        theme= prefs.getString("theme","AppTheme");
+
         setContentView(R.layout.activity_detalle_centro);
         ButterKnife.bind(this);
         setToolbar();// Añadir action bar
+        helper.changeTheme(this,theme);
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
         repository = new CentroListRepositoryImpl();
         imageLoader = new GlideImageLoader(this.getApplicationContext());
@@ -145,7 +155,6 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
     }
 
     private void setDataInView() {
-        //collapser.setTitle(centro.getSigla());
         setTitle(centro.getSigla());
         toolbar.setTitle(centro.getSigla());
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <item
             android:id="@+id/nav_Centros"
@@ -51,9 +52,11 @@
         <menu>
 
             <item
-                android:id="@+id/nav_Configuracion"
+                android:id="@+id/nav_theme"
                 android:icon="@drawable/ic_settings_black_24dp"
-                android:title="Configuración" />
+                android:title="Dia/Noche"
+                app:actionLayout="@layout/layout_switch"
+                />
             <item
                 android:id="@+id/nav_ayuda"
                 android:icon="@drawable/ic_help_black_24dp"

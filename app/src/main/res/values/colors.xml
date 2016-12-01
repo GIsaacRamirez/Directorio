@@ -3,6 +3,12 @@
     <color name="colorPrimary">#00BCD4</color>
     <color name="colorPrimaryDark">#0097a7</color>
     <color name="colorAccent">#f7ff9800</color>
+
+    <color name="colorPrimaryNight">#607D8B</color>
+    <color name="colorPrimaryDarkNight">#455A64</color>
+    <color name="colorAccentNight">#FF5722</color>
+
+
     <color name="white_transparent">#D9FFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="white">#ffffff</color>

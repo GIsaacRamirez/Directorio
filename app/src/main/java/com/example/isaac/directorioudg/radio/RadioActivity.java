@@ -53,6 +53,7 @@ public class RadioActivity extends AppCompatActivity implements MediaPlayer.OnPr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppThemeNight);
         setContentView(R.layout.activity_radio);
         ButterKnife.bind(this);
         MusicService.removeNotification(getApplicationContext());

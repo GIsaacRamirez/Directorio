@@ -41,7 +41,6 @@ public class RadioList extends Fragment implements OnItemClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_radio_cucei, container, false);
         ButterKnife.bind(this, view);
 
@@ -54,6 +53,12 @@ public class RadioList extends Fragment implements OnItemClickListener {
         radioCucei.setStationName("Radio CUCEI");
         radioCucei.setUrlRadio("http://s3.streammonster.com:8225/autodj.m3u");
         radioCucei.setSourceImagen(R.drawable.radiocucei);
+
+        Radio radioCucba = new Radio();
+        radioCucba.setStationName("Radio CUCBA");
+        radioCucba.setUrlRadio("http://radio.cucba.udg.mx:8000/radio");
+        radioCucba.setSourceImagen(R.drawable.radiocucba);
+
 
         Radio radioAmeca = new Radio();
         radioAmeca.setStationName("Radio Ameca");
@@ -93,6 +98,7 @@ public class RadioList extends Fragment implements OnItemClickListener {
 
         radioList.add(radioUdg);
         radioList.add(radioCucei);
+        radioList.add(radioCucba);
         radioList.add(radioAmeca);
         radioList.add(radioAutlan);
         radioList.add(radioGuzman);
