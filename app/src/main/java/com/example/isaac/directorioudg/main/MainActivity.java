@@ -269,8 +269,6 @@ public class MainActivity extends AppCompatActivity
             bundle.putParcelable("centro",centro);
             intent.putExtras(bundle);//ponerlos en el intent
             startActivity(intent);//iniciar la actividad
-
-        }else if (id == R.id.nav_Configuracion) {
         }else if (id == R.id.nav_ayuda){
             sendEmail("luis.medellin@cucei.udg.mx");
         }

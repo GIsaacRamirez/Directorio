@@ -55,6 +55,11 @@ public class RadioList extends Fragment implements OnItemClickListener {
         radioCucei.setUrlRadio("http://s3.streammonster.com:8225/autodj.m3u");
         radioCucei.setSourceImagen(R.drawable.radiocucei);
 
+        /*Radio radioCucba = new Radio();
+        radioCucba.setStationName("Radio CUCBA");
+        radioCucba.setUrlRadio("http://radio.cucba.udg.mx:8000/radio.m3u");
+        radioCucba.setSourceImagen(R.drawable.radiocucba);*/
+
         Radio radioAmeca = new Radio();
         radioAmeca.setStationName("Radio Ameca");
         radioAmeca.setUrlRadio("http://148.202.87.222:8000/;stream/1");
@@ -93,6 +98,7 @@ public class RadioList extends Fragment implements OnItemClickListener {
 
         radioList.add(radioUdg);
         radioList.add(radioCucei);
+        //radioList.add(radioCucba);
         radioList.add(radioAmeca);
         radioList.add(radioAutlan);
         radioList.add(radioGuzman);

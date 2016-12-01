@@ -49,11 +49,6 @@
     </item>
     <item android:title="Ayuda">
         <menu>
-
-            <item
-                android:id="@+id/nav_Configuracion"
-                android:icon="@drawable/ic_settings_black_24dp"
-                android:title="Configuración" />
             <item
                 android:id="@+id/nav_ayuda"
                 android:icon="@drawable/ic_help_black_24dp"
