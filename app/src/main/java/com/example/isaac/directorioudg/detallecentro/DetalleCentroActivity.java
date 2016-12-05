@@ -258,19 +258,30 @@ public class DetalleCentroActivity extends AppCompatActivity implements OnMapRea
         }
     }
     private void shareCentro() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
+
         String aux = "Centro: " + centro.getNombreCentro();
         aux += " \n Imagen: " + centro.getImagenURL() + "\n";
         aux += " \nDir. " + centro.getDireccion() + ", " + centro.getMunicipio() + "Jalisco";
         aux += "\nCP:" + centro.getCP();
         aux += "\n" + centro.getWeb();
 
-        intent.putExtra(Intent.EXTRA_TEXT, aux);
-
-        startActivity(Intent.createChooser(intent, "Compartir"));
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, aux);
+        sendIntent.setType("text/plain");
+        Intent i = Intent.createChooser(sendIntent, "Compartir");
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // startActivityForResult(i,SEND_REQUEST);
+        startActivityForResult(i, 1);
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == RESULT_CANCELED) {
+                // Operation failed or cancelled. Handle in your own way.
+            }
+        }
+    }
 
     private void zoomImage() {
         //pasamos el ImageView al metodo imageFileCache para que se pueda compartir la imagen

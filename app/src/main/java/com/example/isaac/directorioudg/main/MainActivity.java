@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity
     NavigationView navView;
     int isPrepa;
 
-    trabajador_centro fragmentTrabajadorCentro = new trabajador_centro();
-
     PrepaListRepositoryImpl prepaListRepository = new PrepaListRepositoryImpl();
     CentroListRepositoryImpl centroListRepository = new CentroListRepositoryImpl();
     ContenidosGacetaRepositoryImpl contenidosGacetaRepository= new ContenidosGacetaRepositoryImpl();
@@ -62,8 +60,6 @@ public class MainActivity extends AppCompatActivity
 
     PrepaList fragmentPrepaList = new PrepaList();
     CentroList fragmentCentroList = new CentroList();
-
-
 
     public void loadPrepaList( ){
         isPrepa=0;

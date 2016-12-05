@@ -43,7 +43,6 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     private CameraUpdate mCamera;
     private Double Latitud, Longitud;
     String Estado = "Jalisco";
-    private static final int SEND_REQUEST = 1;
 
     Prepa prepa = new Prepa();
 
@@ -253,25 +252,19 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         sendIntent.setType("text/plain");
         Intent i = Intent.createChooser(sendIntent, "Compartir");
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
-        ((Activity)getApplicationContext()).startActivityForResult(i,SEND_REQUEST);
+        // startActivityForResult(i,SEND_REQUEST);
+        startActivityForResult(i, 1);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-            }
-
             if (resultCode == RESULT_CANCELED) {
                 // Operation failed or cancelled. Handle in your own way.
-                showSnackbar("Cancelo en envio");
             }
         }
     }
 
-    private void showSnackbar(String msg) {
-        Snackbar.make(getWindow().findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show();
-    }
+
 
 }
 

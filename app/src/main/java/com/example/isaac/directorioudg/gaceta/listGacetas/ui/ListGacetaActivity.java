@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.isaac.directorioudg.R;
 import com.example.isaac.directorioudg.entities.ContenidoGaceta;
 import com.example.isaac.directorioudg.gaceta.detalleGaceta.ui.detalleGaceta;
+import com.example.isaac.directorioudg.gaceta.listGacetas.ContenidosGacetaRepositoryImpl;
 import com.example.isaac.directorioudg.gaceta.listGacetas.GacetaListPresenterImpl;
 import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.GacetasAdapter;
 import com.example.isaac.directorioudg.gaceta.listGacetas.adapters.OnItemClickListener;
@@ -66,9 +67,13 @@ public class ListGacetaActivity extends AppCompatActivity implements OnItemClick
         anyoactual=Integer.parseInt(anyo);
 
 
-
         setupSpinnerYears(anyoactual);
         setupSpinnerMonts();
+
+        if(helper.isConect()){
+            ContenidosGacetaRepositoryImpl contenidosGacetaRepository= new ContenidosGacetaRepositoryImpl();
+            contenidosGacetaRepository.descargarDatosContenidoGacetaCompletos();
+        }
 
         setupGacetaListAdapter();
         presenter = new GacetaListPresenterImpl(getAdapter());
