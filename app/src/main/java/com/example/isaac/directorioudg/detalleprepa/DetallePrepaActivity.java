@@ -1,5 +1,6 @@
 package com.example.isaac.directorioudg.detalleprepa;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     private CameraUpdate mCamera;
     private Double Latitud, Longitud;
     String Estado = "Jalisco";
+    private static final int SEND_REQUEST = 1;
 
     Prepa prepa = new Prepa();
 
@@ -236,8 +238,6 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void sharePrepa() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
         String aux = "Preparatoria: " + prepa.getPreparatoria();
         aux+=" \n Imagen: "+prepa.getImagenURL()+"\n";
         aux +=" \nDir. " + prepa.getDireccion() + ", " + prepa.getMunicipio() + "Jalisco";
@@ -247,9 +247,26 @@ public class DetallePrepaActivity extends AppCompatActivity implements OnMapRead
         aux += "\nSecretario: " + prepa.getSecretario() + " email: " + prepa.getCorreoSecretario();
         //aux += "\nImagen: " +prepa.getImagenURL();
 
-        intent.putExtra(Intent.EXTRA_TEXT, aux);
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, aux);
+        sendIntent.setType("text/plain");
+        Intent i = Intent.createChooser(sendIntent, "Compartir");
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+        ((Activity)getApplicationContext()).startActivityForResult(i,SEND_REQUEST);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+            }
 
-        startActivity(Intent.createChooser(intent, "Compartir"));
+            if (resultCode == RESULT_CANCELED) {
+                // Operation failed or cancelled. Handle in your own way.
+                showSnackbar("Cancelo en envio");
+            }
+        }
     }
 
     private void showSnackbar(String msg) {
