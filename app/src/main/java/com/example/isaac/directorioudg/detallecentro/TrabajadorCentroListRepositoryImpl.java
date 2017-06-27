@@ -15,12 +15,12 @@ import com.example.isaac.directorioudg.detallecentro.adapters.TrabajadorCentrosA
 import com.example.isaac.directorioudg.entities.TrabajadorCentro;
 import com.example.isaac.directorioudg.entities.TrabajadorCentro_Table;
 import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.sql.language.Condition;
-import com.raizlabs.android.dbflow.sql.language.ConditionGroup;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
+import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
+import com.raizlabs.android.dbflow.sql.language.ConditionGroup;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -108,11 +108,10 @@ public class TrabajadorCentroListRepositoryImpl {
 
             FlowManager.getDatabase(DirectorioDataBase.class)
                     .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
-                            new ProcessModelTransaction.ProcessModel<TrabajadorCentro>() {
+                            new ProcessModelTransaction.ProcessModel<TrabajadorCentro>(){
                                 @Override
-                                public void processModel(TrabajadorCentro trabajador) {
-                                    // do work here -- i.e. user.delete() or user.update()
-                                    trabajador.save();
+                                public void processModel(TrabajadorCentro trabajadorCentro) {
+                                    trabajadorCentro.save();
                                 }
                             }).addAll(listTrabajadores).build())  // add elements (can also handle multiple)
                     .error(new Transaction.Error() {

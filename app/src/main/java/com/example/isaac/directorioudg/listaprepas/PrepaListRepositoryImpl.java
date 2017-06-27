@@ -27,10 +27,6 @@ import java.util.List;
 
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
-
-/**
- * Created by isaac on 14/07/16.
- */
 public class PrepaListRepositoryImpl{
 
     Context context;
@@ -77,6 +73,7 @@ public class PrepaListRepositoryImpl{
     }
 
     public void parsearDatosPrepaDBFlow(String json) {
+        //noinspection EmptyCatchBlock
         try {
 
             Object objetoJson = JSONValue.parse(json);
@@ -152,8 +149,7 @@ public class PrepaListRepositoryImpl{
 
 
     public Prepa getPrepa(int id) {
-        Prepa prepa = new Select().from(Prepa.class).where(Prepa_Table.idPrepa.is(id)).querySingle();
-        return prepa;
+        return new Select().from(Prepa.class).where(Prepa_Table.idPrepa.is(id)).querySingle();
     }
 
 }
